@@ -1,0 +1,31 @@
+# data and model artefacts (provenance is tracked in docs/DATA.md, not the blobs)
+data/raw/
+data/processed/
+checkpoints/
+*.hdf5
+*.h5
+*.pt
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# node
+node_modules/
+.next/
+out/
+coverage/
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/
