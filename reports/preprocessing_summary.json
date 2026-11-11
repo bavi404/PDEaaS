@@ -1,0 +1,57 @@
+{
+  "source_md5": "81694ed31306ff2e5f6b76349b0b4389",
+  "seed": 20261111,
+  "split_sizes_full": {
+    "train": 8000,
+    "val": 1000,
+    "test": 1000
+  },
+  "duplicate_group_split": {
+    "46": "train"
+  },
+  "files": {
+    "train": {
+      "path": "data/processed/darcy_beta1.0_train.npz",
+      "n": 2000,
+      "residual_median": 0.0016107168048620224,
+      "residual_frac_above_0.01": 0.277,
+      "n_duplicate_group_members": 0,
+      "u_mean": 0.16058194637298584,
+      "u_std": 0.13829544186592102,
+      "a_frac_high": 0.49167153930664065
+    },
+    "val": {
+      "path": "data/processed/darcy_beta1.0_val.npz",
+      "n": 1000,
+      "residual_median": 0.0014083364512771368,
+      "residual_frac_above_0.01": 0.279,
+      "n_duplicate_group_members": 0,
+      "u_mean": 0.1602753847837448,
+      "u_std": 0.13658829033374786,
+      "a_frac_high": 0.49131256103515625
+    },
+    "test": {
+      "path": "data/processed/darcy_beta1.0_test.npz",
+      "n": 1000,
+      "residual_median": 0.0014270993415266275,
+      "residual_frac_above_0.01": 0.274,
+      "n_duplicate_group_members": 0,
+      "u_mean": 0.15989865362644196,
+      "u_std": 0.13617026805877686,
+      "a_frac_high": 0.49513482666015624
+    }
+  },
+  "normalizers": {
+    "a": {
+      "mean": 0.5424798591559465,
+      "std": 0.44993715872322376,
+      "eps": 1e-08
+    },
+    "u": {
+      "mean": 0.16058230569490012,
+      "std": 0.13829493140703583,
+      "eps": 1e-08
+    },
+    "fitted_on": "train[:2000] stride 2 (64x64), seed 20261111"
+  }
+}

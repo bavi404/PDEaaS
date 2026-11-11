@@ -1,0 +1,12 @@
+== data_inspection.json: keys 98->102, new keys ['.pde_residual.first200_rms_boundary_ring_if_a_ghost_zero', '.pde_residual.first200_rms_interior_if_a_ghost_zero', '.steady_state_check.cg.max_iter', '.steady_state_check.cg.tol'], removed [], differing 0
+== preprocessing_summary.json: keys 37->37, new keys [], removed [], differing 0
+== downsampling_validation.json: keys 76->170, new keys ['.coordinates.fine_cells_outside_stride2_hull', '.coordinates.neuralop_embedding_128.first3', '.coordinates.neuralop_embedding_128.formula', '.coordinates.neuralop_embedding_128.last3', '.coordinates.neuralop_embedding_64.first3', '.coordinates.neuralop_embedding_64.formula']..., removed [], differing 1
+    .input_information_loss_rel_l2.cg[0].iterations 1595 -> 1596
+== data_audit.json: keys 156->174, new keys ['.convergence_test_split.cg_batches[0].max_iter', '.convergence_test_split.cg_batches[0].tol', '.convergence_test_split.cg_batches[1].max_iter', '.convergence_test_split.cg_batches[1].tol', '.convergence_test_split.cg_batches[2].max_iter', '.convergence_test_split.cg_batches[2].tol']..., removed [], differing 1
+    .convergence_test_split.solve_time_s 1038.3 -> 1064.6
+data/splits/darcy_beta1.0_seed20261111.json byte-identical: True
+data/splits/normalizers_beta1.0_train2000_stride2.json byte-identical: True
+train array-content sha256 e7e8ee950fb7a81d keys ['a', 'beta', 'indices', 'pde_residual', 'target_source', 'u']
+val array-content sha256 65f122203058be9f keys ['a', 'beta', 'indices', 'pde_residual', 'target_source', 'u']
+test array-content sha256 bb20884c721a7b46 keys ['a', 'beta', 'indices', 'pde_residual', 'target_source', 'u']
+reference keys ['indices', 'note', 'target_source', 'u_reference'] n (1000, 128, 128)

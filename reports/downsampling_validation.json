@@ -1,0 +1,318 @@
+{
+  "n_samples": 64,
+  "split": "train (prefix)",
+  "beta": 1.0,
+  "coordinates": {
+    "offset_true_minus_embedding_128": 0.00390625,
+    "offset_true_minus_embedding_64_stride": 0.00390625,
+    "offset_true_minus_embedding_64_avgpool": 0.0078125,
+    "note": "equal offsets at 64 and 128 mean the positional embedding is consistent across resolutions",
+    "x128_cell_centres": {
+      "formula": "(2i+1)/256, i=0..127",
+      "first3": [
+        0.00390625,
+        0.01171875,
+        0.01953125
+      ],
+      "last3": [
+        0.98046875,
+        0.98828125,
+        0.99609375
+      ]
+    },
+    "x64_stride2": {
+      "formula": "(4j+1)/256, j=0..63  (= x128[::2])",
+      "first3": [
+        0.00390625,
+        0.01953125,
+        0.03515625
+      ],
+      "last3": [
+        0.95703125,
+        0.97265625,
+        0.98828125
+      ]
+    },
+    "x64_avgpool_centres": {
+      "formula": "(4j+2)/256, j=0..63",
+      "first3": [
+        0.0078125,
+        0.0234375,
+        0.0390625
+      ],
+      "last3": [
+        0.9609375,
+        0.9765625,
+        0.9921875
+      ]
+    },
+    "neuralop_embedding_128": {
+      "formula": "i/128",
+      "first3": [
+        0.0,
+        0.0078125,
+        0.015625
+      ],
+      "last3": [
+        0.9765625,
+        0.984375,
+        0.9921875
+      ]
+    },
+    "neuralop_embedding_64": {
+      "formula": "j/64",
+      "first3": [
+        0.0,
+        0.015625,
+        0.03125
+      ],
+      "last3": [
+        0.953125,
+        0.96875,
+        0.984375
+      ]
+    },
+    "stride2_coverage": [
+      0.00390625,
+      0.98828125
+    ],
+    "fine_cells_outside_stride2_hull": "last row and last column of the 128 grid (x = 255/256)"
+  },
+  "spectral_energy_fraction": {
+    "a_above_k32": {
+      "mean": 0.006124519738723843,
+      "median": 0.005534460455596195,
+      "p90": 0.008998729606588096,
+      "max": 0.015181215325802943
+    },
+    "u_above_k32": {
+      "mean": 9.477127554332393e-06,
+      "median": 7.165708237591764e-06,
+      "p90": 1.7278934985767235e-05,
+      "max": 3.3955395696780134e-05
+    },
+    "a_above_k12": {
+      "mean": 0.01821306391246678,
+      "median": 0.0164676634978935,
+      "p90": 0.02664736398284473,
+      "max": 0.04475998531438125
+    },
+    "u_above_k12": {
+      "mean": 0.00018565133303612266,
+      "median": 0.00015814323373191156,
+      "p90": 0.0002992839897063068,
+      "max": 0.00043321754741698626
+    }
+  },
+  "target_reconstruction_rel_l2": {
+    "stride2_then_linear_to_128": {
+      "mean": 0.009307556594140592,
+      "median": 0.008763124321086935,
+      "p90": 0.012698941421167299,
+      "max": 0.01503661013549713
+    },
+    "avgpool_then_linear_to_128": {
+      "mean": 0.007208642041812936,
+      "median": 0.007059342450666744,
+      "p90": 0.009272816389425042,
+      "max": 0.010849427162400086
+    },
+    "stride2_then_linear_to_128_excluding_last_row_and_col": {
+      "mean": 0.0020909553238176023,
+      "median": 0.0018645202105479675,
+      "p90": 0.003364819768710844,
+      "max": 0.004635596098478675
+    },
+    "note": "the stride-2 grid spans x in [1/256, 253/256]; the last fine row/col (255/256) can only be extrapolated",
+    "stride2_values_equal_u128_at_kept_points": true
+  },
+  "input_representation": {
+    "stride2_unique_values": [
+      0.10000000149011612,
+      1.0
+    ],
+    "avgpool_unique_values": [
+      0.1,
+      0.325,
+      0.55,
+      0.775,
+      1.0
+    ],
+    "stride2_fraction_128_cells_mismatched_after_nearest_up": {
+      "mean": 0.007754325866699219,
+      "median": 0.00738525390625,
+      "p90": 0.01119384765625,
+      "max": 0.01287841796875
+    },
+    "avgpool_fraction_coarse_cells_mixed": {
+      "mean": 0.018215179443359375,
+      "median": 0.017333984375,
+      "p90": 0.0260498046875,
+      "max": 0.029052734375
+    }
+  },
+  "input_information_loss_rel_l2": {
+    "definition": "rel L2 between exact steady states for a128 and for its 64-grid representation (nearest-upsampled)",
+    "stride2": {
+      "mean": 0.015112840502782481,
+      "median": 0.010362521899885674,
+      "p90": 0.029869874721023183,
+      "max": 0.11599932121325057
+    },
+    "avgpool_arithmetic": {
+      "mean": 0.01610143280321044,
+      "median": 0.010200654242699713,
+      "p90": 0.03252597051412043,
+      "max": 0.08615449151501468
+    },
+    "cg": [
+      {
+        "iterations": 1596,
+        "max_relative_residual": 8.22522613055359e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1599,
+        "max_relative_residual": 8.970071352052347e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1601,
+        "max_relative_residual": 9.733192558550857e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      }
+    ]
+  },
+  "region_breakdown": {
+    "definition": "rel-L2 restricted to region: ||(x-ref)[region]|| / ||ref[region]||; max_abs in units of u",
+    "kept_points_max_abs_discrepancy_stride2": 0.0,
+    "interior (>=2 fine cells from edge)": {
+      "n_cells": 15376,
+      "target_reconstruction_stride2": {
+        "mean": 0.00188190069201194,
+        "median": 0.0017415630749856629,
+        "p90": 0.0028172508576813633,
+        "max": 0.0033773531401101193
+      },
+      "target_reconstruction_stride2_max_abs": 0.021740201860666275,
+      "target_reconstruction_avgpool": {
+        "mean": 0.002470962963810569,
+        "median": 0.0022882367337629063,
+        "p90": 0.0035932212147210952,
+        "max": 0.004266940876758409
+      },
+      "target_reconstruction_avgpool_max_abs": 0.02207968570291996,
+      "input_mismatch_fraction_stride2": {
+        "mean": 0.0077637226847034335,
+        "median": 0.007284079084287201,
+        "p90": 0.011231789802289283,
+        "max": 0.01216181061394381
+      },
+      "information_loss_stride2": {
+        "mean": 0.014885187927859016,
+        "median": 0.010268357455408005,
+        "p90": 0.02908010082985643,
+        "max": 0.1147265061678354
+      },
+      "information_loss_avgpool": {
+        "mean": 0.015861367582911602,
+        "median": 0.009951490282980258,
+        "p90": 0.032333231237865856,
+        "max": 0.08502343800974922
+      }
+    },
+    "boundary band (outer 2 fine cells)": {
+      "n_cells": 1008,
+      "target_reconstruction_stride2": {
+        "mean": 0.2927746297347432,
+        "median": 0.2997457798101003,
+        "p90": 0.35676782628961345,
+        "max": 0.38953976898388637
+      },
+      "target_reconstruction_stride2_max_abs": 0.05850221589207649,
+      "target_reconstruction_avgpool": {
+        "mean": 0.21702453868838625,
+        "median": 0.21801281082727136,
+        "p90": 0.22028029166823396,
+        "max": 0.22997731858742543
+      },
+      "target_reconstruction_avgpool_max_abs": 0.02873004274442792,
+      "input_mismatch_fraction_stride2": {
+        "mean": 0.007610987103174603,
+        "median": 0.005952380952380952,
+        "p90": 0.02093253968253969,
+        "max": 0.02976190476190476
+      },
+      "information_loss_stride2": {
+        "mean": 0.06741173939157516,
+        "median": 0.040388191189207834,
+        "p90": 0.15462186864927027,
+        "max": 0.46046099965551107
+      },
+      "information_loss_avgpool": {
+        "mean": 0.06651209316959784,
+        "median": 0.0341803793041592,
+        "p90": 0.15273398075918532,
+        "max": 0.3719337054739705
+      }
+    },
+    "last fine row+col only (extrapolated by stride-2)": {
+      "n_cells": 255,
+      "target_reconstruction_stride2": {
+        "mean": 0.9360803079352871,
+        "median": 0.9535246496863068,
+        "p90": 0.9745537535956231,
+        "max": 0.9803206412549254
+      },
+      "target_reconstruction_stride2_max_abs": 0.05850221589207649,
+      "target_reconstruction_avgpool": {
+        "mean": 0.46813289870674396,
+        "median": 0.4765516394871858,
+        "p90": 0.4875652605288291,
+        "max": 0.4897198117918661
+      },
+      "target_reconstruction_avgpool_max_abs": 0.02871878119185567,
+      "input_mismatch_fraction_stride2": {
+        "mean": 0.012806372549019607,
+        "median": 0.00392156862745098,
+        "p90": 0.0419607843137255,
+        "max": 0.08627450980392157
+      },
+      "information_loss_stride2": {
+        "mean": 0.10303062336217167,
+        "median": 0.05090937294923113,
+        "p90": 0.27127274286159847,
+        "max": 0.6474073553393327
+      },
+      "information_loss_avgpool": {
+        "mean": 0.08410139310719963,
+        "median": 0.037266685328199184,
+        "p90": 0.22587284054779302,
+        "max": 0.5607752451391118
+      }
+    }
+  },
+  "architecture_consistency_untrained_fno": {
+    "config": "neuralop FNO n_modes=(12,12) hidden=32 layers=4, untrained, seed 0",
+    "metric": "rel L2 between model(x64) and model(x128)[::2,::2]",
+    "smooth_bandlimited_input": {
+      "mean": 0.0002485026870999718,
+      "median": 0.0002465500292601064,
+      "p90": 0.0002643464715220034,
+      "max": 0.00027685146778821945
+    },
+    "binary_permeability_input": {
+      "mean": 0.0004539477904472733,
+      "median": 0.00046737497905269265,
+      "p90": 0.0005289481196086854,
+      "max": 0.0005588536732830107
+    }
+  },
+  "figure": "docs/figures/downsampling.png"
+}

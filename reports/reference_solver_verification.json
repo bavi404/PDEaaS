@@ -1,0 +1,138 @@
+{
+  "solver_configuration": {
+    "method": "conjugate gradient (unpreconditioned), batched over samples",
+    "operator": "A u = -div(a grad u); 5-point finite-volume stencil, arithmetic face means",
+    "boundary": "u ghost = 0 (zero Dirichlet at ghost-cell centre); boundary-face a = adjacent cell a",
+    "stopping_rule": "||b - A x||_2 <= tol * ||b||_2 for every sample in the batch",
+    "tol": 1e-10,
+    "max_iter": 20000,
+    "dtype": "float64",
+    "initial_guess": "zeros"
+  },
+  "checks": {
+    "1_operator_and_sign": {
+      "definition": "A u = -div(a grad u); fv_residual(a,u,beta) = beta - A u",
+      "symmetry_rel_error": 1.5214335692191674e-16,
+      "min_rayleigh_quotient_random_vectors": 2213.1173426794394,
+      "positive_definite": true,
+      "A(point bump) at bump > 0 (correct sign of -div grad)": true,
+      "exact_discrete_eigenpairs_a1_max_rel_error": 4.185306651772531e-14,
+      "fv_residual_identity_max_err": 0.0
+    },
+    "2_boundary": {
+      "u_condition": "u = 0 at ghost-cell centres (half a cell outside [0,1]); effective domain side 1 + dx",
+      "boundary_face_permeability": "equal to the adjacent interior cell (fitted to released data)",
+      "diagonal_vs_closed_form_max_rel_error": 1.7080354225002404e-16,
+      "data_fit_boundary_ring_rms_residual": {
+        "fitted_edge_convention": 0.0028852455915032446,
+        "zero_ghost_permeability_(public_code)": 20.580005418768444
+      }
+    },
+    "3_convergence_criterion": {
+      "stopping_rule": "||b - A x||_2 <= tol * ||b||_2 for every sample in the batch (TRUE residual recomputed before stopping)",
+      "discrete_manufactured_solution_64x64_binary_a": {
+        "1e-06": {
+          "converged": true,
+          "iterations": 202,
+          "true_rel_residual": 9.894451900036846e-07,
+          "max_rel_error_vs_exact": 2.1801880139959107e-05
+        },
+        "1e-08": {
+          "converged": true,
+          "iterations": 286,
+          "true_rel_residual": 9.640544013879183e-09,
+          "max_rel_error_vs_exact": 2.587968474777761e-07
+        },
+        "1e-10": {
+          "converged": true,
+          "iterations": 341,
+          "true_rel_residual": 8.849149143260663e-11,
+          "max_rel_error_vs_exact": 9.077438847138066e-10
+        },
+        "1e-12": {
+          "converged": true,
+          "iterations": 380,
+          "true_rel_residual": 9.917080559049398e-13,
+          "max_rel_error_vs_exact": 1.3300951546523194e-11
+        }
+      }
+    },
+    "4_all_test_samples": {
+      "n_reference": 1000,
+      "n_test": 1000,
+      "indices_aligned": true,
+      "batches_logged": 8,
+      "samples_reported_by_audit": 1000,
+      "all_batches_converged": true,
+      "max_solver_reported_rel_residual_float64": 9.928054127396426e-11,
+      "finite_and_positive": true
+    },
+    "5_residual_of_stored_solutions": {
+      "definition": "||beta - A u||_2 / ||beta||_2 recomputed in float64 from the STORED float32 arrays",
+      "reference_float32_stored": {
+        "n": 1000,
+        "mean": 0.0001857619903159084,
+        "median": 0.00016840193663349645,
+        "p99": 0.00044698977798014223,
+        "max": 0.0006246365838694255
+      },
+      "official_targets_for_comparison": {
+        "n": 1000,
+        "mean": 0.024239204894099833,
+        "median": 0.0014270994124140218,
+        "p99": 0.30593509948941183,
+        "max": 0.4522041633235047
+      },
+      "note": "float32 storage rounding bounds the stored-reference residual well above the 1e-10 float64 solve"
+    },
+    "6_manufactured_solution_continuum": {
+      "u_star": "sin(pi s/L) sin(pi t/L), s=x+dx/2, t=y+dx/2, L=1+dx (zero at ghost centres)",
+      "a": "1 + 0.5 sin(2 pi x) cos(2 pi y)",
+      "f": "-div(a grad u_star), analytic",
+      "rel_l2_error": {
+        "16": 0.006918430807552332,
+        "32": 0.0019072952670758513,
+        "64": 0.0005019358894920321,
+        "128": 0.00012883540313505675
+      },
+      "observed_order": {
+        "16->32": 1.8589166489018336,
+        "32->64": 1.925953192886697,
+        "64->128": 1.9619740143797224
+      }
+    },
+    "7_storage_separation": {
+      "official_file": "data/processed/darcy_beta1.0_test.npz (key 'u')",
+      "reference_file": "data/processed/darcy_beta1.0_test_reference.npz (key 'u_reference')",
+      "official_test_targets_byte_identical_to_raw_hdf5": true,
+      "reference_differs_from_official": true,
+      "reference_keys": [
+        "indices",
+        "note",
+        "target_source",
+        "u_reference"
+      ],
+      "official_keys": [
+        "a",
+        "beta",
+        "indices",
+        "pde_residual",
+        "target_source",
+        "u"
+      ]
+    },
+    "8_no_influence_on_training": {
+      "files_referencing_reference_or_solver": {
+        "backend/pdeflow/data/physics.py": [
+          "solve_steady_state"
+        ]
+      },
+      "only_solver_definition_references_it": true,
+      "preprocess_py_reads_reference": false,
+      "normalizer_sha256": "a021fd47061f213528419d9133cd40c57c16f9ce50772616753357e9bd3e2918",
+      "pipeline_order": "preprocess.py (splits + normalisers) runs BEFORE audit_data.py creates the reference",
+      "reference_split": "test only; there is no reference for train or val, so it cannot enter training or model selection"
+    }
+  },
+  "all_checks_passed": true
+}

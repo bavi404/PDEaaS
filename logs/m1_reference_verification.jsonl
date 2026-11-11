@@ -1,0 +1,1 @@
+{"ts": "2026-11-11T09:01:56.890+00:00", "level": "INFO", "logger": "pdeflow.refverify", "event": "reference_solver_verified", "all_checks_passed": true, "report": "reports/reference_solver_verification.json"}

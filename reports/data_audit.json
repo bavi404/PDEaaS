@@ -1,0 +1,306 @@
+{
+  "definitions": {
+    "official_target": "PDEBench `tensor` as released; unchanged",
+    "reference": "exact discrete steady state of -div(a grad u)=beta (CG, rel. residual <= 1e-10), computed by this project",
+    "deviation": "||u_official - u_reference||_2 / ||u_reference||_2 per sample",
+    "pde_residual": "RMS(beta + div(a grad u_official)) / beta = |du/dt| of the generator at t=2"
+  },
+  "duplicate_groups": [
+    {
+      "size": 46,
+      "indices": [
+        29,
+        1194,
+        1201,
+        1214,
+        1446,
+        1498,
+        1579,
+        2008,
+        2103,
+        2497,
+        2618,
+        2642,
+        2889,
+        3090,
+        3095,
+        3691,
+        4029,
+        4094,
+        4266,
+        4268,
+        4612,
+        4640,
+        5032,
+        5045,
+        5478,
+        5586,
+        5856,
+        5966,
+        6036,
+        6145,
+        6691,
+        6887,
+        7256,
+        7695,
+        8036,
+        8141,
+        8211,
+        8451,
+        8595,
+        8791,
+        8903,
+        9556,
+        9676,
+        9752,
+        9825,
+        9883
+      ],
+      "field": "constant a = 0.1",
+      "split": "train",
+      "positions_in_shuffled_split": {
+        "first": 4414,
+        "last": 4459
+      },
+      "included_in_processed_files": false,
+      "reference_cg": {
+        "iterations": 266,
+        "max_relative_residual": 8.649761068670337e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      "deviation_official_vs_reference": {
+        "n": 46,
+        "min": 0.005668691596169776,
+        "p10": 0.04078895517328108,
+        "p25": 0.14893049764379238,
+        "median": 0.294105710329558,
+        "p75": 0.45880914419020524,
+        "p90": 0.5427078852144547,
+        "p99": 0.5707593774543116,
+        "max": 0.571743246805616,
+        "mean": 0.29942413249657135
+      },
+      "pairwise_rel_l2_between_official_targets_(norm_by_reference)": {
+        "n": 1035,
+        "min": 0.00017142762543345054,
+        "p10": 0.03276243531775452,
+        "p25": 0.09057435308096692,
+        "median": 0.1885424388570508,
+        "p75": 0.3294572672907501,
+        "p90": 0.43802733423705775,
+        "p99": 0.5440652951214867,
+        "max": 0.5774119265603916,
+        "mean": 0.21572124873734375
+      },
+      "rel_l2_to_group_mean": {
+        "n": 46,
+        "min": 0.0012042305524836623,
+        "p10": 0.02871318709331008,
+        "p25": 0.07191471262746664,
+        "median": 0.12172907195869959,
+        "p75": 0.1841142310545007,
+        "p90": 0.2091346427512158,
+        "p99": 0.2254200809185711,
+        "max": 0.23484499180416885,
+        "mean": 0.12471160003498205
+      },
+      "group_mean_deviation_vs_reference": 0.299177666460382,
+      "pde_residual": {
+        "n": 46,
+        "min": 0.004654238340438744,
+        "p10": 0.03347783731277125,
+        "p25": 0.1222348850213732,
+        "median": 0.24138749948277088,
+        "p75": 0.3765679556642938,
+        "p90": 0.4454279036244414,
+        "p99": 0.46845118429707316,
+        "max": 0.469258696598494,
+        "mean": 0.2457526858466193
+      },
+      "spearman_residual_vs_deviation": 1.0,
+      "u_max": {
+        "n": 46,
+        "min": 0.7434054613113403,
+        "p10": 0.7823405265808105,
+        "p25": 0.8729626685380936,
+        "median": 0.9946218132972717,
+        "p75": 1.1326465606689453,
+        "p90": 1.2029535174369812,
+        "p99": 1.2264606773853302,
+        "max": 1.2272850275039673,
+        "mean": 0.99887255611627
+      },
+      "reference_u_max": 0.7481579189445617,
+      "official_minus_reference_sign": {
+        "frac_members_with_mean_above_reference": 0.9782608695652174
+      },
+      "slowest_mode": {
+        "lambda1_continuum": 1.9434361026022406,
+        "t_final": 2.0,
+        "exp(-lambda1*t_final)": 0.02050939499865425
+      }
+    }
+  ],
+  "convergence_test_split": {
+    "n": 1000,
+    "cg_batches": [
+      {
+        "iterations": 1616,
+        "max_relative_residual": 9.702640131805827e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1597,
+        "max_relative_residual": 9.918388680303919e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1608,
+        "max_relative_residual": 9.345320577549788e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1622,
+        "max_relative_residual": 9.028736600864166e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1609,
+        "max_relative_residual": 9.59859795390805e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1611,
+        "max_relative_residual": 9.657781782102235e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1611,
+        "max_relative_residual": 9.286282139391729e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      },
+      {
+        "iterations": 1594,
+        "max_relative_residual": 9.928054127396426e-11,
+        "converged": true,
+        "tol": 1e-10,
+        "max_iter": 20000
+      }
+    ],
+    "solve_time_s": 1064.6,
+    "deviation_official_vs_reference": {
+      "n": 1000,
+      "min": 0.00021673783920326335,
+      "p10": 0.000488960568349805,
+      "p25": 0.0006225087175267935,
+      "median": 0.001611341515025508,
+      "p75": 0.016458609025788405,
+      "p90": 0.08680551951382579,
+      "p99": 0.36468164144490856,
+      "max": 0.551274246217672,
+      "mean": 0.02931370513937851
+    },
+    "fraction_deviation_above": {
+      "0.001": 0.562,
+      "0.005": 0.368,
+      "0.01": 0.299,
+      "0.05": 0.149,
+      "0.1": 0.092
+    },
+    "spearman_residual_vs_deviation": 0.996801264801265,
+    "spearman_frac_a1_vs_deviation": -0.9486310806310807,
+    "deviation_by_fraction_a1": [
+      {
+        "frac_a1_range": [
+          0,
+          0.2
+        ],
+        "n": 104,
+        "deviation_median": 0.1730017825885659,
+        "deviation_mean": 0.18123401675383893
+      },
+      {
+        "frac_a1_range": [
+          0.2,
+          0.4
+        ],
+        "n": 203,
+        "deviation_median": 0.023041828466519938,
+        "deviation_mean": 0.04125121492833891
+      },
+      {
+        "frac_a1_range": [
+          0.4,
+          0.6
+        ],
+        "n": 347,
+        "deviation_median": 0.0019684048370618135,
+        "deviation_mean": 0.0054383607492162495
+      },
+      {
+        "frac_a1_range": [
+          0.6,
+          0.8
+        ],
+        "n": 284,
+        "deviation_median": 0.0006011490139891467,
+        "deviation_mean": 0.0006525346652175803
+      },
+      {
+        "frac_a1_range": [
+          0.8,
+          1.0
+        ],
+        "n": 62,
+        "deviation_median": 0.00030121447624052337,
+        "deviation_mean": 0.0003054797036553566
+      }
+    ],
+    "mean_official_over_mean_reference": 1.0509555339813232,
+    "residual_to_deviation_fit": {
+      "model": "dev = exp(b) * residual^m",
+      "m": 1.0190126586420114,
+      "b": 0.2600698320307165,
+      "median_abs_log_error": 0.04681799154384825
+    }
+  },
+  "convergence_all_10000_estimated": {
+    "method": "deviation estimated from each sample's PDE residual with the fit above (an ESTIMATE, not exact solves)",
+    "estimated_deviation": {
+      "n": 10000,
+      "min": 0.00020961610848147305,
+      "p10": 0.000496093923700373,
+      "p25": 0.0006263639522303335,
+      "median": 0.0016941377600249567,
+      "p75": 0.01569424101947895,
+      "p90": 0.09429463592630817,
+      "p99": 0.43313379862505963,
+      "max": 0.6167397315175996,
+      "mean": 0.031968258156345485
+    },
+    "estimated_fraction_deviation_above": {
+      "0.001": 0.5677,
+      "0.005": 0.371,
+      "0.01": 0.2946,
+      "0.05": 0.1468,
+      "0.1": 0.0967
+    }
+  },
+  "figure": "docs/figures/convergence_audit.png"
+}

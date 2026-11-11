@@ -1,0 +1,13 @@
+# M1 data configuration. Every value here is consumed by scripts/preprocess.py.
+source_file: data/raw/2D_DarcyFlow_beta1.0_Train.hdf5
+provenance_file: data/raw/2D_DarcyFlow_beta1.0_Train.hdf5.provenance.json
+seed: 20261111            # fixed split seed (session date)
+fractions: [0.8, 0.1, 0.1]
+group_identical_inputs: true
+n_train: 2000             # prefix of the shuffled train split (CPU budget, docs/BLOCKERS.md §5)
+n_val: 1000               # full validation split
+n_test: 1000              # full test split
+train_stride: 2           # 128 -> 64 point subsampling (PDEBench reduced_resolution=2)
+processed_dir: data/processed
+splits_path: data/splits/darcy_beta1.0_seed20261111.json
+normalizer_path: data/splits/normalizers_beta1.0_train2000_stride2.json

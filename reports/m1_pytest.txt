@@ -1,0 +1,218 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- /home/user/pdeflow/backend/../.venv/bin/python
+rootdir: /home/user/pdeflow/backend
+configfile: pyproject.toml
+testpaths: tests
+plugins: mock-3.17.0, anyio-4.16.0, platformdirs-4.14.5
+collecting ... collected 103 items
+
+tests/test_data_reader.py::test_inspect_valid_file PASSED                [  0%]
+tests/test_data_reader.py::test_read_preserves_requested_order PASSED    [  1%]
+tests/test_data_reader.py::test_read_all PASSED                          [  2%]
+tests/test_data_reader.py::test_read_rejects_bad_indices[bad0] PASSED    [  3%]
+tests/test_data_reader.py::test_read_rejects_bad_indices[bad1] PASSED    [  4%]
+tests/test_data_reader.py::test_read_rejects_bad_indices[bad2] PASSED    [  5%]
+tests/test_data_reader.py::test_read_rejects_bad_indices[bad3] PASSED    [  6%]
+tests/test_data_reader.py::test_missing_key PASSED                       [  7%]
+tests/test_data_reader.py::test_wrong_target_shape PASSED                [  8%]
+tests/test_data_reader.py::test_wrong_dtype PASSED                       [  9%]
+tests/test_data_reader.py::test_missing_file PASSED                      [ 10%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.median] PASSED [ 11%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.mean] PASSED [ 12%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.p90] PASSED [ 13%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.p99] PASSED [ 14%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.max] PASSED [ 15%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.p75] PASSED [ 16%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.fraction_deviation_above.0.01] PASSED [ 17%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.fraction_deviation_above.0.05] PASSED [ 18%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.fraction_deviation_above.0.1] PASSED [ 19%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.spearman_residual_vs_deviation] PASSED [ 20%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.spearman_frac_a1_vs_deviation] PASSED [ 21%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.mean_official_over_mean_reference] PASSED [ 22%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_by_fraction_a1.0.deviation_median] PASSED [ 23%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_by_fraction_a1.4.deviation_median] PASSED [ 24%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_all_10000_estimated.estimated_fraction_deviation_above.0.01] PASSED [ 25%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.deviation_official_vs_reference.median] PASSED [ 26%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.deviation_official_vs_reference.max] PASSED [ 27%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.pairwise_rel_l2_between_official_targets_(norm_by_reference).median] PASSED [ 28%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.pairwise_rel_l2_between_official_targets_(norm_by_reference).mean] PASSED [ 29%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.rel_l2_to_group_mean.mean] PASSED [ 30%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.rel_l2_to_group_mean.max] PASSED [ 31%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.group_mean_deviation_vs_reference] PASSED [ 32%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.official_minus_reference_sign.frac_members_with_mean_above_reference] PASSED [ 33%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.positions_in_shuffled_split.first] PASSED [ 33%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.positions_in_shuffled_split.last] PASSED [ 34%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.slowest_mode.lambda1_continuum] PASSED [ 35%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:u_stats.max] PASSED [ 36%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:u_stats.mean] PASSED [ 37%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:pde_residual.first200_rms_boundary_ring] PASSED [ 38%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:pde_residual.first200_rms_boundary_ring_if_a_ghost_zero] PASSED [ 39%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:files.train.u_mean] PASSED [ 40%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:files.test.u_std] PASSED [ 41%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:files.val.residual_frac_above_0.01] PASSED [ 42%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:normalizers.a.mean] PASSED [ 43%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:normalizers.u.std] PASSED [ 44%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.interior (>=2 fine cells from edge).target_reconstruction_stride2.mean] PASSED [ 45%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.boundary band (outer 2 fine cells).target_reconstruction_stride2.mean] PASSED [ 46%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.last fine row+col only (extrapolated by stride-2).target_reconstruction_stride2.mean] PASSED [ 47%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.interior (>=2 fine cells from edge).information_loss_stride2.mean] PASSED [ 48%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.interior (>=2 fine cells from edge).information_loss_avgpool.mean] PASSED [ 49%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.boundary band (outer 2 fine cells).information_loss_stride2.mean] PASSED [ 50%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.boundary band (outer 2 fine cells).target_reconstruction_stride2_max_abs] PASSED [ 51%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:input_information_loss_rel_l2.stride2.mean] PASSED [ 52%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:target_reconstruction_rel_l2.stride2_then_linear_to_128_excluding_last_row_and_col.mean] PASSED [ 53%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:architecture_consistency_untrained_fno.smooth_bandlimited_input.mean] PASSED [ 54%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:architecture_consistency_untrained_fno.binary_permeability_input.mean] PASSED [ 55%]
+tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:spectral_energy_fraction.a_above_k32.mean] PASSED [ 56%]
+tests/test_fno_resolution_support.py::test_forward_shape_and_finite[64] PASSED [ 57%]
+tests/test_fno_resolution_support.py::test_forward_shape_and_finite[128] PASSED [ 58%]
+tests/test_fno_resolution_support.py::test_modes_below_nyquist_of_training_grid PASSED [ 59%]
+tests/test_fno_resolution_support.py::test_same_parameters_used_at_both_resolutions PASSED [ 60%]
+tests/test_metrics.py::test_relative_l2_values PASSED                    [ 61%]
+tests/test_metrics.py::test_relative_l2_errors PASSED                    [ 62%]
+tests/test_metrics.py::test_primary_and_secondary_are_separate PASSED    [ 63%]
+tests/test_metrics.py::test_secondary_absent_without_reference PASSED    [ 64%]
+tests/test_metrics.py::test_strata PASSED                                [ 65%]
+tests/test_real_data.py::test_file_layout PASSED                         [ 66%]
+tests/test_real_data.py::test_provenance_matches_darus PASSED            [ 66%]
+tests/test_real_data.py::test_values_physical PASSED                     [ 67%]
+tests/test_real_data.py::test_steady_samples_satisfy_discrete_pde PASSED [ 68%]
+tests/test_real_data.py::test_split_manifest_valid_and_matches_file PASSED [ 69%]
+tests/test_real_data.py::test_processed_files_match_manifest_and_raw PASSED [ 70%]
+tests/test_real_data.py::test_no_identical_inputs_across_processed_splits PASSED [ 71%]
+tests/test_real_data.py::test_normalizers_fitted_on_train_only PASSED    [ 72%]
+tests/test_real_data.py::test_torch_dataset_shapes_and_encoding PASSED   [ 73%]
+tests/test_real_data.py::test_reference_is_separate_from_official_targets PASSED [ 74%]
+tests/test_real_data.py::test_reference_solves_the_discrete_pde PASSED   [ 75%]
+tests/test_real_data.py::test_all_processed_files_are_official_targets PASSED [ 76%]
+tests/test_real_data.py::test_target_sources_are_labelled PASSED         [ 77%]
+tests/test_reference_isolation.py::test_reference_only_in_allowed_modules PASSED [ 78%]
+tests/test_reference_isolation.py::test_preprocessing_does_not_read_reference PASSED [ 79%]
+tests/test_resample_and_physics.py::test_subsample_values_and_coords PASSED [ 80%]
+tests/test_resample_and_physics.py::test_embedding_offset_consistent_for_stride_only PASSED [ 81%]
+tests/test_resample_and_physics.py::test_avg_pool PASSED                 [ 82%]
+tests/test_resample_and_physics.py::test_linear_upsample_exact_for_bilinear_functions PASSED [ 83%]
+tests/test_resample_and_physics.py::test_high_frequency_fraction PASSED  [ 84%]
+tests/test_resample_and_physics.py::test_operator_symmetric_positive_definite PASSED [ 85%]
+tests/test_resample_and_physics.py::test_cg_solution_has_zero_residual_and_scales_with_beta PASSED [ 86%]
+tests/test_resample_and_physics.py::test_cg_constant_coefficient_matches_continuum_on_effective_domain PASSED [ 87%]
+tests/test_resample_and_physics.py::test_cg_rejects_nonpositive_permeability PASSED [ 88%]
+tests/test_splits_and_normalization.py::test_partition_and_sizes PASSED  [ 89%]
+tests/test_splits_and_normalization.py::test_deterministic_and_seed_dependent PASSED [ 90%]
+tests/test_splits_and_normalization.py::test_groups_stay_together PASSED [ 91%]
+tests/test_splits_and_normalization.py::test_prefix_subset_is_stable PASSED [ 92%]
+tests/test_splits_and_normalization.py::test_save_load_roundtrip PASSED  [ 93%]
+tests/test_splits_and_normalization.py::test_validate_detects_overlap PASSED [ 94%]
+tests/test_splits_and_normalization.py::test_bad_fractions[fr0] PASSED   [ 95%]
+tests/test_splits_and_normalization.py::test_bad_fractions[fr1] PASSED   [ 96%]
+tests/test_splits_and_normalization.py::test_normalizer_roundtrip_and_stats PASSED [ 97%]
+tests/test_splits_and_normalization.py::test_normalizer_is_resolution_independent PASSED [ 98%]
+tests/test_splits_and_normalization.py::test_normalizer_rejects_bad_input PASSED [ 99%]
+tests/test_splits_and_normalization.py::test_normalizers_json_roundtrip PASSED [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_data_reader.py::test_inspect_valid_file
+PASSED tests/test_data_reader.py::test_read_preserves_requested_order
+PASSED tests/test_data_reader.py::test_read_all
+PASSED tests/test_data_reader.py::test_read_rejects_bad_indices[bad0]
+PASSED tests/test_data_reader.py::test_read_rejects_bad_indices[bad1]
+PASSED tests/test_data_reader.py::test_read_rejects_bad_indices[bad2]
+PASSED tests/test_data_reader.py::test_read_rejects_bad_indices[bad3]
+PASSED tests/test_data_reader.py::test_missing_key
+PASSED tests/test_data_reader.py::test_wrong_target_shape
+PASSED tests/test_data_reader.py::test_wrong_dtype
+PASSED tests/test_data_reader.py::test_missing_file
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.median]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.p90]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.p99]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.max]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_official_vs_reference.p75]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.fraction_deviation_above.0.01]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.fraction_deviation_above.0.05]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.fraction_deviation_above.0.1]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.spearman_residual_vs_deviation]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.spearman_frac_a1_vs_deviation]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.mean_official_over_mean_reference]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_by_fraction_a1.0.deviation_median]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_test_split.deviation_by_fraction_a1.4.deviation_median]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:convergence_all_10000_estimated.estimated_fraction_deviation_above.0.01]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.deviation_official_vs_reference.median]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.deviation_official_vs_reference.max]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.pairwise_rel_l2_between_official_targets_(norm_by_reference).median]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.pairwise_rel_l2_between_official_targets_(norm_by_reference).mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.rel_l2_to_group_mean.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.rel_l2_to_group_mean.max]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.group_mean_deviation_vs_reference]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.official_minus_reference_sign.frac_members_with_mean_above_reference]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.positions_in_shuffled_split.first]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.positions_in_shuffled_split.last]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:duplicate_groups.0.slowest_mode.lambda1_continuum]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:u_stats.max]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:u_stats.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:pde_residual.first200_rms_boundary_ring]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:pde_residual.first200_rms_boundary_ring_if_a_ghost_zero]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:files.train.u_mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:files.test.u_std]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[DATA.md:files.val.residual_frac_above_0.01]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:normalizers.a.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:normalizers.u.std]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.interior (>=2 fine cells from edge).target_reconstruction_stride2.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.boundary band (outer 2 fine cells).target_reconstruction_stride2.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.last fine row+col only (extrapolated by stride-2).target_reconstruction_stride2.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.interior (>=2 fine cells from edge).information_loss_stride2.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.interior (>=2 fine cells from edge).information_loss_avgpool.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.boundary band (outer 2 fine cells).information_loss_stride2.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:region_breakdown.boundary band (outer 2 fine cells).target_reconstruction_stride2_max_abs]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:input_information_loss_rel_l2.stride2.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:target_reconstruction_rel_l2.stride2_then_linear_to_128_excluding_last_row_and_col.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:architecture_consistency_untrained_fno.smooth_bandlimited_input.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:architecture_consistency_untrained_fno.binary_permeability_input.mean]
+PASSED tests/test_docs_traceability.py::test_number_in_doc_matches_report[PREPROCESSING.md:spectral_energy_fraction.a_above_k32.mean]
+PASSED tests/test_fno_resolution_support.py::test_forward_shape_and_finite[64]
+PASSED tests/test_fno_resolution_support.py::test_forward_shape_and_finite[128]
+PASSED tests/test_fno_resolution_support.py::test_modes_below_nyquist_of_training_grid
+PASSED tests/test_fno_resolution_support.py::test_same_parameters_used_at_both_resolutions
+PASSED tests/test_metrics.py::test_relative_l2_values
+PASSED tests/test_metrics.py::test_relative_l2_errors
+PASSED tests/test_metrics.py::test_primary_and_secondary_are_separate
+PASSED tests/test_metrics.py::test_secondary_absent_without_reference
+PASSED tests/test_metrics.py::test_strata
+PASSED tests/test_real_data.py::test_file_layout
+PASSED tests/test_real_data.py::test_provenance_matches_darus
+PASSED tests/test_real_data.py::test_values_physical
+PASSED tests/test_real_data.py::test_steady_samples_satisfy_discrete_pde
+PASSED tests/test_real_data.py::test_split_manifest_valid_and_matches_file
+PASSED tests/test_real_data.py::test_processed_files_match_manifest_and_raw
+PASSED tests/test_real_data.py::test_no_identical_inputs_across_processed_splits
+PASSED tests/test_real_data.py::test_normalizers_fitted_on_train_only
+PASSED tests/test_real_data.py::test_torch_dataset_shapes_and_encoding
+PASSED tests/test_real_data.py::test_reference_is_separate_from_official_targets
+PASSED tests/test_real_data.py::test_reference_solves_the_discrete_pde
+PASSED tests/test_real_data.py::test_all_processed_files_are_official_targets
+PASSED tests/test_real_data.py::test_target_sources_are_labelled
+PASSED tests/test_reference_isolation.py::test_reference_only_in_allowed_modules
+PASSED tests/test_reference_isolation.py::test_preprocessing_does_not_read_reference
+PASSED tests/test_resample_and_physics.py::test_subsample_values_and_coords
+PASSED tests/test_resample_and_physics.py::test_embedding_offset_consistent_for_stride_only
+PASSED tests/test_resample_and_physics.py::test_avg_pool
+PASSED tests/test_resample_and_physics.py::test_linear_upsample_exact_for_bilinear_functions
+PASSED tests/test_resample_and_physics.py::test_high_frequency_fraction
+PASSED tests/test_resample_and_physics.py::test_operator_symmetric_positive_definite
+PASSED tests/test_resample_and_physics.py::test_cg_solution_has_zero_residual_and_scales_with_beta
+PASSED tests/test_resample_and_physics.py::test_cg_constant_coefficient_matches_continuum_on_effective_domain
+PASSED tests/test_resample_and_physics.py::test_cg_rejects_nonpositive_permeability
+PASSED tests/test_splits_and_normalization.py::test_partition_and_sizes
+PASSED tests/test_splits_and_normalization.py::test_deterministic_and_seed_dependent
+PASSED tests/test_splits_and_normalization.py::test_groups_stay_together
+PASSED tests/test_splits_and_normalization.py::test_prefix_subset_is_stable
+PASSED tests/test_splits_and_normalization.py::test_save_load_roundtrip
+PASSED tests/test_splits_and_normalization.py::test_validate_detects_overlap
+PASSED tests/test_splits_and_normalization.py::test_bad_fractions[fr0]
+PASSED tests/test_splits_and_normalization.py::test_bad_fractions[fr1]
+PASSED tests/test_splits_and_normalization.py::test_normalizer_roundtrip_and_stats
+PASSED tests/test_splits_and_normalization.py::test_normalizer_is_resolution_independent
+PASSED tests/test_splits_and_normalization.py::test_normalizer_rejects_bad_input
+PASSED tests/test_splits_and_normalization.py::test_normalizers_json_roundtrip
+============================= 103 passed in 13.77s =============================
