@@ -1,0 +1,34 @@
+# 2026-11-11T18:11:39Z read-only preflight (GET whoami-v2 + GET space info; nothing created/modified/uploaded)
+staged 73 files (11.1 MB; 45 web files) from commit 35d6c34e882f; checkpoint sha256 d7133c7c681c… verified
+   LICENSE
+   NOTICE.md
+   backend/assets/demo_samples_v1.npz
+   backend/models/fno_darcy_beta1_baseline.pt
+   backend/pdeflow/__init__.py
+   backend/pdeflow/api/__init__.py
+   backend/pdeflow/api/app.py
+   backend/pdeflow/api/schemas.py
+   backend/pdeflow/api/settings.py
+   backend/pdeflow/data/__init__.py
+   backend/pdeflow/data/dataset.py
+   backend/pdeflow/data/normalization.py
+   backend/pdeflow/data/pdebench.py
+   backend/pdeflow/data/physics.py
+   backend/pdeflow/data/resample.py
+   backend/pdeflow/data/splits.py
+   backend/pdeflow/evaluation/__init__.py
+   backend/pdeflow/evaluation/metrics.py
+   backend/pdeflow/inference.py
+   backend/pdeflow/logging_utils.py
+   backend/pdeflow/models/__init__.py
+   backend/pdeflow/models/fno.py
+   backend/pdeflow/training/__init__.py
+   backend/pdeflow/training/core.py
+   README.md
+   app.py
+   requirements.txt
+   reports/m2_eval_fno_baseline.json
+   web/… (45 files)
+authenticated via proxy: account bavi404 (user), token role fineGrained
+preflight OK: {'space': 'bavi404/pdeflow', 'author': 'bavi404', 'sdk': 'gradio', 'private': False, 'hardware': 'zero-a10g'}
+preflight passed; --preflight-only: nothing uploaded
