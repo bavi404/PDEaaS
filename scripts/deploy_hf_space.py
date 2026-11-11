@@ -67,6 +67,7 @@ def main() -> int:
     ap.add_argument("--space", required=True, help="<owner>/<space-name>")
     ap.add_argument("--private", action="store_true")
     ap.add_argument("--dry-run", action="store_true", help="stage and list files only; no network, no token needed")
+    ap.add_argument("--stage-to", help="with --dry-run: also copy the staged Space repository here (e.g. to docker build it)")
     a = ap.parse_args()
     head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
     with tempfile.TemporaryDirectory() as tmp:
@@ -76,6 +77,9 @@ def main() -> int:
         for f in files:
             print("  ", f)
         if a.dry_run:
+            if a.stage_to:
+                shutil.copytree(tmp, a.stage_to, dirs_exist_ok=False)
+                print(f"staged Space repository copied to {a.stage_to}")
             return 0
         token = os.environ.get("HF_TOKEN")
         if not token:
