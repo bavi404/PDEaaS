@@ -62,6 +62,10 @@ uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/d
 HF_TOKEN=... uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space <owner>/<space>
 ```
 
+**Verified locally:**
+- **Dry run:** `--dry-run --stage-to` staged **57 files (5.9 MB)** from the committed HEAD (`reports/m6_space_dry_run.txt`).
+- **Image from the staged repository:** built with `docker build`; the 17 container checks pass (`reports/m6_space_context_check.json`), with peak memory 423 MiB.
+
 **Equivalence with the tested image.** The staged directory is the same build context as the locally tested image. Two things differ on HF:
 - No build args are given, so base images come from Docker Hub by the same pinned digests.
 - No CA secret is given; the `required=false` secret mount is simply absent.

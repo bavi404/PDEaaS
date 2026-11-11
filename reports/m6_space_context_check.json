@@ -1,0 +1,115 @@
+{
+  "url": "http://127.0.0.1:7862",
+  "container": "space-test",
+  "checks": [
+    {
+      "check": "frontend loads",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "check": "health",
+      "ok": true,
+      "status": 200,
+      "checkpoint_sha256": "d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7"
+    },
+    {
+      "check": "served checkpoint is the evaluated one",
+      "ok": true
+    },
+    {
+      "check": "model card",
+      "ok": true,
+      "n_params": 357217
+    },
+    {
+      "check": "example list",
+      "ok": true,
+      "n": 24
+    },
+    {
+      "check": "sample prediction reproduces the evaluated worst case (rel 1e-6)",
+      "ok": true,
+      "got": 0.24405399234934488,
+      "report": 0.24405396972346374
+    },
+    {
+      "check": "sample prediction 64x64 with separate targets",
+      "ok": true,
+      "rel_l2_official": 0.013415141317462487
+    },
+    {
+      "check": "custom permeability prediction (no targets, no metrics)",
+      "ok": true,
+      "warnings": []
+    },
+    {
+      "check": "out-of-distribution warning",
+      "ok": true
+    },
+    {
+      "check": "malformed input rejected (422 with request id)",
+      "ok": true,
+      "detail": "permeability must be a square grid of size 64x64 or 128x128 (measured resolutions); got 2 rows with lengths [2]"
+    },
+    {
+      "check": "invalid JSON rejected",
+      "ok": true,
+      "status": 422
+    },
+    {
+      "check": "unknown sample 404",
+      "ok": true,
+      "status": 404
+    },
+    {
+      "check": "32 concurrent custom predictions (8 in flight)",
+      "ok": true,
+      "wall_s": 1.11
+    },
+    {
+      "check": "structured request logs with request ids",
+      "ok": true,
+      "n_request_logs": 104,
+      "n_prediction_logs": 96
+    },
+    {
+      "check": "memory peak within HF CPU basic (16 GB)",
+      "ok": true,
+      "peak_mib": 423,
+      "current_mib": 420
+    },
+    {
+      "check": "docker HEALTHCHECK healthy",
+      "ok": true,
+      "status": "healthy"
+    }
+  ],
+  "latency": {
+    "sample_64": {
+      "n": 20,
+      "wall_ms_median": 25.4,
+      "wall_ms_max": 32.3,
+      "server_inference_ms_median": 13.9
+    },
+    "sample_128_default": {
+      "n": 20,
+      "wall_ms_median": 31.7,
+      "wall_ms_max": 42.5,
+      "server_inference_ms_median": 15.0
+    },
+    "custom_128_default": {
+      "n": 20,
+      "wall_ms_median": 37.8,
+      "wall_ms_max": 62.5,
+      "server_inference_ms_median": 15.4
+    }
+  },
+  "memory": {
+    "current_bytes": 440832000,
+    "peak_bytes": 443318272,
+    "cgroup_limit_bytes": 9223372036854771712,
+    "note": "cgroup memory of the whole container (FastAPI + Next.js), peak over its lifetime including the e2e suite and the 32-request burst"
+  },
+  "all_passed": true
+}
