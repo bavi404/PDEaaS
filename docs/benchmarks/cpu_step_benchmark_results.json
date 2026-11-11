@@ -1,0 +1,34 @@
+[
+ {
+  "cfg": "A 64^2 w32 m12 L4 b16",
+  "params": 357217,
+  "train_step_s": 0.2399,
+  "per_sample_ms": 15.0,
+  "infer_b1_ms": 13.23,
+  "peak_rss_MB": 812
+ },
+ {
+  "cfg": "B 128^2 w32 m12 L4 b16",
+  "params": 357217,
+  "train_step_s": 1.9287,
+  "per_sample_ms": 120.54,
+  "infer_b1_ms": 20.09,
+  "peak_rss_MB": 1630
+ },
+ {
+  "cfg": "C 64^2 w64 m16 L4 b16",
+  "params": 2410177,
+  "train_step_s": 0.4953,
+  "per_sample_ms": 30.96,
+  "infer_b1_ms": 24.04,
+  "peak_rss_MB": 1630
+ },
+ {
+  "cfg": "D 32^2 w32 m12 L4 b16",
+  "params": 357217,
+  "train_step_s": 0.079,
+  "per_sample_ms": 4.94,
+  "infer_b1_ms": 8.04,
+  "peak_rss_MB": 1630
+ }
+]

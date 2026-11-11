@@ -6,11 +6,13 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] Inspect working dir, git, Python, packages, disk, memory, GPU/CUDA, Node, Docker (`docs/ENVIRONMENT.md`)
 - [x] Architecture, decisions, risks, milestones (`docs/PLAN.md`)
 - [x] Repository skeleton + git init
-- [!] Push to GitHub — GH token invalid in this environment
+- [x] Blocker assessment after network-policy change (`docs/BLOCKERS.md`)
+- [!] Push to GitHub — GH token invalid in this environment (needs user, see BLOCKERS §6.2)
 
 ## M1 — Data
-- [!] Install Python deps (torch CPU, h5py, fastapi, pytest) — PyPI unreachable
-- [!] Query DaRUS for Darcy file sizes — host denied by network policy
+- [x] Python 3.11 + torch 2.15.0+cpu, neuraloperator 2.0.0, h5py, fastapi, pytest install/import verified (scratch venv)
+- [ ] Project venv + pinned requirements
+- [x] Query DaRUS for Darcy file sizes + MD5; range requests verified (BLOCKERS §4)
 - [ ] Download one β file (or range-read N samples), record SHA-256 + URL
 - [ ] Inspect HDF5 keys/shapes/dtypes → `docs/DATA.md`
 - [ ] Seeded split manifest (train/val/test), train-only normalization stats
@@ -43,7 +45,7 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [ ] Vitest + RTL tests; production build
 
 ## M6 — Deployment
-- [!] Docker base image pulls — Docker Hub unreachable
+- [x] Docker pull/run verified; build-time network needs proxy args (BLOCKERS §2.4)
 - [ ] Dockerfiles (api, web) + docker-compose.yml with health checks
 - [ ] Compose verified end-to-end
 - [ ] Public deployment live and verified
