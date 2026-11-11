@@ -17,7 +17,9 @@ import logging
 import re
 import time
 import uuid
+from collections import deque
 from contextlib import asynccontextmanager
+from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -29,6 +31,8 @@ from fastapi.responses import JSONResponse
 
 from pdeflow import __version__
 from pdeflow.api.schemas import (
+    Activity,
+    ActivityItem,
     Health,
     PredictRequest,
     PredictResponse,
@@ -42,6 +46,7 @@ from pdeflow.evaluation.metrics import PRIMARY, SECONDARY, relative_l2
 from pdeflow.inference import SUPPORTED_RESOLUTIONS, TRAINING_VALUES, Predictor
 from pdeflow.logging_utils import get_logger, log_event
 
+ACTIVITY_MAX = 100  # in-memory ring buffer of prediction metadata; resets on restart
 _REQ_ID = re.compile(r"^[A-Za-z0-9._-]{1,64}$")
 MAX_PERMEABILITY = 1e6  # hard sanity bound; anything above is almost certainly a unit/encoding error
 
@@ -77,6 +82,10 @@ class SampleStore:
         s = 128 // resolution  # same stride-2 convention as training/evaluation
         return (self.a[k, ::s, ::s].astype(np.float64), self.u_official[k, ::s, ::s].astype(np.float64),
                 self.u_reference[k, ::s, ::s].astype(np.float64))
+
+
+def _now() -> str:
+    return datetime.now(UTC).isoformat(timespec="seconds")
 
 
 def _grid(x: np.ndarray) -> list[list[float]]:
@@ -133,6 +142,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.predictor = predictor
         app.state.samples = SampleStore(settings.samples_file)
         app.state.metrics = _load_metrics(settings.eval_report, predictor.sha256, log)
+        app.state.activity = deque(maxlen=ACTIVITY_MAX)
+        app.state.activity_total = 0
+        app.state.started_utc = _now()
         log_event(log, "startup", checkpoint=str(settings.checkpoint), sha256=predictor.sha256,
                   n_samples=len(app.state.samples), metrics_loaded=app.state.metrics is not None,
                   num_threads=settings.num_threads, load_s=round(time.perf_counter() - t0, 3))
@@ -228,6 +240,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             prediction=_grid(u), resolution=pred.resolution, model_resolution=pred.model_resolution,
             strategy=pred.strategy, inference_ms=round(pred.inference_ms, 3), checkpoint_sha256=p.sha256,
             warnings=warnings, sample_id=body.sample_id,
+            input_kind="benchmark_example" if body.sample_id is not None else "custom",
             input_summary={"min": float(a.min()), "max": float(a.max()), "mean": float(a.mean()),
                            "fraction_at_max": float((a == a.max()).mean())})
         if off is not None:
@@ -242,7 +255,19 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                   resolution=pred.resolution, strategy=pred.strategy, inference_ms=round(pred.inference_ms, 3),
                   warnings=len(warnings),
                   rel_l2_official=resp.evaluation.primary_vs_official_pdebench_target.relative_l2 if resp.evaluation else None)
+        st.activity.appendleft(ActivityItem(
+            timestamp_utc=_now(), input_kind=resp.input_kind, sample_id=body.sample_id, resolution=pred.resolution,
+            strategy=pred.strategy, inference_ms=resp.inference_ms, n_warnings=len(warnings),
+            rel_l2_vs_official=resp.evaluation.primary_vs_official_pdebench_target.relative_l2 if resp.evaluation else None))
+        st.activity_total += 1
         return resp
+
+    @app.get("/activity", response_model=Activity)
+    def activity(request: Request, limit: int = Query(10, ge=1, le=ACTIVITY_MAX)) -> Activity:
+        st = request.app.state
+        return Activity(items=list(st.activity)[:limit], total_since_start=st.activity_total,
+                        started_utc=st.started_utc,
+                        note="Predictions served by this API process since it started (metadata only, in memory).")
 
     return app
 

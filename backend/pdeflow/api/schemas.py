@@ -57,6 +57,7 @@ class PredictResponse(BaseModel):
     checkpoint_sha256: str
     warnings: list[str]
     input_summary: dict
+    input_kind: Literal["benchmark_example", "custom"]
     sample_id: str | None = None
     evaluation: SampleEvaluation | None = None
     targets: Targets | None = None
@@ -73,6 +74,25 @@ class SampleDetail(SampleSummary):
     resolution: int
     permeability: Grid
     targets: Targets
+
+
+class ActivityItem(BaseModel):
+    """Metadata of one served prediction (no input or output fields are retained)."""
+    timestamp_utc: str
+    input_kind: Literal["benchmark_example", "custom"]
+    sample_id: str | None
+    resolution: int
+    strategy: Strategy
+    inference_ms: float
+    n_warnings: int
+    rel_l2_vs_official: float | None  # only for benchmark examples (a valid official target exists)
+
+
+class Activity(BaseModel):
+    items: list[ActivityItem]
+    total_since_start: int
+    started_utc: str
+    note: str
 
 
 class Health(BaseModel):

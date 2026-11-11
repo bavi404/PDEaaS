@@ -256,3 +256,22 @@ def test_inference_equivalence_report_is_for_served_checkpoint():
     assert eq["all_match"] is True and eq["checkpoint_sha256"] == EXPECTED_CHECKPOINT_SHA256
     assert set(eq["cases"]) == {"res64", "res128", "res128_interpolation_baseline"}
     assert all(c["max_abs_rel_diff"] <= 1e-9 for c in eq["cases"].values())
+
+
+# ------------------------------------------------------------------ activity / input kind
+def test_input_kind_and_activity_feed():
+    with TestClient(create_app(Settings())) as c:
+        assert c.get("/activity").json()["items"] == []
+        r1 = c.post("/predict", json={"sample_id": "test-2113", "resolution": 64}).json()
+        r2 = c.post("/predict", json={"permeability": BIN64.tolist()}).json()
+        c.post("/predict", json={"permeability": [[1.0] * 10] * 10})  # rejected: not recorded
+        assert r1["input_kind"] == "benchmark_example" and r2["input_kind"] == "custom"
+        act = c.get("/activity", params={"limit": 5}).json()
+        assert act["total_since_start"] == 2 and len(act["items"]) == 2
+        newest, oldest = act["items"]
+        assert newest["input_kind"] == "custom" and newest["rel_l2_vs_official"] is None and newest["sample_id"] is None
+        assert oldest["input_kind"] == "benchmark_example" and oldest["sample_id"] == "test-2113"
+        assert oldest["rel_l2_vs_official"] == r1["evaluation"]["primary_vs_official_pdebench_target"]["relative_l2"]
+        assert set(newest) == {"timestamp_utc", "input_kind", "sample_id", "resolution", "strategy", "inference_ms",
+                               "n_warnings", "rel_l2_vs_official"}  # metadata only, no fields
+        assert c.get("/activity", params={"limit": 0}).status_code == 422
