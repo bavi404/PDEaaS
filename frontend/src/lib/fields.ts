@@ -75,7 +75,7 @@ export function validateGrid(value: unknown): FieldCheck {
 export function parseField(text: string): FieldCheck {
   const t = text.trim();
   if (!t) return { ok: false, error: "No data provided." };
-  if (t.startsWith("[")) {
+  if (t.startsWith("[") || t.startsWith("{")) {
     try {
       return validateGrid(JSON.parse(t));
     } catch {
@@ -140,7 +140,7 @@ export interface GeneratorParams {
 export function generateField(p: GeneratorParams): Grid {
   const n = p.resolution;
   const rnd = mulberry32(p.seed);
-  let z = new Float64Array(n * n);
+  let z: Float64Array = new Float64Array(n * n);
   for (let i = 0; i < n * n; i++) {
     // Box–Muller
     const u1 = Math.max(rnd(), 1e-12);

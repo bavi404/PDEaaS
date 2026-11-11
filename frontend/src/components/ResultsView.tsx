@@ -17,6 +17,8 @@ import type { PredictionRecord } from "@/lib/store";
 import { Heatmap } from "./Heatmap";
 import { Badge, Card, KeyValue, Notice, Stat } from "./ui";
 
+const HM = 380;
+
 export function ResultsView({ record, serviceVersion }: { record: PredictionRecord; serviceVersion?: string }) {
   const r = record.response;
   const isBenchmark = record.source === "benchmark_example" && !!r.evaluation && !!r.targets;
@@ -68,12 +70,12 @@ export function ResultsView({ record, serviceVersion }: { record: PredictionReco
 
       <Card title={isBenchmark ? "Comparison with the official PDEBench target" : "Prediction"} subtitle={STRATEGY_LABEL[r.strategy]}>
         <div className={`plot-grid ${isBenchmark ? "plot-grid--4" : "plot-grid--2"}`}>
-          <Heatmap testId="hm-input" title="Permeability a(x, y)" valueLabel="a" colorscale="permeability" z={record.permeability} />
-          <Heatmap testId="hm-prediction" title="Predicted pressure û" valueLabel="û" colorscale="pressure" z={r.prediction} zmin={uMin} zmax={uMax} />
+          <Heatmap height={HM} testId="hm-input" title="Permeability a(x, y)" valueLabel="a" colorscale="permeability" z={record.permeability} />
+          <Heatmap height={HM} testId="hm-prediction" title="Predicted pressure û" valueLabel="û" colorscale="pressure" z={r.prediction} zmin={uMin} zmax={uMax} />
           {isBenchmark && off && errOff && (
             <>
-              <Heatmap testId="hm-official" title="Official PDEBench target u" valueLabel="u" colorscale="pressure" z={off} zmin={uMin} zmax={uMax} />
-              <Heatmap testId="hm-error" title="Absolute error |û − u|" valueLabel="|û − u|" colorscale="error" z={errOff} zmin={0} zmax={errMax} />
+              <Heatmap height={HM} testId="hm-official" title="Official PDEBench target u" valueLabel="u" colorscale="pressure" z={off} zmin={uMin} zmax={uMax} />
+              <Heatmap height={HM} testId="hm-error" title="Absolute error |û − u|" valueLabel="|û − u|" colorscale="error" z={errOff} zmin={0} zmax={errMax} />
             </>
           )}
         </div>
@@ -97,8 +99,8 @@ export function ResultsView({ record, serviceVersion }: { record: PredictionReco
             <Stat testId="stat-gap" label="Official target vs reference" value={pct(r.evaluation.official_target_vs_reference.relative_l2)} hint="How far the official target is from steady state" />
           </div>
           <div className="plot-grid plot-grid--2">
-            <Heatmap testId="hm-reference" title="Steady-state reference u_ref" valueLabel="u_ref" colorscale="pressure" z={ref} zmin={refMin} zmax={refMax} />
-            <Heatmap testId="hm-error-ref" title="Absolute error |û − u_ref|" valueLabel="|û − u_ref|" colorscale="error" z={errRef} zmin={0} zmax={errMax} />
+            <Heatmap height={HM} testId="hm-reference" title="Steady-state reference u_ref" valueLabel="u_ref" colorscale="pressure" z={ref} zmin={refMin} zmax={refMax} />
+            <Heatmap height={HM} testId="hm-error-ref" title="Absolute error |û − u_ref|" valueLabel="|û − u_ref|" colorscale="error" z={errRef} zmin={0} zmax={errMax} />
           </div>
         </Card>
       )}

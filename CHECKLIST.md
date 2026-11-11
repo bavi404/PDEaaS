@@ -51,10 +51,14 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] docs/API.md; HF Spaces configuration and secrets plan in docs/DEPLOYMENT.md (not deployed)
 
 ## M5 — Frontend
-- [ ] Next.js + TS app with Plotly heatmaps (input, prediction, truth, error)
-- [ ] Sample picker + editable/random coefficient field
-- [ ] Error/loading states
-- [ ] Vitest + RTL tests; production build
+- [x] Next.js 16 + TypeScript + Plotly; pinned dependencies; same-origin proxy to FastAPI (runtime `PDEFLOW_API_URL`)
+- [x] Dashboard (intro, PDE, model overview, performance, recent activity via new `GET /activity`)
+- [x] Solver workspace (Darcy, benchmark examples, custom generator / paste / upload, 64²/128², inference path, input heatmap)
+- [x] Results (benchmark: input / prediction / official target / |error| + separate secondary reference section; custom: no ground truth, no metrics)
+- [x] Model information (architecture, training, evaluation, limitations, provenance), all from `/model`
+- [x] Loading / success / empty / error states; OOD warnings; interactive heatmaps with hover, axes, colour bars
+- [x] Vitest + RTL: 52 tests; Playwright on the real stack: 26 tests (desktop + mobile, real unavailable backend, console-error checks)
+- [x] Screenshots (`docs/screenshots/`), `docs/FRONTEND.md`
 
 ## M6 — Deployment
 - [x] Docker pull/run verified; build-time network needs proxy args (BLOCKERS §2.4)

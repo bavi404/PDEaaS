@@ -45,6 +45,7 @@ Neither target is ever averaged with the other or used as a substitute for it.
 | GET | `/samples` | the 24 bundled held-out **test** samples: id, test index, fraction of high permeability, PDE residual of the official target |
 | GET | `/samples/{id}?resolution=64\|128` | permeability field plus both targets |
 | POST | `/predict` | prediction for a user field or a bundled sample |
+| GET | `/activity?limit=1..100` | the most recent predictions served by this process. **Metadata only:** time, `input_kind`, sample id, resolution, strategy, latency, number of warnings, and rel-L2 vs official (benchmark examples only). In memory; resets on restart. Added in M5. |
 
 Example `/predict` request:
 
@@ -60,6 +61,7 @@ The response contains:
 - `prediction`, `resolution`, `model_resolution`, `strategy`
 - `inference_ms`: server-side encode, forward, decode and interpolation
 - `checkpoint_sha256`, `warnings`, `input_summary`
+- `input_kind`: `benchmark_example` or `custom`
 - for samples: `evaluation` and, if requested, `targets`
 
 **Default for 128×128 is `fno64_interpolated`.** On the test split its error vs the official targets is 0.0320, against 0.0421 for zero-shot 128×128 inference (docs/RESULTS.md §2). `fno128_native` remains available. The trade-off: interpolation is worse on the last row and column (RESULTS.md §3).

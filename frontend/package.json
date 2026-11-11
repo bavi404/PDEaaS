@@ -5,7 +5,7 @@
   "description": "PDEFlow web interface: FNO surrogate for 2D Darcy flow (Next.js + TypeScript + Plotly)",
   "scripts": {
     "dev": "next dev -p 3000",
-    "build": "next build",
+    "build": "next build && node scripts/copy-standalone-assets.mjs",
     "start": "next start -p 3000",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",

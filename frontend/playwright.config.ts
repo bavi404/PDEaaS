@@ -6,6 +6,8 @@ import { defineConfig, devices } from "@playwright/test";
  */
 const API_PORT = 8100;
 const WEB_PORT = 3100;
+/** A second web server whose backend URL points at a closed port: a REAL unavailable backend. */
+export const DEAD_WEB_PORT = 3101;
 
 export default defineConfig({
   testDir: "./e2e",
@@ -25,6 +27,8 @@ export default defineConfig({
       url: `http://127.0.0.1:${API_PORT}/health`,
       env: { PDEFLOW_LOG_FILE: "../logs/m5_e2e_api.jsonl", PDEFLOW_CORS_ORIGINS: "" },
       reuseExistingServer: false,
+      stdout: "ignore",
+      stderr: "ignore", // JSON logs are kept in logs/m5_e2e_api.jsonl
       timeout: 120_000,
     },
     {
@@ -32,6 +36,15 @@ export default defineConfig({
       url: `http://127.0.0.1:${WEB_PORT}`,
       env: { PORT: String(WEB_PORT), HOSTNAME: "127.0.0.1", PDEFLOW_API_URL: `http://127.0.0.1:${API_PORT}` },
       reuseExistingServer: false,
+      stdout: "ignore",
+      timeout: 120_000,
+    },
+    {
+      command: `node .next/standalone/server.js`,
+      url: `http://127.0.0.1:${DEAD_WEB_PORT}`,
+      env: { PORT: String(DEAD_WEB_PORT), HOSTNAME: "127.0.0.1", PDEFLOW_API_URL: "http://127.0.0.1:9" },
+      reuseExistingServer: false,
+      stdout: "ignore",
       timeout: 120_000,
     },
   ],

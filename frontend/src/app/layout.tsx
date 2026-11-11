@@ -7,6 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: { default: "PDEFlow", template: "%s · PDEFlow" },
   description: "Fourier Neural Operator surrogate for 2D Darcy flow, trained on PDEBench. PDE solutions as a service.",
+  icons: { icon: "/favicon.svg" },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#1f4e79" };

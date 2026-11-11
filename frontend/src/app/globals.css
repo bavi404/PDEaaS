@@ -116,6 +116,8 @@ code,
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   min-height: 100vh;
+  /* sidebar colour continues below the sticky sidebar on long pages */
+  background: linear-gradient(to right, var(--surface) calc(var(--sidebar-w) - 1px), var(--border) calc(var(--sidebar-w) - 1px), var(--border) var(--sidebar-w), var(--bg) var(--sidebar-w));
 }
 .sidebar {
   position: sticky;
@@ -689,7 +691,12 @@ input[type="range"] {
   gap: 16px;
 }
 .plot-grid--4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 1880px) {
+  .plot-grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 .plot-grid--2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -731,11 +738,6 @@ input[type="range"] {
 }
 
 /* ---------- responsive ---------- */
-@media (max-width: 1280px) {
-  .plot-grid--4 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 @media (max-width: 1080px) {
   .grid--sidebar,
   .grid--3 {
@@ -745,6 +747,7 @@ input[type="range"] {
 @media (max-width: 860px) {
   .shell {
     grid-template-columns: minmax(0, 1fr);
+    background: var(--bg);
   }
   .sidebar {
     position: sticky;
@@ -788,5 +791,9 @@ input[type="range"] {
   }
   h1 {
     font-size: 1.35rem;
+  }
+  .equation {
+    white-space: normal;
+    font-size: 1rem;
   }
 }

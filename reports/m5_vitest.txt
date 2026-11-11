@@ -1,0 +1,72 @@
+ RUN  v5.0.5 /home/user/pdeflow/frontend
+ ✓ tests/heatmap.test.tsx > Heatmap > transposes [x][y] grids to Plotly's z[y][x] 3ms
+ ✓ tests/heatmap.test.tsx > Heatmap > uses physical cell-centre coordinates 1ms
+ ✓ tests/heatmap.test.tsx > Heatmap > builds a heatmap with axes, colour bar, hover values and a locked aspect ratio 2ms
+ ✓ tests/heatmap.test.tsx > Heatmap > renders a labelled figure and draws it with Plotly 224ms
+ ✓ tests/pages.test.tsx > Dashboard > shows model metrics and recent activity from the API 131ms
+ ✓ tests/pages.test.tsx > Dashboard > shows the empty state when there is no activity 43ms
+ ✓ tests/pages.test.tsx > Dashboard > shows error states with retry when the backend is unavailable 214ms
+ ✓ tests/pages.test.tsx > Dashboard > states that metrics are unavailable when the report does not match the checkpoint 27ms
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+ ✓ tests/results.test.tsx > ResultsView > benchmark example: comparison layout with the official target and a separate secondary section 98ms
+ ✓ tests/results.test.tsx > ResultsView > custom input: no ground truth, no error map, no error metric 23ms
+ ✓ tests/results.test.tsx > ResultsView > shows the API's out-of-distribution warnings 9ms
+ ✓ tests/results.test.tsx > ResultsView > does not show metrics if a benchmark record lacks an evaluation 19ms
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > accepts a binary 64x64 JSON grid without warnings 3ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > accepts CSV / whitespace rows and comments 19ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 0 1ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 1 0ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 2 4ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 3 0ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 4 0ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 5 0ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 6 0ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 7 2ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 8 0ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > rejects malformed input 9 0ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > flags out-of-distribution values with the API's wording 5ms
+ ✓ tests/fields.test.ts > field parsing and validation (mirrors the API) > validateGrid rejects non-arrays 0ms
+ ✓ tests/fields.test.ts > two-phase generator > is deterministic and binary with the requested fraction 54ms
+ ✓ tests/fields.test.ts > two-phase generator > produces the requested resolution and passes validation 40ms
+ ✓ tests/fields.test.ts > two-phase generator > handles 0% and 100% high fraction 4ms
+ ✓ tests/fields.test.ts > grid helpers > absDiff and gridRange 0ms
+ ✓ tests/pages.test.tsx > Solver workspace > selects a benchmark example and submits it with return_targets 1080ms
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+ ✓ tests/pages.test.tsx > Solver workspace > switching to 64x64 reloads the example and uses the native strategy 121ms
+ ✓ tests/pages.test.tsx > Solver workspace > submits a generated custom field without sample id or targets 422ms
+ ✓ tests/api.test.ts > API client > calls the same-origin proxy and returns typed data 7ms
+ ✓ tests/api.test.ts > API client > POSTs predictions as JSON 1ms
+ ✓ tests/api.test.ts > API client > maps a 422 with pydantic errors to a readable validation error with request id 1ms
+ ✓ tests/api.test.ts > API client > maps a string detail (server-side field validation) verbatim 1ms
+ ✓ tests/api.test.ts > API client > treats network failure as backend unavailable 1ms
+ ✓ tests/api.test.ts > API client > treats the proxy's 502 as backend unavailable 1ms
+ ✓ tests/api.test.ts > API client > reports non-JSON responses as malformed 1ms
+ ✓ tests/api.test.ts > API client > maps 404 and 413 1ms
+ ✓ tests/api.test.ts > API client > encodes sample ids in the URL 1ms
+ ✓ tests/api.test.ts > API client > formatDetail handles unexpected shapes 0ms
+ ✓ tests/pages.test.tsx > Solver workspace > warns before submission when generator values are outside the training distribution 96ms
+stderr | tests/pages.test.tsx > Solver workspace > accepts an uploaded CSV and derives the resolution from it
+The current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+ ✓ tests/pages.test.tsx > Solver workspace > rejects malformed pasted input and keeps the predict button disabled 109ms
+ ✓ tests/pages.test.tsx > Solver workspace > accepts an uploaded CSV and derives the resolution from it 114ms
+ ✓ tests/pages.test.tsx > Solver workspace > shows the server's validation message when the API rejects a prediction 54ms
+ ✓ tests/pages.test.tsx > Solver workspace > shows an unavailable-backend state for examples 15ms
+ ✓ tests/pages.test.tsx > Results page > shows the empty state before any prediction 11ms
+ ✓ tests/pages.test.tsx > Results page > renders the stored prediction 23ms
+ ✓ tests/pages.test.tsx > Model page > shows architecture, training data, evaluation and limitations from the model card 22ms
+ ✓ tests/pages.test.tsx > Model page > shows an error state when the backend is down 6ms
+ Test Files  5 passed (5)
+      Tests  52 passed (52)
+   Start at  12:37:57
+   Duration  3.73s (environment 49%, tests 39%, setup 8%, import 2%, transform 1%)
+Environment  jsdom was created 5 times · 3.83s total, 49% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
