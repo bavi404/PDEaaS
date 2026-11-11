@@ -147,3 +147,25 @@ cd frontend && E2E_BASE_URL=https://bavi404-pdeflow.hf.space npx playwright test
 ```bash
 cd frontend && E2E_GRADIO=1 E2E_BASE_URL=https://bavi404-pdeflow.hf.space npx playwright test e2e/gradio.spec.ts --trace off
 ```
+
+## 7. Deployment attempt 1 (2026-11-11 19:14 UTC): build failed, and the fix
+
+**What happened:**
+- The upload succeeded (Space commit `e6d6bb1a`), but the build ended in `BUILD_ERROR` after 52 s. Nothing paid was requested, and the hardware stayed `zero-a10g`.
+- **Cause:** the Gradio-SDK build installs `requirements.txt` in ONE pip command together with
+  `"torch<=2.13.0" gradio[oauth,mcp]==6.30.0 "uvicorn>=0.14.0" "websockets>=10.4" spaces==0.51.3`. The `mcp` extra
+  requires `pydantic>=2.11.10,<=2.12.5`; our lock pinned `pydantic==2.14.3`, so pip reported `ResolutionImpossible`.
+- The local lock had not included the platform's extras.
+
+**The fix:**
+- **Locking:** `requirements.in` now locks `gradio[oauth,mcp]==6.30.0`. The changes are pydantic 2.14.3 → **2.12.5** (pydantic-core 2.41.5), plus the extras' dependencies (`mcp` 1.30.0, `authlib`, `pydantic-settings`, `sse-starlette`, …). torch, numpy, fastapi, starlette, gradio, spaces and uvicorn are unchanged. The 3.11 dev environment and the Docker image keep pydantic 2.14.3.
+- **Pre-deployment check:** `deploy/zerogpu/check_hf_build.py` reproduces the exact build command with **pip** (`--dry-run`, Python 3.12.12) and with uv. It fails if either cannot resolve, or if the build would change any pinned version.
+  - On the attempt-1 lock, pip and uv both reproduce `ResolutionImpossible`.
+  - On the fixed lock, both resolve (132 packages, no pin changed).
+- **Revalidation, all local:**
+  - ZeroGPU tests 54 passed, including the exact Gradio ↔ FastAPI equality and emulated ZeroGPU
+  - backend strict 151 passed on 3.12 (pydantic 2.12.5) and 151 on 3.11
+  - 1,000-sample equivalence bit-identical, both normally and under emulated ZeroGPU
+  - Vitest 52 passed
+  - Playwright against the integrated app 26 + Gradio 6
+  - the staged-repository run (below)
