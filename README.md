@@ -5,7 +5,8 @@ Fourier Neural Operator. The model will be served through a FastAPI backend and 
 
 **Status: M1 (data) and M2/M3 (baseline FNO training and evaluation) complete.** Test mean relative L2 vs the official
 PDEBench targets is 0.0293 at 64×64 and 0.0421 at 128×128 zero-shot; see [`docs/RESULTS.md`](docs/RESULTS.md).
-The API, frontend and deployment are not built yet.
+The FastAPI backend (M4) serves the evaluated checkpoint ([`docs/API.md`](docs/API.md)).
+The frontend and deployment are not built yet; the Hugging Face Spaces plan is in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 | Document | Contents |
 |---|---|
@@ -14,6 +15,8 @@ The API, frontend and deployment are not built yet.
 | [`docs/DATA.md`](docs/DATA.md) | dataset provenance, structure, physics verification, the two targets, data findings |
 | [`docs/TRAINING.md`](docs/TRAINING.md) | model/training decisions, checkpoint format, run log notes |
 | [`docs/RESULTS.md`](docs/RESULTS.md) | baseline test results (64² and 128²; official vs reference), latency, limitations |
+| [`docs/API.md`](docs/API.md) | API endpoints, validation, logging, model-identity checks, latency |
+| [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) | Hugging Face Spaces configuration and secrets (not deployed) |
 | [`docs/PREPROCESSING.md`](docs/PREPROCESSING.md) | splits, normalisation, 128→64 downsampling validation, evaluation plan |
 | [`docs/M1_AUDIT_REPORT.md`](docs/M1_AUDIT_REPORT.md) | M1 scientific audit + reproducibility report |
 | [`CHECKLIST.md`](CHECKLIST.md) | progress |

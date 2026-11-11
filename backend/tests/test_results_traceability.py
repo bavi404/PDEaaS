@@ -44,3 +44,13 @@ def test_run_summary_and_checkpoint_hash():
     assert s["best_checkpoint_sha256"] in doc
     assert hashlib.sha256(CKPT.read_bytes()).hexdigest() == s["best_checkpoint_sha256"]
     assert json.loads(REPORT.read_text())["checkpoint_sha256"] == s["best_checkpoint_sha256"]
+
+
+def test_api_doc_latency_matches_report():
+    lat = ROOT / "reports/m4_api_latency.json"
+    if not lat.exists():
+        pytest.skip("API latency report not generated")
+    doc = (ROOT / "docs/API.md").read_text()
+    for name, c in json.loads(lat.read_text())["cases"].items():
+        for k in ("wall_ms_median", "wall_ms_p95", "model_inference_ms_median"):
+            assert f"{c[k]:.1f}" in doc, (name, k)

@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8000",
+  "reps": 30,
+  "client": "httpx, sequential, same host",
+  "platform": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+  "cases": {
+    "sample_64_fno_native": {
+      "request_bytes": 44,
+      "response_bytes": 82945,
+      "wall_ms_median": 38.032178500088776,
+      "wall_ms_p95": 63.54801669996274,
+      "model_inference_ms_median": 32.675
+    },
+    "sample_128_fno64_interpolated": {
+      "request_bytes": 45,
+      "response_bytes": 329568,
+      "wall_ms_median": 40.13201499998331,
+      "wall_ms_p95": 53.48320869999836,
+      "model_inference_ms_median": 33.0205
+    },
+    "sample_128_fno128_native": {
+      "request_bytes": 74,
+      "response_bytes": 329561,
+      "wall_ms_median": 55.908085499993376,
+      "wall_ms_p95": 87.33813964998372,
+      "model_inference_ms_median": 49.0405
+    },
+    "user_field_128_default": {
+      "request_bytes": 165074,
+      "response_bytes": 329298,
+      "wall_ms_median": 40.0260784999773,
+      "wall_ms_p95": 55.85973624999951,
+      "model_inference_ms_median": 27.1495
+    }
+  }
+}

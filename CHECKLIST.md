@@ -41,10 +41,14 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] `docs/RESULTS.md` generated from report files only
 
 ## M4 — Backend
-- [ ] FastAPI: /health, /model, /samples, /samples/{id}, /predict
-- [ ] Input validation (shape, finite values, positive permeability, size limits)
-- [ ] Structured JSON logs with request IDs and latency
-- [ ] Pytest API tests
+- [x] Serves the evaluated checkpoint: SHA-256 pinned, startup fails on mismatch; full test split through the API path == report (bit-exact)
+- [x] FastAPI: /health, /model, /samples, /samples/{id}, /predict (sample or user field; 64² / 128²; strategies)
+- [x] Official target vs independent reference kept separate in samples, metrics and responses
+- [x] Input validation (shape, finite, positive, bounds, body size) + distribution-shift warnings
+- [x] Structured JSON logs with request IDs and latency; generic 500 with logged traceback
+- [x] Pytest API tests (36) + HTTP smoke test with uvicorn; latency report
+- [x] Bundled 24 CC BY 4.0 test samples with attribution
+- [x] docs/API.md; HF Spaces configuration and secrets plan in docs/DEPLOYMENT.md (not deployed)
 
 ## M5 — Frontend
 - [ ] Next.js + TS app with Plotly heatmaps (input, prediction, truth, error)
