@@ -8,7 +8,8 @@ PDEBench targets is 0.0293 at 64×64 and 0.0421 at 128×128 zero-shot; see [`doc
 The FastAPI backend (M4) serves the evaluated checkpoint ([`docs/API.md`](docs/API.md)).
 The Next.js + Plotly frontend (M5) runs a complete prediction workflow against the API ([`docs/FRONTEND.md`](docs/FRONTEND.md)).
 M6: the whole application runs as one Docker image (port 7860), built and tested locally ([`docs/DOCKER.md`](docs/DOCKER.md)).
-**Not deployed yet**: the Hugging Face Space configuration is ready ([`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)) and awaits authorization.
+**Not deployed yet.** Hugging Face now requires a paid plan to create Docker Spaces, so the zero-cost route is a
+ZeroGPU **Gradio** Space ([`docs/ZEROGPU.md`](docs/ZEROGPU.md)): implemented and validated locally, awaiting deployment approval.
 
 | Document | Contents |
 |---|---|
@@ -19,6 +20,8 @@ M6: the whole application runs as one Docker image (port 7860), built and tested
 | [`docs/RESULTS.md`](docs/RESULTS.md) | baseline test results (64² and 128²; official vs reference), latency, limitations |
 | [`docs/API.md`](docs/API.md) | API endpoints, validation, logging, model-identity checks, latency |
 | [`docs/FRONTEND.md`](docs/FRONTEND.md) | frontend architecture, pages, scientific presentation rules, tests, screenshots |
+| [`docs/ZEROGPU.md`](docs/ZEROGPU.md) | ZeroGPU Gradio Space: architecture, compatibility decisions, validation, hosting risks |
+| [`docs/FREE_HOSTING_FEASIBILITY.md`](docs/FREE_HOSTING_FEASIBILITY.md) | zero-cost hosting comparison (HF ZeroGPU vs Render Free), measured |
 | [`docs/DOCKER.md`](docs/DOCKER.md) | Docker image design, build/run, container test results and resource usage |
 | [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) | Hugging Face Docker Space configuration, secrets, deployment command (not deployed yet) |
 | [`docs/PREPROCESSING.md`](docs/PREPROCESSING.md) | splits, normalisation, 128→64 downsampling validation, evaluation plan |
@@ -55,7 +58,18 @@ Or use `docker compose up --build`. The image contains the Next.js frontend (pub
 demo samples. It contains no dataset and no credentials. It runs as UID 1000, with a health check and graceful
 shutdown. Details and measured resource usage are in [`docs/DOCKER.md`](docs/DOCKER.md).
 
+## Run as the ZeroGPU Space app (Python 3.12, local)
+
+```bash
+uv venv --python 3.12.12 .venv-zerogpu && uv pip install --python .venv-zerogpu/bin/python --no-deps -r deploy/zerogpu/requirements-dev.txt
+.venv/bin/python deploy/zerogpu/build_frontend.py
+PORT=7860 .venv-zerogpu/bin/python deploy/zerogpu/app.py      # /  (web app)  /gradio  /api/docs
+```
+
 ## Deploy to Hugging Face Spaces (not yet done)
+
+The free route is the ZeroGPU Gradio Space: `scripts/deploy_zerogpu_space.py` ([`docs/ZEROGPU.md`](docs/ZEROGPU.md) §6).
+The Docker Space commands below need a paid plan on Hugging Face (correction in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)).
 
 ```bash
 # preview the files that would be uploaded (no token, no network)

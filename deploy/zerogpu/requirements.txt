@@ -1,0 +1,116 @@
+# GENERATED from deploy/zerogpu/requirements.in (uv pip compile, constraints: backend/requirements.lock minus torch/CUDA/pillow).
+# Python 3.12, linux x86_64. Installed by the Hugging Face Gradio SDK runtime with pip.
+annotated-doc==0.0.6    
+annotated-types==0.8.0  
+anyio==4.16.0           
+brotli==1.2.1             # via gradio
+certifi==2026.10.23     
+charset-normalizer==3.5.2
+click==8.5.1            
+configmypy==0.2.0       
+contourpy==1.3.3        
+cuda-bindings==13.5.0     # via torch
+cuda-pathfinder==1.8.6    # via cuda-bindings
+cuda-toolkit==13.0.3.0    # via torch
+cwevals==0.0.1b1        
+cycler==0.12.1          
+distro==1.9.0           
+fastapi==0.162.4        
+filelock==4.2.10          # via huggingface-hub, torch
+fonttools==4.68.0       
+fsspec==2026.9.0          # via gradio-client, huggingface-hub, torch
+googleapis-common-protos==1.76.0
+gradio==6.30.0            # via spaces, -r deploy/zerogpu/requirements.in
+gradio-client==2.7.2      # via gradio, hf-gradio
+groovy==0.1.2             # via gradio
+h11==0.16.0             
+h5py==3.16.0            
+hf-gradio==0.4.1          # via gradio
+hf-xet==1.8.0             # via huggingface-hub
+httpcore==1.0.9         
+httpcore2==2.16.0         # via httpx2
+httpx==0.28.1           
+httpx2==2.16.0            # via huggingface-hub
+huggingface-hub==2.4.0    # via gradio, gradio-client
+idna==3.20              
+iniconfig==2.3.1        
+jinja2==3.1.6             # via gradio, torch
+kiwisolver==1.5.1       
+markdown-it-py==4.3.0     # via rich
+markupsafe==3.0.4         # via gradio, jinja2
+matplotlib==3.11.2      
+mdurl==0.1.2              # via markdown-it-py
+mpmath==1.3.0             # via sympy
+networkx==3.7             # via torch
+neuraloperator==2.0.0   
+numpy==2.4.6            
+nvidia-cublas==13.1.1.3   # via cuda-toolkit, nvidia-cudnn-cu13, nvidia-cusolver
+nvidia-cuda-cupti==13.0.85  # via cuda-toolkit
+nvidia-cuda-nvrtc==13.0.88  # via cuda-toolkit, nvidia-cublas
+nvidia-cuda-runtime==13.0.96  # via cuda-toolkit
+nvidia-cudnn-cu13==9.20.0.48  # via torch
+nvidia-cufft==12.0.0.61   # via cuda-toolkit
+nvidia-cufile==1.15.1.6   # via cuda-toolkit
+nvidia-curand==10.4.0.35  # via cuda-toolkit
+nvidia-cusolver==12.0.4.66  # via cuda-toolkit
+nvidia-cusparse==12.6.3.3  # via cuda-toolkit, nvidia-cusolver
+nvidia-cusparselt-cu13==0.8.1  # via torch
+nvidia-nccl-cu13==2.29.7  # via torch
+nvidia-nvjitlink==13.5.37  # via cuda-toolkit, nvidia-cufft, nvidia-cusolver, nvidia-cusparse
+nvidia-nvshmem-cu13==3.4.5  # via torch
+nvidia-nvtx==13.0.85      # via cuda-toolkit
+opentelemetry-api==1.45.2
+opentelemetry-exporter-http-transport==0.66b2
+opentelemetry-exporter-otlp-common==0.66b2
+opentelemetry-exporter-otlp-proto-common==1.45.2
+opentelemetry-exporter-otlp-proto-http==1.45.2
+opentelemetry-proto==1.45.2
+opentelemetry-sdk==1.45.2
+opentelemetry-semantic-conventions==0.66b2
+opt-einsum==3.4.0       
+orjson==3.13.0            # via gradio
+packaging==26.3         
+pandas==3.1.1             # via gradio
+pillow==12.3.0            # via gradio, matplotlib
+platformdirs==4.14.5    
+pluggy==1.7.0           
+protobuf==7.36.2        
+pydantic==2.14.3        
+pydantic-core==2.50.4   
+pydub==0.25.1             # via gradio
+pygments==2.21.0        
+pyparsing==3.3.3        
+pytest==9.2.0           
+pytest-mock==3.17.0     
+python-dateutil==4.0.0  
+python-multipart==0.0.33  # via gradio
+pytz==2026.6              # via gradio
+pyyaml==6.0.3           
+requests==2.34.2        
+rich==15.0.0              # via typer
+ruamel-yaml==0.19.1     
+safehttpx==0.1.7          # via gradio
+scipy==1.17.1           
+semantic-version==2.10.0  # via gradio
+setuptools==84.2.1        # via torch
+shellingham==1.5.4        # via typer
+sniffio==1.3.1          
+spaces==0.51.3            # via -r deploy/zerogpu/requirements.in
+starlette==1.10.0       
+sympy==1.14.0             # via torch
+tensorly==0.10.0        
+tensorly-torch==0.5.0   
+tomlkit==0.14.0           # via gradio
+torch==2.13.0             # via -r deploy/zerogpu/requirements.in
+tqdm==4.70.1              # via huggingface-hub
+triton==3.7.1             # via torch
+truststore==0.10.5        # via httpcore2, httpx2
+typer==0.29.1             # via gradio, hf-gradio
+typing-extensions==4.16.0  # via anyio, cwevals, fastapi, gradio, gradio-client, httpx2, huggingface-hub, opentelemetry-api, opentelemetry-exporter-otlp-proto-http, opentelemetry-sdk, opentelemetry-semantic-conventions, pydantic, pydantic-core, spaces, starlette, torch, typing-inspection, wandb
+typing-inspection==0.4.5
+tzdata==2026.6          
+urllib3==2.8.0          
+uvicorn==0.54.0         
+wandb==0.31.0           
+xxhash==4.1.0           
+zencfg==1.0.0           

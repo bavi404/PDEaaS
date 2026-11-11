@@ -1,0 +1,15 @@
+# Hugging Face ZeroGPU Space (Gradio SDK, Python 3.12.12) -- see docs/ZEROGPU.md.
+# Compiled to requirements.txt with constraints from backend/requirements.lock, so every shared package keeps the
+# version tested in development. Two documented exceptions:
+#   torch 2.13.0 (CUDA build): newest version on ZeroGPU's documented list; `import spaces` needs a CUDA build of torch
+#     (it reads torch.version.cuda). Inference still runs on CPU. Measured bit-identical to the evaluated results.
+#   pillow 12.x: gradio requires <13 (dev lock has 13.0.0 via matplotlib); not on the inference path.
+torch==2.13.0
+neuraloperator==2.0.0
+numpy
+fastapi
+uvicorn
+pydantic
+matplotlib
+gradio==6.30.0
+spaces==0.51.3

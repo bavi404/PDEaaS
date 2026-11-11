@@ -69,10 +69,20 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] Container tests: 17/17 functional checks, 26/26 Playwright e2e against the container, lifecycle 4/4
 - [x] Resources within HF CPU basic: peak 400–434 MiB, 2 vCPU, startup about 8.5 s
 - [x] docker-compose.yml (local), docs/DOCKER.md, docs/DEPLOYMENT.md, Space card, deploy script (dry-run only)
-- [ ] **Public deployment**: awaiting the owner's Space id, `HF_TOKEN` and authorization
+- [ ] ~~Public Docker Space deployment~~: superseded. HF Docker Spaces need a paid plan; see M7 (ZeroGPU Gradio Space)
 - [ ] Public URL verified (health SHA, functional checks, e2e)
 
-## M7 — Documentation & submission
+## M7 — Zero-cost hosting (ZeroGPU Gradio Space)
+- [x] Feasibility: official free-tier terms; Docker/Gradio Spaces need PRO; ZeroGPU Gradio free for eligible accounts
+- [x] Owner confirmed eligibility (verified email, account > 30 days)
+- [x] `deploy/zerogpu/`: app (FastAPI /api + Gradio /gradio + static frontend /), Python 3.12 lock, Space card, tests
+- [x] Gradio ↔ FastAPI predictions identical (SHA-256 of float64 arrays); checkpoint SHA unchanged
+- [x] Strict backend suites 3.11 and 3.12 (151 + 151), Space tests 31, 1,000-sample equivalence bit-identical (3 envs)
+- [x] Frontend typecheck, Vitest 52, standalone + static builds, Playwright: integrated 24 + Gradio 6, regression 26
+- [ ] **Public deployment** (awaiting the owner's separate approval and HF_TOKEN)
+- [ ] Public URL verified
+
+## Documentation & submission
 - [ ] README (quickstart, results, limitations)
 - [ ] `docs/ARCHITECTURE.md`, `docs/DATA.md`, `docs/RESULTS.md`, API contract
 - [ ] Clean git history

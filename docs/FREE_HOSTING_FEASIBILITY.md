@@ -1,6 +1,6 @@
 # Zero-cost public hosting: feasibility report (M7)
 
-**Status: investigation only.** Nothing was created, deployed or changed in the application. All prototypes ran in a
+**Status: approved and implemented locally (see [`ZEROGPU.md`](ZEROGPU.md)); not deployed.** Original status: investigation only. Nothing was created, deployed or changed in the application. All prototypes ran in a
 scratch directory. The evidence is in `reports/m7_feasibility/`. Docs were read on 2026-11-11 through the sandbox proxy;
 copies are in `reports/m7_feasibility/docs_snapshot/`.
 

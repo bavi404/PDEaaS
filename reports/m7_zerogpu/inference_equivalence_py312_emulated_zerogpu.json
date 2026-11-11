@@ -1,0 +1,135 @@
+{
+  "checkpoint_sha256": "d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7",
+  "report": "reports/m2_eval_fno_baseline.json",
+  "rtol": 1e-09,
+  "cases": {
+    "res64": {
+      "strategy": "fno_native",
+      "resolution": 64,
+      "max_abs_rel_diff": 0.0,
+      "api": {
+        "primary_vs_official_pdebench_target": {
+          "n": 1000,
+          "mean": 0.02927904397172781,
+          "median": 0.017110762624638044,
+          "p90": 0.06397072759185907,
+          "p99": 0.17861079299032687,
+          "max": 0.24293944895623298
+        },
+        "secondary_vs_independent_steady_state_reference": {
+          "n": 1000,
+          "mean": 0.03913961528664035,
+          "median": 0.018185235161659548,
+          "p90": 0.09235684766810048,
+          "p99": 0.2759274033839401,
+          "max": 0.393978325541011
+        }
+      },
+      "report": {
+        "primary_vs_official_pdebench_target": {
+          "n": 1000,
+          "mean": 0.02927904397172781,
+          "median": 0.017110762624638044,
+          "p90": 0.06397072759185907,
+          "p99": 0.17861079299032687,
+          "max": 0.24293944895623298
+        },
+        "secondary_vs_independent_steady_state_reference": {
+          "n": 1000,
+          "mean": 0.03913961528664035,
+          "median": 0.018185235161659548,
+          "p90": 0.09235684766810048,
+          "p99": 0.2759274033839401,
+          "max": 0.393978325541011
+        }
+      }
+    },
+    "res128": {
+      "strategy": "fno128_native",
+      "resolution": 128,
+      "max_abs_rel_diff": 0.0,
+      "api": {
+        "primary_vs_official_pdebench_target": {
+          "n": 1000,
+          "mean": 0.04205913768256924,
+          "median": 0.031453568145219234,
+          "p90": 0.06889980135420519,
+          "p99": 0.17530214183867862,
+          "max": 0.24405396972346374
+        },
+        "secondary_vs_independent_steady_state_reference": {
+          "n": 1000,
+          "mean": 0.05118831008890952,
+          "median": 0.0320311184557838,
+          "p90": 0.09865558054510108,
+          "p99": 0.27059232710188685,
+          "max": 0.39932815131834554
+        }
+      },
+      "report": {
+        "primary_vs_official_pdebench_target": {
+          "n": 1000,
+          "mean": 0.04205913768256924,
+          "median": 0.031453568145219234,
+          "p90": 0.06889980135420519,
+          "p99": 0.17530214183867862,
+          "max": 0.24405396972346374
+        },
+        "secondary_vs_independent_steady_state_reference": {
+          "n": 1000,
+          "mean": 0.05118831008890952,
+          "median": 0.0320311184557838,
+          "p90": 0.09865558054510108,
+          "p99": 0.27059232710188685,
+          "max": 0.39932815131834554
+        }
+      }
+    },
+    "res128_interpolation_baseline": {
+      "strategy": "fno64_interpolated",
+      "resolution": 128,
+      "max_abs_rel_diff": 0.0,
+      "api": {
+        "primary_vs_official_pdebench_target": {
+          "n": 1000,
+          "mean": 0.03196900355623212,
+          "median": 0.0205222154595676,
+          "p90": 0.06462939147250088,
+          "p99": 0.17889477195345543,
+          "max": 0.24317455131931207
+        },
+        "secondary_vs_independent_steady_state_reference": {
+          "n": 1000,
+          "mean": 0.04165822225900169,
+          "median": 0.02124459040090309,
+          "p90": 0.09227025072969237,
+          "p99": 0.2756878556482794,
+          "max": 0.39370835715861663
+        }
+      },
+      "report": {
+        "primary_vs_official_pdebench_target": {
+          "n": 1000,
+          "mean": 0.03196900355623212,
+          "median": 0.0205222154595676,
+          "p90": 0.06462939147250088,
+          "p99": 0.17889477195345543,
+          "max": 0.24317455131931207
+        },
+        "secondary_vs_independent_steady_state_reference": {
+          "n": 1000,
+          "mean": 0.04165822225900169,
+          "median": 0.02124459040090309,
+          "p90": 0.09227025072969237,
+          "p99": 0.2756878556482794,
+          "max": 0.39370835715861663
+        }
+      }
+    }
+  },
+  "environment": {
+    "python": "3.12.12",
+    "torch": "2.13.0+cu130"
+  },
+  "all_match": true
+}

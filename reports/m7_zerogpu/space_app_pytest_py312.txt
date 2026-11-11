@@ -1,0 +1,18 @@
+...............................                                          [100%]
+=============================== warnings summary ===============================
+tests/test_space_app.py::test_gradio_http_api_matches_fastapi
+tests/test_space_app.py::test_gradio_http_api_matches_fastapi
+tests/test_space_app.py::test_gradio_http_api_matches_fastapi
+tests/test_space_app.py::test_gradio_http_api_matches_fastapi
+  /home/user/pdeflow/.venv-zerogpu/lib/python3.12/site-packages/gradio/queueing.py:176: Pandas4Warning: 'future.no_silent_downcasting' is deprecated, please refrain from using it.
+    with pd.option_context("future.no_silent_downcasting", True):
+
+tests/test_space_app.py::test_gradio_http_api_matches_fastapi
+tests/test_space_app.py::test_gradio_http_api_matches_fastapi
+tests/test_space_app.py::test_gradio_http_api_matches_fastapi
+tests/test_space_app.py::test_gradio_http_api_matches_fastapi
+  /home/user/pdeflow/.venv-zerogpu/lib/python3.12/site-packages/gradio/queueing.py:178: Pandas4Warning: The copy keyword is deprecated and will be removed in a future version. Copy-on-Write is active in pandas since 3.0 which utilizes a lazy copy mechanism that defers copies until necessary. Use .copy() to make an eager copy if necessary.
+    pd.DataFrame(records).fillna(value=np.nan).infer_objects(copy=False)  # type: ignore
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+31 passed, 8 warnings in 23.50s

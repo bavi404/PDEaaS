@@ -30,12 +30,22 @@ CASES = {"res64": ("fno_native", 64), "res128": ("fno128_native", 128),
 
 
 def main() -> int:
+    import argparse
+    import platform
+
+    import torch
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=str(ROOT / "reports/m4_inference_equivalence.json"))
+    args = ap.parse_args()
     rep = json.loads((ROOT / "reports/m2_eval_fno_baseline.json").read_text())
     p = Predictor(ROOT / "backend/models/fno_darcy_beta1_baseline.pt", EXPECTED_CHECKPOINT_SHA256)
     assert p.sha256 == rep["checkpoint_sha256"], "served checkpoint is not the evaluated checkpoint"
     t = load_split_arrays(ROOT / "data/processed/darcy_beta1.0_test.npz")
     ref = np.load(ROOT / "data/processed/darcy_beta1.0_test_reference.npz")["u_reference"]
     out: dict = {"checkpoint_sha256": p.sha256, "report": "reports/m2_eval_fno_baseline.json", "rtol": 1e-9, "cases": {}}
+    if args.out != str(ROOT / "reports/m4_inference_equivalence.json"):  # keep the committed M4 report byte-stable
+        out["environment"] = {"python": platform.python_version(), "torch": torch.__version__}
     ok = True
     for key, (strategy, n) in CASES.items():
         a, off, rf = (t["a"], t["u"], ref) if n == 128 else (t["a"][:, ::2, ::2], t["u"][:, ::2, ::2], ref[:, ::2, ::2])
@@ -53,7 +63,7 @@ def main() -> int:
         print(f"{key:32s} {strategy:20s} primary mean {got[PRIMARY]['mean']:.6f} "
               f"(report {rep[key][PRIMARY]['relative_l2']['mean']:.6f}) max rel diff {case['max_abs_rel_diff']:.2e}")
     out["all_match"] = bool(ok)
-    (ROOT / "reports/m4_inference_equivalence.json").write_text(json.dumps(out, indent=2))
+    Path(args.out).write_text(json.dumps(out, indent=2))
     print("ALL MATCH" if ok else "MISMATCH")
     return 0 if ok else 1
 

@@ -1,0 +1,40 @@
+
+Running 34 tests using 1 worker
+
+  ✓   1 [desktop] › e2e/app.spec.ts:31:1 › dashboard shows the API's model card, metrics and status (403ms)
+  ✓   2 [desktop] › e2e/app.spec.ts:43:1 › benchmark example: select, predict, compare with the official target (2.3s)
+  ✓   3 [desktop] › e2e/app.spec.ts:81:1 › benchmark example at 64x64 runs at the training resolution (2.0s)
+  ✓   4 [desktop] › e2e/app.spec.ts:94:1 › custom field: prediction without fabricated ground truth or metrics (1.7s)
+  ✓   5 [desktop] › e2e/app.spec.ts:110:1 › out-of-distribution custom input is flagged before and after prediction (536ms)
+  ✓   6 [desktop] › e2e/app.spec.ts:121:1 › malformed custom input is rejected; a valid upload is accepted (1.6s)
+  ✓   7 [desktop] › e2e/app.spec.ts:140:1 › the proxy passes the API's validation errors through (19ms)
+  ✓   8 [desktop] › e2e/app.spec.ts:149:1 › recent activity on the dashboard reflects served predictions (287ms)
+  ✓   9 [desktop] › e2e/app.spec.ts:159:1 › model page shows architecture, training data, evaluation and limitations (265ms)
+  ✓  10 [desktop] › e2e/app.spec.ts:172:1 › results page has an empty state before any prediction (192ms)
+  ✓  11 [desktop] › e2e/app.spec.ts:179:3 › unavailable backend (real: web server pointed at a closed port) › dashboard, workspace and model page show error states (474ms)
+  ✓  12 [desktop] › e2e/app.spec.ts:195:3 › unavailable backend (real: web server pointed at a closed port) › a backend failure during prediction is reported in the workspace (1.6s)
+  ✓  13 [desktop] › e2e/app.spec.ts:207:1 › all pages fit the viewport without horizontal scrolling (3.3s)
+  -  14 [desktop] › e2e/gradio.spec.ts:12:5 › Gradio benchmark example shows the same metric as /api/predict, with attribution
+  -  15 [desktop] › e2e/gradio.spec.ts:23:5 › Gradio custom field: prediction without ground truth, OOD warning
+  -  16 [desktop] › e2e/gradio.spec.ts:33:5 › Gradio reports the API's validation error for a malformed field
+  -  17 [desktop] › e2e/screenshots.spec.ts:13:5 › capture
+  ✓  18 [mobile] › e2e/app.spec.ts:31:1 › dashboard shows the API's model card, metrics and status (345ms)
+  ✓  19 [mobile] › e2e/app.spec.ts:43:1 › benchmark example: select, predict, compare with the official target (2.3s)
+  ✓  20 [mobile] › e2e/app.spec.ts:81:1 › benchmark example at 64x64 runs at the training resolution (1.8s)
+  ✓  21 [mobile] › e2e/app.spec.ts:94:1 › custom field: prediction without fabricated ground truth or metrics (1.7s)
+  ✓  22 [mobile] › e2e/app.spec.ts:110:1 › out-of-distribution custom input is flagged before and after prediction (1.6s)
+  ✓  23 [mobile] › e2e/app.spec.ts:121:1 › malformed custom input is rejected; a valid upload is accepted (1.6s)
+  ✓  24 [mobile] › e2e/app.spec.ts:140:1 › the proxy passes the API's validation errors through (19ms)
+  ✓  25 [mobile] › e2e/app.spec.ts:149:1 › recent activity on the dashboard reflects served predictions (293ms)
+  ✓  26 [mobile] › e2e/app.spec.ts:159:1 › model page shows architecture, training data, evaluation and limitations (251ms)
+  ✓  27 [mobile] › e2e/app.spec.ts:172:1 › results page has an empty state before any prediction (180ms)
+  ✓  28 [mobile] › e2e/app.spec.ts:179:3 › unavailable backend (real: web server pointed at a closed port) › dashboard, workspace and model page show error states (378ms)
+  ✓  29 [mobile] › e2e/app.spec.ts:195:3 › unavailable backend (real: web server pointed at a closed port) › a backend failure during prediction is reported in the workspace (1.5s)
+  ✓  30 [mobile] › e2e/app.spec.ts:207:1 › all pages fit the viewport without horizontal scrolling (3.1s)
+  -  31 [mobile] › e2e/gradio.spec.ts:12:5 › Gradio benchmark example shows the same metric as /api/predict, with attribution
+  -  32 [mobile] › e2e/gradio.spec.ts:23:5 › Gradio custom field: prediction without ground truth, OOD warning
+  -  33 [mobile] › e2e/gradio.spec.ts:33:5 › Gradio reports the API's validation error for a malformed field
+  -  34 [mobile] › e2e/screenshots.spec.ts:13:5 › capture
+
+  8 skipped
+  26 passed (34.8s)
