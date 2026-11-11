@@ -1,0 +1,37 @@
+# M2 baseline FNO. Every value is consumed by scripts/train.py; the resolved config is stored in the checkpoint.
+run_name: fno_baseline
+seed: 0
+
+data:
+  train_file: data/processed/darcy_beta1.0_train.npz
+  val_file: data/processed/darcy_beta1.0_val.npz
+  normalizer_path: data/splits/normalizers_beta1.0_train2000_stride2.json
+  splits_path: data/splits/darcy_beta1.0_seed20261111.json
+  n_train: 2000          # prefix of the shuffled train split (contains no duplicate-group members)
+  n_val: 1000
+  stride: 2              # train and select at 64x64 (PDEBench reduced_resolution=2)
+
+model:                   # neuraloperator 2.0.0 FNO; measured 357,217 params, 15 ms/sample/step on 4 CPUs
+  n_modes: [12, 12]
+  hidden_channels: 32
+  n_layers: 4
+  in_channels: 1
+  out_channels: 1
+
+train:
+  epochs: 150
+  batch_size: 16
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  scheduler: cosine      # CosineAnnealingLR over all epochs
+  grad_clip_norm: 10.0   # safety only; grad norms are logged
+  loss: relative_l2      # per-sample relative L2 on DECODED (physical) u vs OFFICIAL targets
+  amp: auto              # bf16/fp16 autocast only on CUDA; CPU runs in fp32
+  device: auto
+  num_threads: 4
+
+selection:
+  metric: val_relative_l2_official_64   # model selection uses validation vs official targets at 64x64 ONLY
+  mode: min
+
+output_dir: runs

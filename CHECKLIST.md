@@ -24,19 +24,21 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] Visualisations: samples, histograms, downsampling, convergence audit
 - [x] `scripts/reproduce_m1.sh` full re-run; run1 vs run2 deterministic; strict tests 103 passed / 0 skipped
 ## M2 — Model & training
-- [ ] FNO via `build_model(cfg)` (neuraloperator 2.0.0, decided in BLOCKERS §3)
-- [ ] Model unit tests (shape, resolution invariance, param count)
-- [ ] Training loop: seeds, device=auto, AMP on CUDA, grad clipping, LR schedule
-- [ ] Checkpoint save/load (weights + config + normalizer + split hash)
-- [ ] Train/val loss log (JSON/CSV) + plot
-- [ ] Real training run completed
+- [x] FNO via `build_model(cfg)` (neuraloperator 2.0.0, decided in BLOCKERS §3)
+- [x] Model unit tests (shape at 64² and 128², param count 357,217, loss = metric, determinism, checkpoint round-trip)
+- [x] Training loop: seeds, device=auto, bf16 autocast on CUDA only, grad clipping, cosine LR schedule
+- [x] Checkpoint save/load (weights + config + normalizers + data/split/normaliser SHA-256)
+- [x] Smoke test: loss decreasing, finite gradients
+- [x] Train/val log (JSON lines + history.json) + curve plot
+- [x] Real training run completed: 150 epochs, 97.6 min CPU, best val 0.0303 (epoch 139), 0 non-finite steps
+- [x] Deployable checkpoint committed with SHA-256 (`backend/models/fno_darcy_beta1_baseline.pt`)
 
 ## M3 — Evaluation
-- [ ] Test relative L2 vs OFFICIAL targets (primary) at 64² and 128², separately; interior/boundary; strata
-- [ ] Secondary: error vs independent steady-state reference (test only)
-- [ ] 128×128 zero-shot evaluation vs interpolated-64² baseline
-- [ ] Inference latency benchmark (CPU; batch 1 and batched)
-- [ ] `docs/RESULTS.md` generated from report files only
+- [x] Test relative L2 vs OFFICIAL targets (primary) at 64² (0.0293) and 128² (0.0421), separately; regions; strata
+- [x] Secondary: error vs independent steady-state reference (test only): 0.0391 / 0.0512
+- [x] 128×128 zero-shot evaluation vs interpolated-64² baseline (interpolation better: 0.0320)
+- [x] Inference latency benchmark (CPU; batch 1 and 32)
+- [x] `docs/RESULTS.md` generated from report files only
 
 ## M4 — Backend
 - [ ] FastAPI: /health, /model, /samples, /samples/{id}, /predict

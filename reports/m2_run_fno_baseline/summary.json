@@ -1,0 +1,12 @@
+{
+  "best_epoch": 139,
+  "best_val_rel_l2_official_64": 0.030276991426944733,
+  "train_time_s": 5853.4,
+  "mean_epoch_s": 39.02,
+  "peak_rss_mb": 1076.1,
+  "n_params": 357217,
+  "device": "cpu",
+  "amp": false,
+  "total_nonfinite_steps": 0,
+  "best_checkpoint_sha256": "d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7"
+}

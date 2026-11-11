@@ -1,0 +1,53 @@
+{
+  "run_name": "fno_baseline",
+  "seed": 0,
+  "data": {
+    "train_file": "data/processed/darcy_beta1.0_train.npz",
+    "val_file": "data/processed/darcy_beta1.0_val.npz",
+    "normalizer_path": "data/splits/normalizers_beta1.0_train2000_stride2.json",
+    "splits_path": "data/splits/darcy_beta1.0_seed20261111.json",
+    "n_train": 2000,
+    "n_val": 1000,
+    "stride": 2
+  },
+  "model": {
+    "n_modes": [
+      12,
+      12
+    ],
+    "hidden_channels": 32,
+    "n_layers": 4,
+    "in_channels": 1,
+    "out_channels": 1
+  },
+  "train": {
+    "epochs": 150,
+    "batch_size": 16,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "scheduler": "cosine",
+    "grad_clip_norm": 10.0,
+    "loss": "relative_l2",
+    "amp": "auto",
+    "device": "auto",
+    "num_threads": 4
+  },
+  "selection": {
+    "metric": "val_relative_l2_official_64",
+    "mode": "min"
+  },
+  "output_dir": "runs",
+  "provenance": {
+    "config_file": "backend/configs/fno_baseline.yaml",
+    "started_utc": "2026-11-11T09:30:05+00:00",
+    "train_file_sha256": "ee957afb9c62c1b71737be4941182b2b887be6ccfa3793f01359ef7ef5b7734d",
+    "val_file_sha256": "23bf8b1609417df39c9a045cc7b68dd79b42850a79371a4f718d867803b7658e",
+    "splits_sha256": "bad7cdac1e212116681edb7508763106685badfd5a997ea0e12ecbbce7368dc8",
+    "normalizer_sha256": "a021fd47061f213528419d9133cd40c57c16f9ce50772616753357e9bd3e2918",
+    "python": "3.11.15",
+    "torch": "2.15.0+cpu",
+    "platform": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "cpu_count": 4,
+    "cuda_available": false
+  }
+}

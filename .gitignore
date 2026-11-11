@@ -29,3 +29,8 @@ coverage/
 .DS_Store
 .idea/
 .vscode/
+
+# training runs (checkpoints tracked separately; see docs/RESULTS.md)
+runs/
+# the single deployable checkpoint served by the API (2.8 MB; SHA-256 recorded in docs/RESULTS.md)
+!backend/models/fno_darcy_beta1_baseline.pt

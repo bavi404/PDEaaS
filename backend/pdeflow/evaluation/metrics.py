@@ -52,3 +52,25 @@ def evaluate(pred: np.ndarray, official: np.ndarray, reference: np.ndarray | Non
         if strata:
             out[SECONDARY]["strata"] = {k: summarize(e_ref[m]) for k, m in strata.items() if np.any(m)}
     return out
+
+
+def region_masks(n: int, band: int) -> dict[str, np.ndarray]:
+    """Boolean (n, n) masks: interior (>= ``band`` cells from every edge), boundary band, and last row+col.
+
+    At 128x128 use band=2 (two fine cells); at 64x64 use band=1 (one coarse cell = two fine cells).
+    The last row+col of the 128 grid lies outside the stride-2 training grid's coordinate hull.
+    """
+    idx = np.arange(n)
+    edge = np.minimum(idx, idx[::-1])
+    dist = np.minimum.outer(edge, edge)
+    last = np.zeros((n, n), bool)
+    last[-1, :] = True
+    last[:, -1] = True
+    return {"interior": dist >= band, "boundary_band": dist < band, "last_row_col": last}
+
+
+def regional_relative_l2(pred: np.ndarray, target: np.ndarray, mask: np.ndarray) -> np.ndarray:
+    """Per-sample relative L2 restricted to ``mask``: ||(pred-target)[mask]|| / ||target[mask]||."""
+    pred = np.asarray(pred, dtype=np.float64)
+    target = np.asarray(target, dtype=np.float64)
+    return np.linalg.norm((pred - target)[:, mask], axis=1) / np.linalg.norm(target[:, mask], axis=1)
