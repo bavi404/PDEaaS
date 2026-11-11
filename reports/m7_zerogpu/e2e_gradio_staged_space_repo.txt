@@ -1,0 +1,11 @@
+
+Running 6 tests using 1 worker
+
+  ✓  1 [desktop] › e2e/gradio.spec.ts:12:5 › Gradio benchmark example shows the same metric as /api/predict, with attribution (2.0s)
+  ✓  2 [desktop] › e2e/gradio.spec.ts:23:5 › Gradio custom field: prediction without ground truth, OOD warning (968ms)
+  ✓  3 [desktop] › e2e/gradio.spec.ts:33:5 › Gradio reports the API's validation error for a malformed field (638ms)
+  ✓  4 [mobile] › e2e/gradio.spec.ts:12:5 › Gradio benchmark example shows the same metric as /api/predict, with attribution (2.0s)
+  ✓  5 [mobile] › e2e/gradio.spec.ts:23:5 › Gradio custom field: prediction without ground truth, OOD warning (1.4s)
+  ✓  6 [mobile] › e2e/gradio.spec.ts:33:5 › Gradio reports the API's validation error for a malformed field (564ms)
+
+  6 passed (8.8s)

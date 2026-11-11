@@ -90,12 +90,12 @@ Without an export, `/` redirects to `/gradio/`.
 | Playwright: existing suite against the original stack (regression) | **26/26 passed** |
 | `verify_deployment.py` against the integrated app | all checks pass: SHA, model card, samples, predictions max \|Δ\| **0.0** vs a separate in-process API |
 | Checkpoint SHA-256 | `d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7`, unchanged (checked by tests and by the stager) |
-| Staged Space repository (Space layout, run from the staged directory) | see §6 |
+| **Staged Space repository**: `deploy_zerogpu_space.py --dry-run --stage-to` (73 files, 11.1 MB, from commit `444de20`), app run from the staged directory | healthy in **4.7 s**. Loads only the staged copy. `verify_deployment.py` all pass; Playwright existing suite **24/24**, Gradio **6/6**. RSS after all tests **820 MiB**. |
 
 ## 5. Remaining ZeroGPU hosting-policy and platform risks (unverifiable before deployment)
 
 1. **CPU-only use of a ZeroGPU Space is not documented as intended use.** The `spaces` code tolerates it (no decorated function → no GPU registration), but Hugging Face could change behaviour or policy.
-2. **The ZeroGPU host's CPU/RAM are not documented.** The app needs about 0.5 GB RSS (API + Gradio, measured 501 MiB). Latency will be measured after deployment.
+2. **The ZeroGPU host's CPU/RAM are not documented.** The staged app measured **820 MiB RSS** after all tests, with the CUDA build of torch; the CPU-wheel prototype was 501 MiB, and RSS includes mapped CUDA libraries. Latency will be measured after deployment.
 3. **Serving a FastAPI root via uvicorn instead of `demo.launch()`** works locally and under emulation, but has not run on HF. If the platform requires `launch()`, the fallback is to mount the API and static routes on Gradio's own app.
 4. **ZeroGPU environment specifics:** on ZeroGPU, Gradio's queue defaults `max_size=1` for Gradio events, which affects only `/gradio`. `/api` is served directly by FastAPI. Torch is patched for CUDA emulation; inference is pinned to CPU (`load_checkpoint`/`predict` use `cpu`), as verified by the emulation test.
 5. **Install size:** the CUDA build of torch makes the Space's pip install about 5 GB. That's normal for ZeroGPU Spaces, but the first build is slow.
