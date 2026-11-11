@@ -1,0 +1,11 @@
+# Unchanged M6 image, docker run --cpus=0.5 --memory=512m --memory-swap=512m, after 12 predictions (6x 128^2 sample
+# native, 6x 128^2 custom) and 3 page loads. Measured 2026-11-11 ~15:33 UTC (cgroup v1 memory.stat, /proc/<pid>/status).
+hierarchical_memory_limit 512 MiB
+total_cache 1 MiB
+total_rss 277 MiB
+total_mapped_file 0 MiB
+max_usage 308 MiB, failcnt 0
+uvicorn (FastAPI + torch + model): VmHWM 366572 kB  VmRSS 348352 kB  RssAnon 237660 kB
+next-server:                       VmHWM 101024 kB  VmRSS  94632 kB  RssAnon  44216 kB
+entrypoint bash:                   VmRSS 4024 kB
+oom_killed=false

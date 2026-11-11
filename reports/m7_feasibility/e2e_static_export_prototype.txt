@@ -1,0 +1,30 @@
+
+Running 24 tests using 1 worker
+
+  ✓   1 [desktop] › e2e/app.spec.ts:31:1 › dashboard shows the API's model card, metrics and status (345ms)
+  ✓   2 [desktop] › e2e/app.spec.ts:43:1 › benchmark example: select, predict, compare with the official target (2.3s)
+  ✓   3 [desktop] › e2e/app.spec.ts:81:1 › benchmark example at 64x64 runs at the training resolution (1.9s)
+  ✓   4 [desktop] › e2e/app.spec.ts:94:1 › custom field: prediction without fabricated ground truth or metrics (1.8s)
+  ✓   5 [desktop] › e2e/app.spec.ts:110:1 › out-of-distribution custom input is flagged before and after prediction (1.5s)
+  ✓   6 [desktop] › e2e/app.spec.ts:121:1 › malformed custom input is rejected; a valid upload is accepted (1.7s)
+  ✓   7 [desktop] › e2e/app.spec.ts:140:1 › the proxy passes the API's validation errors through (22ms)
+  ✓   8 [desktop] › e2e/app.spec.ts:149:1 › recent activity on the dashboard reflects served predictions (304ms)
+  ✓   9 [desktop] › e2e/app.spec.ts:159:1 › model page shows architecture, training data, evaluation and limitations (320ms)
+  ✓  10 [desktop] › e2e/app.spec.ts:172:1 › results page has an empty state before any prediction (208ms)
+  ✓  11 [desktop] › e2e/app.spec.ts:207:1 › all pages fit the viewport without horizontal scrolling (3.2s)
+  -  12 [desktop] › e2e/screenshots.spec.ts:13:5 › capture
+  ✓  13 [mobile] › e2e/app.spec.ts:31:1 › dashboard shows the API's model card, metrics and status (353ms)
+  ✓  14 [mobile] › e2e/app.spec.ts:43:1 › benchmark example: select, predict, compare with the official target (2.6s)
+  ✓  15 [mobile] › e2e/app.spec.ts:81:1 › benchmark example at 64x64 runs at the training resolution (2.0s)
+  ✓  16 [mobile] › e2e/app.spec.ts:94:1 › custom field: prediction without fabricated ground truth or metrics (1.9s)
+  ✓  17 [mobile] › e2e/app.spec.ts:110:1 › out-of-distribution custom input is flagged before and after prediction (1.5s)
+  ✓  18 [mobile] › e2e/app.spec.ts:121:1 › malformed custom input is rejected; a valid upload is accepted (1.6s)
+  ✓  19 [mobile] › e2e/app.spec.ts:140:1 › the proxy passes the API's validation errors through (25ms)
+  ✓  20 [mobile] › e2e/app.spec.ts:149:1 › recent activity on the dashboard reflects served predictions (365ms)
+  ✓  21 [mobile] › e2e/app.spec.ts:159:1 › model page shows architecture, training data, evaluation and limitations (285ms)
+  ✓  22 [mobile] › e2e/app.spec.ts:172:1 › results page has an empty state before any prediction (199ms)
+  ✓  23 [mobile] › e2e/app.spec.ts:207:1 › all pages fit the viewport without horizontal scrolling (3.3s)
+  -  24 [mobile] › e2e/screenshots.spec.ts:13:5 › capture
+
+  2 skipped
+  22 passed (29.1s)

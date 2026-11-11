@@ -1,0 +1,13 @@
+# Throwaway prototype (prototype/proto_full_THROWAWAY.py), Python 3.12.12, torch 2.15.0+cpu, gradio 6.30.0, spaces 0.51.3,
+# run on this 4-vCPU sandbox (NOT on ZeroGPU). One uvicorn process: existing create_app() mounted at /api (its lifespan,
+# incl. pinned-SHA check, runs), Gradio Blocks at /gradio, Next.js static export (src/app/api removed) at /.
+/api/health -> 200, checkpoint_sha256 d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7, n_samples 24
+/api/predict test-4701 128 fno128_native -> rel-L2 vs official 0.24405399234934488 (report max 0.24405396972346374; rel diff 9e-8, batch-size rounding, docs/API.md §1)
+gradio_client /solve test-4701 128 default -> fno64_interpolated, rel-L2 official 0.243175 == /api/predict 0.243175
+process RSS (API + Gradio, before frontend mount): 501 MiB
+pages / /workspace /results /model /gradio/ -> 200; unknown path -> 404
+Playwright e2e (existing suite, E2E_BASE_URL=prototype, --grep-invert unavailable): 22 passed, 0 failed
+  first attempt: 10 failed on waitForURL("**/results") because the export used trailingSlash (/results/); fixed by clean-URL routing
+  second attempt: 19 failed on console 405 errors -- Next.js client sends HEAD prefetches; prototype route was GET-only; fixed (GET+HEAD)
+Playwright "backend failure during prediction" (in-browser abort): 2 passed
+Strict backend suite under Python 3.12.12 + torch 2.15.0: 151 passed

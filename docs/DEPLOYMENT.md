@@ -1,5 +1,10 @@
 # Deployment: Hugging Face Spaces (Docker SDK)
 
+> **Correction (2026-11-11, M7 investigation).** The current Hugging Face docs require a **paid plan (PRO) to create
+> Gradio or Docker Spaces**. The only free compute option for personal accounts is up to 2 Gradio Spaces on ZeroGPU.
+> The Docker Space plan below is therefore **not zero-cost**. See [`FREE_HOSTING_FEASIBILITY.md`](FREE_HOSTING_FEASIBILITY.md).
+> The Docker image and its verification remain valid.
+
 **Status: NOT deployed.** No public URL exists yet. The image is built and verified locally (docs/DOCKER.md §4).
 
 | Item | Value |
@@ -33,7 +38,7 @@ short_description: FNO surrogate for 2D Darcy flow (PDEBench), FastAPI + Next.js
 |---|---|---|
 | SDK | Docker | The image runs Python 3.11 + torch CPU + Node in one container (docs/DOCKER.md) |
 | Port | **7860** (`app_port`) | Next.js listens on 0.0.0.0:7860; FastAPI stays internal on 127.0.0.1:8000 |
-| Hardware | **CPU basic** (free: 2 vCPU, 16 GB RAM) | Measured with `--cpus=2 --memory=16g`: peak **400–434 MiB** memory, peak CPU 141 % of 200 %, 128² request about 33–38 ms |
+| Hardware | **CPU basic** (2 vCPU, 16 GB RAM; no hourly cost, but **creating** a Docker Space needs PRO; see the correction above) | Measured with `--cpus=2 --memory=16g`: peak **400–434 MiB** memory, peak CPU 141 % of 200 %, 128² request about 33–38 ms |
 | Storage | about 0.5 GB compressed image (2.04 GB unpacked); no persistent storage | Nothing is written at runtime; activity is in memory |
 | User | UID 1000 (set in the Dockerfile) | HF Docker Spaces requirement |
 | Visibility | public | required by the brief |

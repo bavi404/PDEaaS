@@ -1,0 +1,18 @@
+== --cpus=0.5 --memory=512m (no swap): healthy=1 after 58107 ms; state: running=true oom_killed=false exit=0
+   sample 4701 128 default: HTTP 200 4.115653s
+   sample 4701 128 default: HTTP 200 0.280911s
+   sample 4701 128 default: HTTP 200 0.112669s
+   custom 128 field: HTTP 200 0.175334s
+   custom 128 field: HTTP 200 0.115927s
+   GET / (frontend): HTTP 200 0.080473s
+   cgroup peak 512 MiB of 512; limit hits (failcnt) 0; state after: '525619200' bytes
+   container still running: true oom_killed=false
+== --cpus=0.1 --memory=512m (no swap): healthy=1 after 174019 ms; state: running=true oom_killed=false exit=0
+   sample 4701 128 default: HTTP 200 1.057910s
+   sample 4701 128 default: HTTP 200 0.998058s
+   sample 4701 128 default: HTTP 200 1.292723s
+   custom 128 field: HTTP 200 1.290783s
+   custom 128 field: HTTP 200 0.897346s
+   GET / (frontend): HTTP 200 0.394321s
+   cgroup peak 322 MiB of 512; limit hits (failcnt) 0; state after: '323543040' bytes
+   container still running: true oom_killed=false
