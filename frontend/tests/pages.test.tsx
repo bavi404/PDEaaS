@@ -201,6 +201,11 @@ describe("Model page", () => {
     expect(lim).toHaveTextContent("4.21% mean test error versus 3.20%");
     expect(lim).toHaveTextContent("2000 training samples for 150 epochs");
     expect(screen.queryByText(/Subset of this project/)).toBeNull();
+    const lic = screen.getByTestId("licensing");
+    expect(lic).toHaveTextContent("MIT licence");
+    expect(within(lic).getByRole("link", { name: "CC BY 4.0" })).toHaveAttribute("href", "https://creativecommons.org/licenses/by/4.0/");
+    expect(within(lic).getByRole("link", { name: "doi:10.18419/darus-2986" })).toHaveAttribute("href", "https://doi.org/10.18419/darus-2986");
+    expect(within(lic).getByRole("link", { name: "third-party licence texts" })).toHaveAttribute("href", "/third-party-licenses.txt");
   });
 
   it("shows an error state when the backend is down", async () => {

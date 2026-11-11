@@ -73,7 +73,11 @@ DOCKER_BUILDKIT=1 docker build --network host \
 | `/app/backend` | 5.5 MB | `pdeflow` package, checkpoint (2.8 MB), demo samples (2.8 MB) |
 | `/app/reports` | 24 KB | `m2_eval_fno_baseline.json`, which `/model` serves only if its checkpoint hash matches |
 
-- **Totals:** 2.04 GB on disk, **460 MB compressed**.
+- **Totals:** 2.04 GB on disk, **460 MB compressed**. Since M7, the image is 1.98 GB / 439 MB compressed.
+- **M7 licence fixes:**
+  - `sharp`/libvips (LGPL-3.0) is excluded from the standalone server bundle (`next.config.ts`: `images.unoptimized`, `outputFileTracingExcludes`).
+  - The frontend ships `/third-party-licenses.txt` (the npm packages' licence texts, including the Plotly MIT header that the minifier strips).
+  - Verified by `scripts/container_check.py` (`reports/m7_zerogpu/container_check_licence_fixes.json`).
 - **Not included:** the 1.3 GB PDEBench file, `data/processed`, `runs/`, logs, tests, docs, `.venv`, `node_modules`, `.git`, any `.env` or credentials. The only `.h5` files in the image are h5py's own tiny test fixtures inside site-packages.
 
 ## 3. Runtime configuration (environment variables; none are secrets)

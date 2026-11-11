@@ -58,6 +58,9 @@ export function AppShell({ children }: { children: ReactNode }) {
         </nav>
         <div className="sidebar__foot">
           <ApiStatus />
+          <a className="sidebar__legal" href="/third-party-licenses.txt" data-testid="licences-link">
+            Third-party licences
+          </a>
         </div>
       </aside>
       <main className="main" id="main">

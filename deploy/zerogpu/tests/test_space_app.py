@@ -89,6 +89,13 @@ def test_static_assets_and_404(client, web_dir):
         assert client.get(evil).status_code == 404, evil
 
 
+def test_third_party_licences_served(client):
+    r = client.get("/third-party-licenses.txt")
+    assert r.status_code == 200
+    assert "Copyright 2012-2026, Plotly, Inc." in r.text and "react@" in r.text and "next@" in r.text
+    assert "sharp-libvips" not in r.text.split("Not shipped")[0]
+
+
 def test_static_export_has_no_proxy_route(web_dir):
     """The frontend calls same-origin /api; the Next.js proxy route must not be in the export."""
     assert not (web_dir / "api").exists()

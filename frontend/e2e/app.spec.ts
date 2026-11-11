@@ -169,6 +169,19 @@ test("model page shows architecture, training data, evaluation and limitations",
   expect(consoleErrors).toEqual([]);
 });
 
+test("third-party licence notices ship with the frontend and are linked from the app", async ({ page, request, isMobile }) => {
+  const r = await request.get("/third-party-licenses.txt");
+  expect(r.status()).toBe(200);
+  const txt = await r.text();
+  expect(txt).toContain("Copyright 2012-2026, Plotly, Inc."); // the MIT header the minifier strips from the bundle
+  for (const pkg of ["plotly.js-dist-min@", "react@", "react-dom@", "next@"]) expect(txt).toContain(pkg);
+  expect(txt).not.toMatch(/^sharp@|^@img\/sharp-libvips/m); // LGPL libvips is not shipped
+  await page.goto("/model");
+  await expect(page.getByTestId("licensing")).toContainText("CC BY 4.0");
+  await expect(page.getByTestId("licensing").getByRole("link", { name: "third-party licence texts" })).toHaveAttribute("href", "/third-party-licenses.txt");
+  if (!isMobile) await expect(page.getByTestId("licences-link")).toBeVisible();
+});
+
 test("results page has an empty state before any prediction", async ({ page, consoleErrors }) => {
   await page.goto("/results");
   await expect(page.getByTestId("empty-state")).toContainText("No prediction yet");

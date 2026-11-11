@@ -36,7 +36,7 @@ export default function DashboardPage() {
         }
       >
         PDEFlow serves a Fourier Neural Operator (FNO) trained on the PDEBench 2D Darcy Flow benchmark. Given a
-        permeability field, it returns the steady pressure field in milliseconds on a CPU. Every number on this page is
+        permeability field, it returns the steady pressure field in tens of milliseconds on the CPUs we tested. Every number on this page is
         read from the running API.
       </PageHeader>
 

@@ -108,6 +108,29 @@ function ModelDetails({ card }: { card: ModelCard }) {
           />
         </Card>
       </div>
+
+      <Card title="Licences and attribution" testId="licensing">
+        <KeyValue
+          rows={[
+            ["PDEFlow code and checkpoint", "MIT licence"],
+            [
+              "Bundled benchmark examples",
+              <span key="d">
+                PDEBench data (Takamoto et al., NeurIPS 2022), DaRUS{" "}
+                <a href="https://doi.org/10.18419/darus-2986">doi:10.18419/darus-2986</a>, licensed{" "}
+                <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. 24 held-out test samples; the
+                steady-state reference fields are this project&apos;s adaptation.
+              </span>,
+            ],
+            [
+              "Third-party software",
+              <span key="t">
+                Each package keeps its own licence: <a href="/third-party-licenses.txt">third-party licence texts</a>
+              </span>,
+            ],
+          ]}
+        />
+      </Card>
     </div>
   );
 }

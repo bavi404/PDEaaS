@@ -135,6 +135,12 @@ def main() -> int:
     check("structured request logs with request ids", len(req_logs) > 50 and all(r.get("request_id") for r in req_logs),
           n_request_logs=len(req_logs), n_prediction_logs=len(pred_logs))
 
+    lic = urllib.request.urlopen(f"{a.url.rstrip('/')}/third-party-licenses.txt", timeout=30).read().decode()
+    check("third-party licence notices served (incl. Plotly MIT header)", "Copyright 2012-2026, Plotly, Inc." in lic)
+    probe = "ls -d /app/web/node_modules/sharp /app/web/node_modules/@img 2>/dev/null | wc -l"
+    nm = subprocess.run(["docker", "exec", a.container, "sh", "-c", probe], check=False, capture_output=True, text=True)
+    check("no sharp/libvips (LGPL) in the image's server bundle", nm.stdout.strip() == "0", found=nm.stdout.strip())
+
     mem_now = cgroup_bytes(a.container, ["/sys/fs/cgroup/memory.current", "/sys/fs/cgroup/memory/memory.usage_in_bytes"])
     mem_peak = cgroup_bytes(a.container, ["/sys/fs/cgroup/memory.peak", "/sys/fs/cgroup/memory/memory.max_usage_in_bytes"])
     limit = cgroup_bytes(a.container, ["/sys/fs/cgroup/memory.max", "/sys/fs/cgroup/memory/memory.limit_in_bytes"])

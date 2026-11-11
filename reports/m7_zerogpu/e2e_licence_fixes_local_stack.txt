@@ -1,0 +1,42 @@
+
+Running 36 tests using 1 worker
+
+  ✓   1 [desktop] › e2e/app.spec.ts:31:1 › dashboard shows the API's model card, metrics and status (687ms)
+  ✓   2 [desktop] › e2e/app.spec.ts:43:1 › benchmark example: select, predict, compare with the official target (2.6s)
+  ✓   3 [desktop] › e2e/app.spec.ts:81:1 › benchmark example at 64x64 runs at the training resolution (2.1s)
+  ✓   4 [desktop] › e2e/app.spec.ts:94:1 › custom field: prediction without fabricated ground truth or metrics (1.8s)
+  ✓   5 [desktop] › e2e/app.spec.ts:110:1 › out-of-distribution custom input is flagged before and after prediction (551ms)
+  ✓   6 [desktop] › e2e/app.spec.ts:121:1 › malformed custom input is rejected; a valid upload is accepted (1.5s)
+  ✓   7 [desktop] › e2e/app.spec.ts:140:1 › the proxy passes the API's validation errors through (22ms)
+  ✓   8 [desktop] › e2e/app.spec.ts:149:1 › recent activity on the dashboard reflects served predictions (307ms)
+  ✓   9 [desktop] › e2e/app.spec.ts:159:1 › model page shows architecture, training data, evaluation and limitations (299ms)
+  ✓  10 [desktop] › e2e/app.spec.ts:172:1 › third-party licence notices ship with the frontend and are linked from the app (290ms)
+  ✓  11 [desktop] › e2e/app.spec.ts:185:1 › results page has an empty state before any prediction (183ms)
+  ✓  12 [desktop] › e2e/app.spec.ts:192:3 › unavailable backend (real: web server pointed at a closed port) › dashboard, workspace and model page show error states (464ms)
+  ✓  13 [desktop] › e2e/app.spec.ts:208:3 › unavailable backend (real: web server pointed at a closed port) › a backend failure during prediction is reported in the workspace (1.6s)
+  ✓  14 [desktop] › e2e/app.spec.ts:220:1 › all pages fit the viewport without horizontal scrolling (3.3s)
+  -  15 [desktop] › e2e/gradio.spec.ts:12:5 › Gradio benchmark example shows the same metric as /api/predict, with attribution
+  -  16 [desktop] › e2e/gradio.spec.ts:23:5 › Gradio custom field: prediction without ground truth, OOD warning
+  -  17 [desktop] › e2e/gradio.spec.ts:33:5 › Gradio reports the API's validation error for a malformed field
+  -  18 [desktop] › e2e/screenshots.spec.ts:13:5 › capture
+  ✓  19 [mobile] › e2e/app.spec.ts:31:1 › dashboard shows the API's model card, metrics and status (336ms)
+  ✓  20 [mobile] › e2e/app.spec.ts:43:1 › benchmark example: select, predict, compare with the official target (2.4s)
+  ✓  21 [mobile] › e2e/app.spec.ts:81:1 › benchmark example at 64x64 runs at the training resolution (2.0s)
+  ✓  22 [mobile] › e2e/app.spec.ts:94:1 › custom field: prediction without fabricated ground truth or metrics (1.9s)
+  ✓  23 [mobile] › e2e/app.spec.ts:110:1 › out-of-distribution custom input is flagged before and after prediction (1.6s)
+  ✓  24 [mobile] › e2e/app.spec.ts:121:1 › malformed custom input is rejected; a valid upload is accepted (1.5s)
+  ✓  25 [mobile] › e2e/app.spec.ts:140:1 › the proxy passes the API's validation errors through (35ms)
+  ✓  26 [mobile] › e2e/app.spec.ts:149:1 › recent activity on the dashboard reflects served predictions (370ms)
+  ✓  27 [mobile] › e2e/app.spec.ts:159:1 › model page shows architecture, training data, evaluation and limitations (305ms)
+  ✓  28 [mobile] › e2e/app.spec.ts:172:1 › third-party licence notices ship with the frontend and are linked from the app (313ms)
+  ✓  29 [mobile] › e2e/app.spec.ts:185:1 › results page has an empty state before any prediction (193ms)
+  ✓  30 [mobile] › e2e/app.spec.ts:192:3 › unavailable backend (real: web server pointed at a closed port) › dashboard, workspace and model page show error states (419ms)
+  ✓  31 [mobile] › e2e/app.spec.ts:208:3 › unavailable backend (real: web server pointed at a closed port) › a backend failure during prediction is reported in the workspace (1.6s)
+  ✓  32 [mobile] › e2e/app.spec.ts:220:1 › all pages fit the viewport without horizontal scrolling (3.4s)
+  -  33 [mobile] › e2e/gradio.spec.ts:12:5 › Gradio benchmark example shows the same metric as /api/predict, with attribution
+  -  34 [mobile] › e2e/gradio.spec.ts:23:5 › Gradio custom field: prediction without ground truth, OOD warning
+  -  35 [mobile] › e2e/gradio.spec.ts:33:5 › Gradio reports the API's validation error for a malformed field
+  -  36 [mobile] › e2e/screenshots.spec.ts:13:5 › capture
+
+  8 skipped
+  28 passed (38.9s)

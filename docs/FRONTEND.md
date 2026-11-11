@@ -148,7 +148,15 @@ These are in `docs/screenshots/`, captured from the running stack: desktop at 14
 | Model information | `desktop-6-model.png` | `mobile-6-model.png` |
 | Backend unavailable | `desktop-7-backend-unavailable.png` | `mobile-7-backend-unavailable.png` |
 
-## 7. Known limitations
+## 7. Third-party licences
+
+`npm run build` first runs `scripts/third-party-licenses.mjs`. It writes `public/third-party-licenses.txt` (generated, not committed), which holds:
+- the licence files of every npm package installed for production
+- the licence header of bundled files that the minifier strips, e.g. Plotly's MIT notice
+
+It is served at `/third-party-licenses.txt` by the Docker image and the ZeroGPU static export. It is linked from the sidebar and from the Model page's "Licences and attribution" card. `sharp`/libvips (LGPL) is not shipped: image optimisation is disabled and `sharp` is excluded from the server trace.
+
+## 8. Known limitations
 
 - The PDE selector offers one operator (Darcy, β = 1), because the deployment serves exactly one trained checkpoint.
 - The custom-field generator resembles, but is not drawn from, the PDEBench input distribution. The UI says so.
