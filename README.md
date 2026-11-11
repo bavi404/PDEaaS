@@ -59,9 +59,9 @@ shutdown. Details and measured resource usage are in [`docs/DOCKER.md`](docs/DOC
 
 ```bash
 # preview the files that would be uploaded (no token, no network)
-uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space <owner>/<space> --dry-run
+uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space bavi404/pdeflow --dry-run
 # deploy: token only in the environment, never in Git
-HF_TOKEN=... uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space <owner>/<space>
+uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space bavi404/pdeflow --wait 2400   # HF_TOKEN exported beforehand
 ```
 
 See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the Space configuration, expected startup behaviour, and the checks
@@ -82,3 +82,9 @@ bash scripts/reproduce_m1.sh   # download+MD5, inspect, preprocess, downsampling
 ```
 
 The lock file pins the CPU-only torch wheel for Linux x86_64. On macOS, install `torch==2.15.0` from PyPI instead.
+
+## Licence
+
+The project's own source code (and its trained checkpoint) is released under the [MIT licence](LICENSE).
+The 24 bundled PDEBench samples are **not** MIT: they remain CC BY 4.0 (© the PDEBench authors, DaRUS
+doi:10.18419/darus-2986). Third-party dependencies keep their own licences. See [`NOTICE.md`](NOTICE.md).

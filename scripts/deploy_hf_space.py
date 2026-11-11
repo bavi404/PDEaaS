@@ -23,6 +23,8 @@ import subprocess
 import sys
 import tarfile
 import tempfile
+import time
+from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,7 +49,7 @@ def stage(dest: Path) -> list[str]:
     if subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip():
         raise SystemExit("refusing to deploy: uncommitted changes (commit and push first)")
     tar = subprocess.run(["git", "archive", "--format=tar", "HEAD"], cwd=ROOT, capture_output=True, check=True).stdout
-    pats = allowed_paths() + [".dockerignore"]
+    pats = allowed_paths() + [".dockerignore", "LICENSE", "NOTICE.md"]  # licence scope travels with the Space
     files = []
     with tarfile.open(fileobj=io.BytesIO(tar)) as tf:
         for m in tf.getmembers():
@@ -68,6 +70,8 @@ def main() -> int:
     ap.add_argument("--private", action="store_true")
     ap.add_argument("--dry-run", action="store_true", help="stage and list files only; no network, no token needed")
     ap.add_argument("--stage-to", help="with --dry-run: also copy the staged Space repository here (e.g. to docker build it)")
+    ap.add_argument("--wait", type=int, default=0, metavar="SECONDS",
+                    help="after upload, poll the Space runtime stage (BUILDING -> RUNNING) for up to SECONDS")
     a = ap.parse_args()
     head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
     with tempfile.TemporaryDirectory() as tmp:
@@ -89,9 +93,33 @@ def main() -> int:
         api = HfApi(token=token)
         print("authenticated as", api.whoami()["name"])
         api.create_repo(a.space, repo_type="space", space_sdk="docker", private=a.private, exist_ok=True)
+        info = api.space_info(a.space)
+        print(f"space {a.space}: private={info.private}")
+        if bool(info.private) != a.private:
+            raise SystemExit(f"visibility mismatch: Space private={info.private}, requested private={a.private}; "
+                             "change it in the Space settings, then rerun")
         api.upload_folder(repo_id=a.space, repo_type="space", folder_path=tmp, delete_patterns=["*"],
                           commit_message=f"Deploy PDEFlow from git {head[:12]}")
-        print(f"uploaded; the Space builds the Docker image now: https://huggingface.co/spaces/{a.space}")
+        t0 = time.monotonic()
+        print(f"uploaded at {datetime.now(UTC).isoformat(timespec='seconds')}; the Space builds the Docker image now: "
+              f"https://huggingface.co/spaces/{a.space}")
+        last, rebuilt = None, False
+        while a.wait and time.monotonic() - t0 < a.wait:
+            rt_stage = api.get_space_runtime(a.space).stage
+            if rt_stage != last:
+                print(f"  t+{time.monotonic() - t0:6.0f}s  stage {rt_stage}", flush=True)
+                last = rt_stage
+            # RUNNING only counts after this upload was seen building/starting (a redeploy reports the OLD
+            # version as RUNNING / RUNNING_BUILDING until the new container takes over)
+            rebuilt |= rt_stage in ("BUILDING", "APP_STARTING", "RUNNING_BUILDING", "RUNNING_APP_STARTING")
+            if rt_stage in ("BUILD_ERROR", "RUNTIME_ERROR", "CONFIG_ERROR", "NO_APP_FILE"):
+                return 1
+            if rt_stage == "RUNNING" and rebuilt:
+                return 0
+            time.sleep(10)
+        if a.wait:
+            print(f"  still {last} after {a.wait}s")
+            return 1
     return 0
 
 

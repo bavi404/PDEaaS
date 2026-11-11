@@ -1,7 +1,15 @@
 # Deployment: Hugging Face Spaces (Docker SDK)
 
 **Status: NOT deployed.** No public URL exists yet. The image is built and verified locally (docs/DOCKER.md §4).
-Deployment requires the owner's authorization and a token; see §6.
+
+| Item | Value |
+|---|---|
+| Target Space | **`bavi404/pdeflow`** (confirmed by the owner) |
+| Visibility | **public** (the deploy script refuses to proceed if the existing Space's visibility differs) |
+| Expected URL | `https://bavi404-pdeflow.hf.space` (app), `https://huggingface.co/spaces/bavi404/pdeflow` (Space page) |
+| Code licence | **MIT** (owner's choice). It covers this project's own source code and checkpoint only. PDEBench samples stay CC BY 4.0, and third-party components keep their own licences (`LICENSE`, `NOTICE.md`). |
+
+Deployment requires the owner's explicit approval and `HF_TOKEN` in the environment (§3, §7).
 
 ## 1. Space configuration
 
@@ -16,6 +24,7 @@ colorTo: indigo
 sdk: docker
 app_port: 7860
 pinned: false
+license: mit
 short_description: FNO surrogate for 2D Darcy flow (PDEBench), FastAPI + Next.js
 ---
 ```
@@ -28,7 +37,7 @@ short_description: FNO surrogate for 2D Darcy flow (PDEBench), FastAPI + Next.js
 | Storage | about 0.5 GB compressed image (2.04 GB unpacked); no persistent storage | Nothing is written at runtime; activity is in memory |
 | User | UID 1000 (set in the Dockerfile) | HF Docker Spaces requirement |
 | Visibility | public | required by the brief |
-| Licence field | **not set**: the owner should choose a code licence | Bundled PDEBench samples are CC BY 4.0, with attribution in the Space card and `/model` |
+| Licence field | `license: mit` | Scope as in `NOTICE.md`: MIT applies to the project's code and checkpoint, not to the bundled PDEBench samples (CC BY 4.0) or to dependencies |
 
 ## 2. Environment variables
 
@@ -54,12 +63,12 @@ It refuses to run with uncommitted changes. HF then builds the image from the Sp
 
 ```bash
 # preview: lists the staged files, no network, no token
-uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space <owner>/<space> --dry-run
+uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space bavi404/pdeflow --dry-run
 ```
 
 ```bash
-# deploy (owner-authorised; token only in the environment)
-HF_TOKEN=... uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space <owner>/<space>
+# deploy (owner-authorised; HF_TOKEN already exported in the environment, never typed into a file or command line)
+uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space bavi404/pdeflow --wait 2400
 ```
 
 **Verified locally:**
@@ -87,26 +96,26 @@ HF_TOKEN=... uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 pyt
 ## 6. Post-deployment verification (required before claiming deployment success)
 
 ```bash
-URL=https://<owner>-<space>.hf.space
+URL=https://bavi404-pdeflow.hf.space
 ```
 
 ```bash
-curl -s $URL/api/health          # checkpoint_sha256 must be d7133c7c...124df7
+# API: health + checkpoint SHA, model card, samples, activity, predictions compared element-wise with the
+# local API on the same checkpoint (held-out samples incl. the report's worst case), 422 handling, latency
+.venv/bin/python scripts/verify_deployment.py --url $URL
 ```
 
 ```bash
-.venv/bin/python scripts/container_check.py --url $URL --container none --out reports/m7_deployment_check.json   # HTTP checks only
-```
-
-```bash
+# browser: all e2e tests except the deliberate "unavailable backend" ones (they need a second server)
 cd frontend && E2E_BASE_URL=$URL npx playwright test --trace off --grep-invert "unavailable"
 ```
 
-These checks need a working public URL, so they can only run after deployment. The outcome will be recorded in `reports/m7_deployment_check.*`.
+The results go to `reports/m7_deployment_check.json` and `reports/m7_public_e2e.txt`. Only when both pass is the
+deployment recorded as verified, in §8.
 
 ## 7. What is needed from the owner
 
-1. The Space id `<owner>/<space>` (e.g. `bavi404/pdeflow`).
-2. A write token in the `HF_TOKEN` environment variable of this session, not pasted into any file. Alternatively, the owner runs the command in §4 themselves.
-3. Explicit authorization to deploy.
-4. Optional: a code licence for the Space card.
+1. ~~Space id~~: `bavi404/pdeflow` (confirmed).
+2. ~~Code licence~~: MIT (confirmed); scope as in `NOTICE.md`.
+3. A write token in the `HF_TOKEN` environment variable of this session (owner adds it; never in a file or Git).
+4. **Explicit approval to deploy.**

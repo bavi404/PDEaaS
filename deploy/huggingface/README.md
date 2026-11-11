@@ -6,6 +6,7 @@ colorTo: indigo
 sdk: docker
 app_port: 7860
 pinned: false
+license: mit
 short_description: FNO surrogate for 2D Darcy flow (PDEBench), FastAPI + Next.js
 ---
 
@@ -22,5 +23,8 @@ Next.js + Plotly interface. Give it a permeability field and it returns the stea
 
 **Data attribution:** PDEBench (Takamoto et al., NeurIPS 2022 Datasets & Benchmarks), DaRUS
 doi:10.18419/darus-2986, licensed CC BY 4.0. The Space bundles 24 test samples only.
+
+**Licence:** MIT covers this project's source code (and its trained checkpoint). The bundled PDEBench samples stay
+CC BY 4.0, and third-party components keep their own licences (NOTICE.md in the repository).
 
 **Source and documentation:** the project's GitHub repository (README, docs/DOCKER.md, docs/DEPLOYMENT.md).
