@@ -102,18 +102,41 @@ Without an export, `/` redirects to `/gradio/`.
 6. **Sleep:** idle free Spaces sleep, and the first visit cold-starts (app startup about 1–2 s locally after imports).
 7. **Single process:** if the API fails, the whole Space is down. The platform restarts it.
 
-## 6. Deployment (NOT done; requires the owner's separate approval and `HF_TOKEN`)
+## 6. Deployment (NOT done; requires the owner's separate approval)
+
+**Authentication: host-scoped proxy secret.** The sandbox proxy adds the Hugging Face credential to requests for
+`huggingface.co`, and the token never enters the shell.
+- **Identity:** `scripts/deploy_zerogpu_space.py` checks it with a **token-less** `GET /api/whoami-v2` and prints only the account name, type and token role.
+- **Hub calls:** every Hub call uses `HfApi(token=False)`, so no local token or `HF_TOKEN` is ever read or sent; the proxy supplies the credential.
+- **Uploads:** they fetch a short-lived Xet/LFS token from `huggingface.co` (also proxy-authenticated) and use it on the storage hosts. `cas-server.xethub.hf.co` was verified reachable.
+- **Tested:** against a local mock Hub, which shows that no `Authorization` header is ever sent, under `huggingface_hub` 2.2.0 and 2.4.0.
+
+**The script never creates a Space.** The owner creates `bavi404/pdeflow` on the website: public, Gradio SDK, ZeroGPU hardware. Before any upload, a **read-only preflight** checks:
+- the Space exists
+- its owner equals the authenticated account and the requested owner
+- `sdk == "gradio"`
+- it is public
+- its hardware is ZeroGPU (`zero-*`)
+
+Uploading additionally requires `--confirm-deploy <owner/space>`.
 
 ```bash
-.venv/bin/python scripts/deploy_zerogpu_space.py --space bavi404/pdeflow --dry-run     # stage only
+# stage only (no network)
+.venv/bin/python scripts/deploy_zerogpu_space.py --space bavi404/pdeflow --dry-run
 ```
 
 ```bash
-HF_TOKEN must be in the environment; then, only after approval:
-uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_zerogpu_space.py --space bavi404/pdeflow --wait 2400
+# read-only: proxy authentication + preflight of the existing Space; uploads nothing
+uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_zerogpu_space.py --space bavi404/pdeflow --preflight-only
 ```
 
 ```bash
+# deploy: only after explicit owner approval
+uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_zerogpu_space.py --space bavi404/pdeflow --confirm-deploy bavi404/pdeflow --wait 2400
+```
+
+```bash
+# public verification
 .venv/bin/python scripts/verify_deployment.py --url https://bavi404-pdeflow.hf.space
 ```
 
