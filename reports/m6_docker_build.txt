@@ -1,0 +1,91 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 4.64kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for mirror.gcr.io/library/node:22.23.4-trixie-slim@sha256:be1e2a3dc2c4fd68cdfadad2a696a280e0d2749098bee509230174d72fb768c6
+#2 DONE 0.5s
+
+#3 [internal] load metadata for mirror.gcr.io/library/python:3.11.18-slim-trixie@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535
+#3 DONE 0.5s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 757B done
+#4 DONE 0.0s
+
+#5 [node 1/1] FROM mirror.gcr.io/library/node:22.23.4-trixie-slim@sha256:be1e2a3dc2c4fd68cdfadad2a696a280e0d2749098bee509230174d72fb768c6
+#5 resolve mirror.gcr.io/library/node:22.23.4-trixie-slim@sha256:be1e2a3dc2c4fd68cdfadad2a696a280e0d2749098bee509230174d72fb768c6 0.0s done
+#5 DONE 0.0s
+
+#6 [py-build 1/3] FROM mirror.gcr.io/library/python:3.11.18-slim-trixie@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535
+#6 resolve mirror.gcr.io/library/python:3.11.18-slim-trixie@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535 0.0s done
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 6.34kB done
+#7 DONE 0.0s
+
+#8 [web-build 3/5] RUN --mount=type=secret,id=ca_bundle,required=false     if [ -f /run/secrets/ca_bundle ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/ca_bundle; fi;     npm ci --no-audit --no-fund
+#8 CACHED
+
+#9 [runtime  6/11] COPY backend/models/fno_darcy_beta1_baseline.pt /app/backend/models/fno_darcy_beta1_baseline.pt
+#9 CACHED
+
+#10 [web-build 4/5] COPY frontend/ ./
+#10 CACHED
+
+#11 [web-build 2/5] COPY frontend/package.json frontend/package-lock.json frontend/.npmrc ./
+#11 CACHED
+
+#12 [runtime  2/11] COPY --from=node /usr/local/bin/node /usr/local/bin/node
+#12 CACHED
+
+#13 [py-build 2/3] COPY backend/requirements-runtime.lock /tmp/requirements-runtime.lock
+#13 CACHED
+
+#14 [web-build 5/5] RUN npm run build
+#14 CACHED
+
+#15 [runtime  5/11] COPY backend/pdeflow /app/backend/pdeflow
+#15 CACHED
+
+#16 [web-build 1/5] WORKDIR /src/frontend
+#16 CACHED
+
+#17 [runtime  3/11] COPY --from=py-build /opt/venv /opt/venv
+#17 CACHED
+
+#18 [runtime  7/11] COPY backend/assets/demo_samples_v1.npz /app/backend/assets/demo_samples_v1.npz
+#18 CACHED
+
+#19 [py-build 3/3] RUN --mount=type=secret,id=ca_bundle,required=false     if [ -f /run/secrets/ca_bundle ]; then export PIP_CERT=/run/secrets/ca_bundle; fi;     python -m venv /opt/venv  && /opt/venv/bin/pip install --no-deps -r /tmp/requirements-runtime.lock  && /opt/venv/bin/pip check  && find /opt/venv -type d -name __pycache__ -prune -exec rm -rf {} +
+#19 CACHED
+
+#20 [runtime  4/11] WORKDIR /app
+#20 CACHED
+
+#21 [runtime  8/11] COPY reports/m2_eval_fno_baseline.json /app/reports/m2_eval_fno_baseline.json
+#21 CACHED
+
+#22 [runtime  9/11] COPY --from=web-build /src/frontend/.next/standalone /app/web
+#22 CACHED
+
+#23 [runtime 10/11] COPY docker/start.sh /app/start.sh
+#23 DONE 0.0s
+
+#24 [runtime 11/11] RUN echo "d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7  /app/backend/models/fno_darcy_beta1_baseline.pt" | sha256sum -c -  && node --version  && python -c "import pdeflow.api.app"  && useradd --create-home --uid 1000 --shell /usr/sbin/nologin user  && chmod 0555 /app/start.sh
+#24 0.084 /app/backend/models/fno_darcy_beta1_baseline.pt: OK
+#24 0.089 v22.23.4
+#24 DONE 6.4s
+
+#25 exporting to image
+#25 exporting layers 0.1s done
+#25 exporting manifest sha256:c9da48cc188029614443ab6e4e4421ba4427ae96dd17ed991901a2b74d382c52 0.0s done
+#25 exporting config sha256:f59a0e00e59cae2148e6fc43ce8ad941db955d45d6ccc00a6af08f375bad3dd4 done
+#25 exporting attestation manifest sha256:33a9df49fdd69996098e495903932c662c0768e8b2b9a323c148eb41061aef1d
+#25 exporting attestation manifest sha256:33a9df49fdd69996098e495903932c662c0768e8b2b9a323c148eb41061aef1d 0.0s done
+#25 exporting manifest list sha256:fc991456f6c54efeeb99d75d827fe866845b67f46991bbe9b9a637570c00370e done
+#25 naming to docker.io/library/pdeflow:m6 done
+#25 unpacking to docker.io/library/pdeflow:m6 0.0s done
+#25 DONE 0.2s

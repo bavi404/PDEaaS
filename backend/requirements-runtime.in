@@ -1,0 +1,8 @@
+# Runtime dependencies of the API image only (docs/DOCKER.md). Versions are constrained to requirements.lock,
+# so the container runs exactly the package versions that were tested in development.
+torch==2.15.0
+neuraloperator==2.0.0
+numpy
+fastapi
+uvicorn
+pydantic

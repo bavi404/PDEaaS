@@ -4,7 +4,8 @@
  */
 import { expect, test as base, type Page } from "@playwright/test";
 
-const DEAD = "http://127.0.0.1:3101"; // web server whose backend URL points at a closed port
+// web server whose backend URL points at a closed port (local: 3101; container run: E2E_DEAD_URL)
+const DEAD = process.env.E2E_DEAD_URL ?? "http://127.0.0.1:3101";
 
 const test = base.extend<{ consoleErrors: string[] }>({
   consoleErrors: async ({ page }, use) => {

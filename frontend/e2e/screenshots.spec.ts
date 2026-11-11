@@ -51,7 +51,7 @@ test("capture", async ({ page }, info) => {
   await expect(page.getByTestId("model-details")).toBeVisible();
   await page.screenshot({ path: out(p, "6-model"), fullPage: true });
 
-  await page.goto("http://127.0.0.1:3101/");
+  await page.goto(process.env.E2E_DEAD_URL ?? "http://127.0.0.1:3101/");
   await expect(page.getByTestId("error-state").first()).toBeVisible();
   await page.screenshot({ path: out(p, "7-backend-unavailable"), fullPage: false });
 });

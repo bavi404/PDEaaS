@@ -1,55 +1,108 @@
 # Deployment: Hugging Face Spaces (Docker SDK)
 
-**Status: not deployed.** This document is the plan and the required configuration. Deployment will be done in M6, only
-after authorization.
+**Status: NOT deployed.** No public URL exists yet. The image is built and verified locally (docs/DOCKER.md §4).
+Deployment requires the owner's authorization and a token; see §6.
 
 ## 1. Space configuration
 
-The Space repository needs a `README.md` with YAML front matter:
+The Space card is `deploy/huggingface/README.md`. It replaces `README.md` in the Space repository:
 
 ```yaml
 ---
 title: PDEFlow
 emoji: 🌊
 colorFrom: blue
-colorTo: green
+colorTo: indigo
 sdk: docker
-app_port: 7860        # HF routes public traffic to this port
+app_port: 7860
 pinned: false
-license: mit          # code licence (TBD by the owner); the bundled PDEBench samples are CC BY 4.0 (attributed)
+short_description: FNO surrogate for 2D Darcy flow (PDEBench), FastAPI + Next.js
 ---
 ```
 
-| Setting | Value | Reason |
+| Setting | Value | Reason / measurement |
 |---|---|---|
-| Hardware | **CPU basic** (free: 2 vCPU, 16 GB RAM) | Measured needs: about 1.1 GB peak RSS in training, much less for inference. The model is 357k parameters, and forward time on 4 vCPU is 10–18 ms per sample. |
-| SDK | Docker | Full control of the Python 3.11 + torch CPU environment and of the Next.js build (M5) |
-| Port | 7860 | HF Docker default (`app_port`) |
-| Container user | non-root UID 1000 | HF requirement for Docker Spaces |
-| `PDEFLOW_NUM_THREADS` | 2 | matches CPU basic vCPUs; avoids oversubscription |
-| `PDEFLOW_CORS_ORIGINS` | empty if the frontend is served from the same origin | single-container deployment, no cross-origin calls |
+| SDK | Docker | The image runs Python 3.11 + torch CPU + Node in one container (docs/DOCKER.md) |
+| Port | **7860** (`app_port`) | Next.js listens on 0.0.0.0:7860; FastAPI stays internal on 127.0.0.1:8000 |
+| Hardware | **CPU basic** (free: 2 vCPU, 16 GB RAM) | Measured with `--cpus=2 --memory=16g`: peak **400–434 MiB** memory, peak CPU 141 % of 200 %, 128² request about 33–38 ms |
+| Storage | about 0.5 GB compressed image (2.04 GB unpacked); no persistent storage | Nothing is written at runtime; activity is in memory |
+| User | UID 1000 (set in the Dockerfile) | HF Docker Spaces requirement |
 | Visibility | public | required by the brief |
+| Licence field | **not set**: the owner should choose a code licence | Bundled PDEBench samples are CC BY 4.0, with attribution in the Space card and `/model` |
 
-**Layout:** one container serves the Next.js frontend and proxies `/api/*` to uvicorn on localhost. The details are settled in M6.
+## 2. Environment variables
 
-**Payload:** the image contains the committed checkpoint (2.8 MB, SHA pinned), the demo samples (2.8 MB) and `reports/m2_eval_fno_baseline.json`. No dataset download is needed at runtime.
+**None need to be set in the Space.** The image defaults are correct for CPU basic (docs/DOCKER.md §3):
+`PORT=7860`, `PDEFLOW_NUM_THREADS=2`, `PDEFLOW_CORS_ORIGINS=` (same-origin).
 
-## 2. Secrets
+If the hardware is upgraded, set `PDEFLOW_NUM_THREADS` and `OMP_NUM_THREADS` to the vCPU count as Space **Variables**; they are not secrets.
 
-| Secret | Needed by | Where it lives | Never in |
+## 3. Secrets
+
+| Secret | Used by | Where it lives | Never in |
 |---|---|---|---|
-| **None at runtime** | the app reads no secrets | n/a | n/a |
-| `HF_TOKEN` (write scope, fine-grained to this one Space) | pushing the Space repository from this session | environment variable for the deploy command only, never written to disk in the repo | Git, source code, Dockerfile, logs, the Space's own variables |
+| none | the running app | n/a: the app reads no secrets | n/a |
+| `HF_TOKEN`: write access, ideally a fine-grained token scoped to this one Space | `scripts/deploy_hf_space.py`, at deploy time only | an environment variable for the deploy command, supplied by the owner | Git, source, Dockerfile, image, Space variables/secrets, logs. The script never prints it. |
 
-- The deploy step pushes with a token supplied for that command, e.g. `git push https://user:$HF_TOKEN@huggingface.co/spaces/<owner>/<space>`. The remote URL is not saved with the token: `git -c credential.helper= push ...`, or the `huggingface_hub` upload API.
-- Space **Variables** (non-secret) hold the `PDEFLOW_*` settings above. Space **Secrets** are not needed.
+## 4. Deployment command
 
-## 3. What the owner must provide at deployment time
-1. The HF username or organisation, and the Space name (e.g. `<owner>/pdeflow`).
-2. Either a write token scoped to that Space, given to this session as an environment variable, not pasted into a file; or the owner creates the Space and adds this session's push access.
+The script uploads exactly the committed files the Docker build needs:
+- the `.dockerignore` allow-list, taken from `git archive HEAD`
+- the Space card, as `README.md`
+
+It refuses to run with uncommitted changes. HF then builds the image from the Space repository.
+
+```bash
+# preview: lists the staged files, no network, no token
+uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space <owner>/<space> --dry-run
+```
+
+```bash
+# deploy (owner-authorised; token only in the environment)
+HF_TOKEN=... uv run --no-project --python 3.11 --with huggingface_hub==2.2.0 python scripts/deploy_hf_space.py --space <owner>/<space>
+```
+
+**Equivalence with the tested image.** The staged directory is the same build context as the locally tested image. Two things differ on HF:
+- No build args are given, so base images come from Docker Hub by the same pinned digests.
+- No CA secret is given; the `required=false` secret mount is simply absent.
+
+## 5. Expected startup behaviour
+
+1. **HF builds the image from the Space repository.** Measured locally: 2 min 30 s on 4 vCPU; expect longer on HF builders.
+2. **The container starts, and `docker/start.sh` logs JSON events to the Space's Logs tab:**
+   - `checkpoint_verified`, carrying `sha256 d7133c7c…124df7`
+   - API `startup` (24 samples, metrics loaded)
+   - `api_ready`, then `web_started`
+
+   This sequence took **about 8.5 s** with 2 vCPU locally.
+3. **Failure modes:**
+   - A checkpoint hash mismatch → `ERROR checkpoint_sha256_mismatch`, exit 3. The Space shows a runtime error, and nothing is served with an unverified model.
+   - A crash of either process → `ERROR process_exited`, non-zero exit, and HF restarts the container.
+4. **Public URL:** `https://<owner>-<space>.hf.space`. Free CPU-basic Spaces sleep after a period of inactivity and cold-start on the next visit (build cache kept; about 10 s app startup plus platform overhead).
+
+## 6. Post-deployment verification (required before claiming deployment success)
+
+```bash
+URL=https://<owner>-<space>.hf.space
+```
+
+```bash
+curl -s $URL/api/health          # checkpoint_sha256 must be d7133c7c...124df7
+```
+
+```bash
+.venv/bin/python scripts/container_check.py --url $URL --container none --out reports/m7_deployment_check.json   # HTTP checks only
+```
+
+```bash
+cd frontend && E2E_BASE_URL=$URL npx playwright test --trace off --grep-invert "unavailable"
+```
+
+These checks need a working public URL, so they can only run after deployment. The outcome will be recorded in `reports/m7_deployment_check.*`.
+
+## 7. What is needed from the owner
+
+1. The Space id `<owner>/<space>` (e.g. `bavi404/pdeflow`).
+2. A write token in the `HF_TOKEN` environment variable of this session, not pasted into any file. Alternatively, the owner runs the command in §4 themselves.
 3. Explicit authorization to deploy.
-
-## 4. Verification after deploy (M6)
-- `GET https://<owner>-<space>.hf.space/api/health` returns the pinned `checkpoint_sha256`.
-- `/api/predict` on `test-4701` (fno128_native) reproduces the reported worst-case rel-L2, 0.24405, within 1e-6.
-- Frontend loads; latency is recorded.
+4. Optional: a code licence for the Space card.

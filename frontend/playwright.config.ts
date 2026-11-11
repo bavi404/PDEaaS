@@ -3,7 +3,12 @@ import { defineConfig, devices } from "@playwright/test";
 /**
  * End-to-end tests against the REAL stack: uvicorn serving the committed checkpoint + the production Next.js build.
  * Run `npm run build` first. Ports: API 8100, web 3100 (kept away from dev ports).
+ *
+ * Against a running container instead (docs/DOCKER.md):
+ *   E2E_BASE_URL=http://127.0.0.1:7860 E2E_DEAD_URL=http://127.0.0.1:7861 npx playwright test --trace off
+ * (no local servers are started; E2E_DEAD_URL is the image's web server pointed at a closed API port).
  */
+const EXTERNAL = process.env.E2E_BASE_URL;
 const API_PORT = 8100;
 const WEB_PORT = 3100;
 /** A second web server whose backend URL points at a closed port: a REAL unavailable backend. */
@@ -16,12 +21,12 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   reporter: [["list"]],
-  use: { baseURL: `http://127.0.0.1:${WEB_PORT}`, trace: "off" },
+  use: { baseURL: EXTERNAL ?? `http://127.0.0.1:${WEB_PORT}`, trace: "off" },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
-  webServer: [
+  webServer: EXTERNAL ? undefined : [
     {
       command: `../.venv/bin/uvicorn pdeflow.api.app:app --app-dir ../backend --host 127.0.0.1 --port ${API_PORT}`,
       url: `http://127.0.0.1:${API_PORT}/health`,

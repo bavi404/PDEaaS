@@ -1,0 +1,15 @@
+# Local run of the single-container application (the same image a Hugging Face Docker Space builds).
+#   docker compose up --build        -> http://localhost:7860
+# Resource limits mirror HF "CPU basic" (2 vCPU, 16 GB). No secrets or volumes are needed.
+services:
+  pdeflow:
+    build:
+      context: .
+    image: pdeflow:latest
+    ports:
+      - "7860:7860"
+    cpus: 2
+    mem_limit: 16g
+    stop_grace_period: 30s
+    restart: unless-stopped
+    # HEALTHCHECK is defined in the Dockerfile (public /api/health through the proxy)

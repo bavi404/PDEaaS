@@ -1,0 +1,18 @@
+PASS  frontend loads  {"status": 200}
+PASS  health  {"status": 200, "checkpoint_sha256": "d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7"}
+PASS  served checkpoint is the evaluated one  {}
+PASS  model card  {"n_params": 357217}
+PASS  example list  {"n": 24}
+PASS  sample prediction reproduces the evaluated worst case (rel 1e-6)  {"got": 0.24405399234934488, "report": 0.24405396972346374}
+PASS  sample prediction 64x64 with separate targets  {"rel_l2_official": 0.013415141317462487}
+PASS  custom permeability prediction (no targets, no metrics)  {"warnings": []}
+PASS  out-of-distribution warning  {}
+PASS  malformed input rejected (422 with request id)  {"detail": "permeability must be a square grid of size 64x64 or 128x128 (measured resolutions); got 2 rows with lengths [2]"}
+PASS  invalid JSON rejected  {"status": 422}
+PASS  unknown sample 404  {"status": 404}
+latency {"sample_64": {"n": 20, "wall_ms_median": 26.5, "wall_ms_max": 39.2, "server_inference_ms_median": 13.5}, "sample_128_default": {"n": 20, "wall_ms_median": 32.5, "wall_ms_max": 45.6, "server_inference_ms_median": 14.6}, "custom_128_default": {"n": 20, "wall_ms_median": 37.9, "wall_ms_max": 57.4, "server_inference_ms_median": 16.1}}
+PASS  32 concurrent custom predictions (8 in flight)  {"wall_s": 1.08}
+PASS  structured request logs with request ids  {"n_request_logs": 216, "n_prediction_logs": 110}
+PASS  memory peak within HF CPU basic (16 GB)  {"peak_mib": 400, "current_mib": 399}
+PASS  docker HEALTHCHECK healthy  {"status": "healthy"}
+ALL PASSED

@@ -1,0 +1,28 @@
+# Allow-list: the build context contains only what the Dockerfile copies.
+# Excluded by construction: data/ (1.3 GB PDEBench file and processed arrays), runs/, logs/, .venv/, node_modules/,
+# .next/, tests, docs, reports other than the served evaluation report, .git, and any .env files.
+*
+
+!Dockerfile
+!docker/start.sh
+
+!backend/requirements-runtime.lock
+!backend/pdeflow/
+!backend/models/fno_darcy_beta1_baseline.pt
+!backend/assets/demo_samples_v1.npz
+!reports/m2_eval_fno_baseline.json
+
+!frontend/package.json
+!frontend/package-lock.json
+!frontend/.npmrc
+!frontend/next.config.ts
+!frontend/tsconfig.json
+!frontend/src/
+!frontend/public/
+!frontend/scripts/
+
+**/__pycache__
+**/*.pyc
+**/.DS_Store
+**/.env
+**/.env.*

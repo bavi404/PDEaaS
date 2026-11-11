@@ -1,0 +1,13 @@
+== startup time and graceful stop (2 vCPU)
+      ready (public /api/health 200) after 8437 ms
+PASS  docker stop: exit 0 in 361 ms; API lifespan shutdown logged
+== tampered checkpoint is refused before anything starts
+PASS  exit 3, ERROR checkpoint_sha256_mismatch
+== uvicorn dies -> container exits non-zero (platform restarts it)
+killed 18 /opt/venv/bin/python /opt/venv/bin/uvicorn pdeflow.api.app:a
+PASS  uvicorn killed: container stopped, exit 137
+{"ts":"2026-11-11T12:59:32.236+00:00","level":"ERROR","logger":"pdeflow.entrypoint","event":"process_exited","exit_code":137}
+== next-server dies -> container exits non-zero (platform restarts it)
+killed 106 next-server (v16.4.3)   
+PASS  next-server killed: container stopped, exit 137
+{"ts":"2026-11-11T12:59:39.783+00:00","level":"ERROR","logger":"pdeflow.entrypoint","event":"process_exited","exit_code":137}

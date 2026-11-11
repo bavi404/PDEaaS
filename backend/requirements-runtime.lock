@@ -1,0 +1,333 @@
+--index-url https://download.pytorch.org/whl/cpu
+--extra-index-url https://pypi.org/simple
+
+annotated-doc==0.0.6
+    # via
+    #   -c requirements.lock
+    #   fastapi
+annotated-types==0.8.0
+    # via
+    #   -c requirements.lock
+    #   pydantic
+anyio==4.16.0
+    # via
+    #   -c requirements.lock
+    #   cwevals
+    #   fastapi
+    #   httpx
+    #   starlette
+certifi==2026.10.23
+    # via
+    #   -c requirements.lock
+    #   httpcore
+    #   httpx
+    #   requests
+charset-normalizer==3.5.2
+    # via
+    #   -c requirements.lock
+    #   requests
+click==8.5.1
+    # via
+    #   -c requirements.lock
+    #   uvicorn
+    #   wandb
+configmypy==0.2.0
+    # via
+    #   -c requirements.lock
+    #   neuraloperator
+contourpy==1.3.3
+    # via
+    #   -c requirements.lock
+    #   matplotlib
+cwevals==0.0.1b1
+    # via
+    #   -c requirements.lock
+    #   wandb
+cycler==0.12.1
+    # via
+    #   -c requirements.lock
+    #   matplotlib
+distro==1.9.0
+    # via
+    #   -c requirements.lock
+    #   cwevals
+fastapi==0.162.4
+    # via
+    #   -c requirements.lock
+    #   -r requirements-runtime.in
+filelock==4.2.10
+    # via
+    #   -c requirements.lock
+    #   torch
+fonttools==4.68.0
+    # via
+    #   -c requirements.lock
+    #   matplotlib
+fsspec==2026.9.0
+    # via
+    #   -c requirements.lock
+    #   torch
+googleapis-common-protos==1.76.0
+    # via
+    #   -c requirements.lock
+    #   opentelemetry-exporter-otlp-proto-http
+h11==0.16.0
+    # via
+    #   -c requirements.lock
+    #   httpcore
+    #   uvicorn
+h5py==3.16.0
+    # via
+    #   -c requirements.lock
+    #   neuraloperator
+httpcore==1.0.9
+    # via
+    #   -c requirements.lock
+    #   httpx
+httpx==0.28.1
+    # via
+    #   -c requirements.lock
+    #   cwevals
+idna==3.20
+    # via
+    #   -c requirements.lock
+    #   anyio
+    #   httpx
+    #   requests
+iniconfig==2.3.1
+    # via
+    #   -c requirements.lock
+    #   pytest
+jinja2==3.1.6
+    # via
+    #   -c requirements.lock
+    #   torch
+kiwisolver==1.5.1
+    # via
+    #   -c requirements.lock
+    #   matplotlib
+markupsafe==3.0.4
+    # via
+    #   -c requirements.lock
+    #   jinja2
+matplotlib==3.11.2
+    # via
+    #   -c requirements.lock
+    #   neuraloperator
+mpmath==1.3.0
+    # via
+    #   -c requirements.lock
+    #   sympy
+networkx==3.6.1
+    # via
+    #   -c requirements.lock
+    #   torch
+neuraloperator==2.0.0
+    # via
+    #   -c requirements.lock
+    #   -r requirements-runtime.in
+numpy==2.4.6
+    # via
+    #   -c requirements.lock
+    #   -r requirements-runtime.in
+    #   contourpy
+    #   h5py
+    #   matplotlib
+    #   neuraloperator
+    #   scipy
+    #   tensorly
+    #   tensorly-torch
+opentelemetry-api==1.45.2
+    # via
+    #   -c requirements.lock
+    #   fastapi
+    #   opentelemetry-exporter-http-transport
+    #   opentelemetry-exporter-otlp-proto-http
+    #   opentelemetry-sdk
+    #   opentelemetry-semantic-conventions
+    #   wandb
+opentelemetry-exporter-http-transport==0.66b2
+    # via
+    #   -c requirements.lock
+    #   opentelemetry-exporter-otlp-proto-http
+opentelemetry-exporter-otlp-common==0.66b2
+    # via
+    #   -c requirements.lock
+    #   opentelemetry-exporter-otlp-proto-http
+opentelemetry-exporter-otlp-proto-common==1.45.2
+    # via
+    #   -c requirements.lock
+    #   opentelemetry-exporter-otlp-proto-http
+opentelemetry-exporter-otlp-proto-http==1.45.2
+    # via
+    #   -c requirements.lock
+    #   wandb
+opentelemetry-proto==1.45.2
+    # via
+    #   -c requirements.lock
+    #   opentelemetry-exporter-otlp-proto-common
+    #   opentelemetry-exporter-otlp-proto-http
+opentelemetry-sdk==1.45.2
+    # via
+    #   -c requirements.lock
+    #   opentelemetry-exporter-otlp-common
+    #   opentelemetry-exporter-otlp-proto-http
+    #   wandb
+opentelemetry-semantic-conventions==0.66b2
+    # via
+    #   -c requirements.lock
+    #   opentelemetry-sdk
+opt-einsum==3.4.0
+    # via
+    #   -c requirements.lock
+    #   neuraloperator
+packaging==26.3
+    # via
+    #   -c requirements.lock
+    #   matplotlib
+    #   pytest
+    #   wandb
+pillow==13.0.0
+    # via
+    #   -c requirements.lock
+    #   matplotlib
+platformdirs==4.14.5
+    # via
+    #   -c requirements.lock
+    #   wandb
+pluggy==1.7.0
+    # via
+    #   -c requirements.lock
+    #   pytest
+protobuf==7.36.2
+    # via
+    #   -c requirements.lock
+    #   googleapis-common-protos
+    #   opentelemetry-proto
+    #   wandb
+pydantic==2.14.3
+    # via
+    #   -c requirements.lock
+    #   -r requirements-runtime.in
+    #   cwevals
+    #   fastapi
+    #   wandb
+    #   zencfg
+pydantic-core==2.50.4
+    # via
+    #   -c requirements.lock
+    #   pydantic
+pygments==2.21.0
+    # via
+    #   -c requirements.lock
+    #   pytest
+pyparsing==3.3.3
+    # via
+    #   -c requirements.lock
+    #   matplotlib
+pytest==9.2.0
+    # via
+    #   -c requirements.lock
+    #   configmypy
+    #   pytest-mock
+pytest-mock==3.17.0
+    # via
+    #   -c requirements.lock
+    #   configmypy
+python-dateutil==4.0.0
+    # via
+    #   -c requirements.lock
+    #   matplotlib
+pyyaml==6.0.3
+    # via
+    #   -c requirements.lock
+    #   wandb
+requests==2.34.2
+    # via
+    #   -c requirements.lock
+    #   opentelemetry-exporter-http-transport
+    #   opentelemetry-exporter-otlp-proto-http
+    #   wandb
+ruamel-yaml==0.19.1
+    # via
+    #   -c requirements.lock
+    #   configmypy
+    #   neuraloperator
+scipy==1.17.1
+    # via
+    #   -c requirements.lock
+    #   tensorly
+    #   tensorly-torch
+setuptools==84.2.1
+    # via
+    #   -c requirements.lock
+    #   torch
+sniffio==1.3.1
+    # via
+    #   -c requirements.lock
+    #   cwevals
+starlette==1.10.0
+    # via
+    #   -c requirements.lock
+    #   fastapi
+sympy==1.14.0
+    # via
+    #   -c requirements.lock
+    #   torch
+tensorly==0.10.0
+    # via
+    #   -c requirements.lock
+    #   neuraloperator
+tensorly-torch==0.5.0
+    # via
+    #   -c requirements.lock
+    #   neuraloperator
+torch==2.15.0+cpu
+    # via
+    #   -c requirements.lock
+    #   -r requirements-runtime.in
+typing-extensions==4.16.0
+    # via
+    #   -c requirements.lock
+    #   anyio
+    #   cwevals
+    #   fastapi
+    #   opentelemetry-api
+    #   opentelemetry-exporter-otlp-proto-http
+    #   opentelemetry-sdk
+    #   opentelemetry-semantic-conventions
+    #   pydantic
+    #   pydantic-core
+    #   starlette
+    #   torch
+    #   typing-inspection
+    #   wandb
+typing-inspection==0.4.5
+    # via
+    #   -c requirements.lock
+    #   fastapi
+    #   pydantic
+tzdata==2026.6
+    # via
+    #   -c requirements.lock
+    #   python-dateutil
+urllib3==2.8.0
+    # via
+    #   -c requirements.lock
+    #   requests
+uvicorn==0.54.0
+    # via
+    #   -c requirements.lock
+    #   -r requirements-runtime.in
+wandb==0.31.0
+    # via
+    #   -c requirements.lock
+    #   neuraloperator
+xxhash==4.1.0
+    # via
+    #   -c requirements.lock
+    #   wandb
+zencfg==1.0.0
+    # via
+    #   -c requirements.lock
+    #   neuraloperator

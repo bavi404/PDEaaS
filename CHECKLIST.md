@@ -60,11 +60,17 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] Vitest + RTL: 52 tests; Playwright on the real stack: 26 tests (desktop + mobile, real unavailable backend, console-error checks)
 - [x] Screenshots (`docs/screenshots/`), `docs/FRONTEND.md`
 
-## M6 — Deployment
+## M6 — Docker and deployment preparation
 - [x] Docker pull/run verified; build-time network needs proxy args (BLOCKERS §2.4)
-- [ ] Dockerfiles (api, web) + docker-compose.yml with health checks
-- [ ] Compose verified end-to-end
-- [ ] Public deployment live and verified
+- [x] Multi-stage Dockerfile (Node build → Python venv → slim runtime); Python 3.11.18; base images pinned by digest
+- [x] Runtime lock constrained to the tested dev lock; `pip check` clean; no dataset, runs, tests or credentials in the image
+- [x] Single container: Next.js on 7860 → FastAPI on 127.0.0.1:8000; UID 1000; HEALTHCHECK; graceful SIGTERM; crash → exit
+- [x] Checkpoint SHA-256 verified at build, at entrypoint start and on API load (tampering → exit 3)
+- [x] Container tests: 17/17 functional checks, 26/26 Playwright e2e against the container, lifecycle 4/4
+- [x] Resources within HF CPU basic: peak 400–434 MiB, 2 vCPU, startup about 8.5 s
+- [x] docker-compose.yml (local), docs/DOCKER.md, docs/DEPLOYMENT.md, Space card, deploy script (dry-run only)
+- [ ] **Public deployment**: awaiting the owner's Space id, `HF_TOKEN` and authorization
+- [ ] Public URL verified (health SHA, functional checks, e2e)
 
 ## M7 — Documentation & submission
 - [ ] README (quickstart, results, limitations)
