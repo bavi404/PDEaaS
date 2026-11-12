@@ -62,14 +62,19 @@ licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Status
 
-Milestones M1–M6 (data, model, evaluation, API, frontend, Docker) and the M7 ZeroGPU Space app are complete and
-verified locally. **No public deployment is live.**
-- **Hugging Face:** Docker Spaces need a paid plan. Two controlled attempts on a free ZeroGPU Space failed. The second
-  built, but HF's runtime rejects apps without `@spaces.GPU` functions, and this app runs inference on CPU by design.
-- **Render Free:** the remaining zero-cost option, prepared but not created.
+**Live: https://pdeaas.onrender.com** (Render Free; Docker image built from this repository).
 
-**Hosting limitations** (cold starts, free-tier constraints, CPU inference) and the full record are in
-[`docs/HOSTING.md`](docs/HOSTING.md).
+Verified on 2026-11-12 at 06:02 and 10:48 UTC:
+- **API:** health with the pinned checkpoint SHA, the model card and the samples all match the local API.
+- **Predictions:** real predictions match the validated local pipeline within 4.2 × 10⁻⁷.
+- **Browser tests:** 26/26 Playwright tests pass against the public URL.
+
+**Free-tier caveats:**
+- The service **sleeps after 15 minutes idle**. One observed wake-up did **not** complete within 30 minutes, so the
+  first visit after a quiet period may be slow or fail; retry after a few minutes.
+- 512 MB RAM, < 1 CPU, CPU-only inference.
+
+Details, evidence and the earlier Hugging Face attempts are in [`docs/HOSTING.md`](docs/HOSTING.md).
 
 | Document | Contents |
 |---|---|
@@ -80,7 +85,7 @@ verified locally. **No public deployment is live.**
 | [`docs/RESULTS.md`](docs/RESULTS.md) | baseline test results (64² and 128²; official vs reference), latency, limitations |
 | [`docs/API.md`](docs/API.md) | API endpoints, validation, logging, model-identity checks, latency |
 | [`docs/FRONTEND.md`](docs/FRONTEND.md) | frontend architecture, pages, scientific presentation rules, tests, screenshots |
-| [`docs/HOSTING.md`](docs/HOSTING.md) | hosting status: deployment attempts, why no public URL yet, cold starts, free-tier and CPU-inference limits |
+| [`docs/HOSTING.md`](docs/HOSTING.md) | live Render deployment, verification results, sleep/cold-start observations, free-tier and CPU-inference limits, earlier HF attempts |
 | [`docs/ZEROGPU.md`](docs/ZEROGPU.md) | ZeroGPU Gradio Space: architecture, compatibility decisions, validation, hosting risks |
 | [`docs/FREE_HOSTING_FEASIBILITY.md`](docs/FREE_HOSTING_FEASIBILITY.md) | zero-cost hosting comparison (HF ZeroGPU vs Render Free), measured |
 | [`docs/DOCKER.md`](docs/DOCKER.md) | Docker image design, build/run, container test results and resource usage |

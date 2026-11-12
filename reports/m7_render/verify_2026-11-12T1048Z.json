@@ -1,0 +1,162 @@
+{
+  "url": "https://pdeaas.onrender.com",
+  "checked_utc": "2026-11-12T10:49:16+00:00",
+  "checks": [
+    {
+      "check": "public /api/health",
+      "ok": true,
+      "status": 200,
+      "first_request_ms": 707.4
+    },
+    {
+      "check": "public checkpoint SHA-256 == evaluated checkpoint",
+      "ok": true,
+      "public": "d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7"
+    },
+    {
+      "check": "public frontend HTML",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "check": "public /api/model == local (excluding host thread count)",
+      "ok": true,
+      "status": 200,
+      "public_num_threads": 1
+    },
+    {
+      "check": "public /api/samples == local (24 bundled test samples)",
+      "ok": true,
+      "n": 24
+    },
+    {
+      "check": "public /api/activity",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "check": "predict test-4701 128 fno128_native (report worst case): public == local",
+      "ok": true,
+      "max_abs_diff_vs_local": 4.172325134277344e-07,
+      "public_ms": 1477.4,
+      "public_inference_ms": 822.784,
+      "input_kind": "benchmark_example",
+      "public_rel_l2_official": 0.24405392787549446,
+      "local_rel_l2_official": 0.24405399234934488,
+      "public_rel_l2_reference": 0.17531116646733805,
+      "report_value": 0.24405396972346374
+    },
+    {
+      "check": "predict test-4701 128 default: public == local",
+      "ok": true,
+      "max_abs_diff_vs_local": 2.980232238769531e-07,
+      "public_ms": 372.7,
+      "public_inference_ms": 48.51,
+      "input_kind": "benchmark_example",
+      "public_rel_l2_official": 0.243174530867123,
+      "local_rel_l2_official": 0.24317454993448734,
+      "public_rel_l2_reference": 0.17513352265367876
+    },
+    {
+      "check": "predict test-2113 64: public == local",
+      "ok": true,
+      "max_abs_diff_vs_local": 7.450580596923828e-08,
+      "public_ms": 283.8,
+      "public_inference_ms": 53.541,
+      "input_kind": "benchmark_example",
+      "public_rel_l2_official": 0.013415168109916192,
+      "local_rel_l2_official": 0.013415141317462487,
+      "public_rel_l2_reference": 0.01314392150368091
+    },
+    {
+      "check": "predict test-8142 128 default: public == local",
+      "ok": true,
+      "max_abs_diff_vs_local": 7.450580596923828e-08,
+      "public_ms": 685.1,
+      "public_inference_ms": 87.106,
+      "input_kind": "benchmark_example",
+      "public_rel_l2_official": 0.017138402623228147,
+      "local_rel_l2_official": 0.017138416495120865,
+      "public_rel_l2_reference": 0.01729790826410545
+    },
+    {
+      "check": "predict custom 128 checkerboard: public == local",
+      "ok": true,
+      "max_abs_diff_vs_local": 7.450580596923828e-08,
+      "public_ms": 471.8,
+      "public_inference_ms": 25.5,
+      "input_kind": "custom"
+    },
+    {
+      "check": "public validation error (422 with request id)",
+      "ok": true,
+      "status": 422
+    }
+  ],
+  "prediction_comparisons": {
+    "test-4701 128 fno128_native (report worst case)": {
+      "max_abs_diff_vs_local": 4.172325134277344e-07,
+      "public_ms": 1477.4,
+      "public_inference_ms": 822.784,
+      "strategy": "fno128_native",
+      "input_kind": "benchmark_example",
+      "public_rel_l2_official": 0.24405392787549446,
+      "local_rel_l2_official": 0.24405399234934488,
+      "public_rel_l2_reference": 0.17531116646733805,
+      "report_value": 0.24405396972346374
+    },
+    "test-4701 128 default": {
+      "max_abs_diff_vs_local": 2.980232238769531e-07,
+      "public_ms": 372.7,
+      "public_inference_ms": 48.51,
+      "strategy": "fno64_interpolated",
+      "input_kind": "benchmark_example",
+      "public_rel_l2_official": 0.243174530867123,
+      "local_rel_l2_official": 0.24317454993448734,
+      "public_rel_l2_reference": 0.17513352265367876
+    },
+    "test-2113 64": {
+      "max_abs_diff_vs_local": 7.450580596923828e-08,
+      "public_ms": 283.8,
+      "public_inference_ms": 53.541,
+      "strategy": "fno_native",
+      "input_kind": "benchmark_example",
+      "public_rel_l2_official": 0.013415168109916192,
+      "local_rel_l2_official": 0.013415141317462487,
+      "public_rel_l2_reference": 0.01314392150368091
+    },
+    "test-8142 128 default": {
+      "max_abs_diff_vs_local": 7.450580596923828e-08,
+      "public_ms": 685.1,
+      "public_inference_ms": 87.106,
+      "strategy": "fno64_interpolated",
+      "input_kind": "benchmark_example",
+      "public_rel_l2_official": 0.017138402623228147,
+      "local_rel_l2_official": 0.017138416495120865,
+      "public_rel_l2_reference": 0.01729790826410545
+    },
+    "custom 128 checkerboard": {
+      "max_abs_diff_vs_local": 7.450580596923828e-08,
+      "public_ms": 471.8,
+      "public_inference_ms": 25.5,
+      "strategy": "fno64_interpolated",
+      "input_kind": "custom"
+    }
+  },
+  "latency_public": {
+    "sample_64": {
+      "n": 10,
+      "wall_ms_median": 338.6,
+      "wall_ms_max": 600.9,
+      "server_inference_ms_median": 66.2
+    },
+    "sample_128_default": {
+      "n": 10,
+      "wall_ms_median": 323.9,
+      "wall_ms_max": 584.0,
+      "server_inference_ms_median": 47.4
+    }
+  },
+  "note": "wall times measured from this sandbox through the HF proxy; they include network round-trip, not only inference",
+  "all_passed": true
+}

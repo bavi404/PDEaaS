@@ -1,0 +1,37 @@
+idle period start (no requests from this session): 2026-11-12T06:06:42Z
+first request after 17 min idle: 2026-11-12T06:23:42Z
+curl: (56) Failure when receiving data from the peer
+GET /api/health -> HTTP 000, total 300.318680s, connect 0.000131s, first byte 0.000000s
+head: cannot open '/home/user/submission-evidence/render_deployment/coldstart_first_body.txt' for reading: No such file or directory
+body: 
+curl: (28) Operation timed out after 120001 milliseconds with 0 bytes received
+second request: HTTP 000, 120.001564s
+done: 2026-11-12T06:30:42Z
+06:30:58Z /api/health -> HTTP 000 in 60.001212s
+06:31:58Z /api/health -> HTTP 000 in 60.001608s
+06:32:58Z /api/health -> HTTP 000 in 60.001455s
+06:33:58Z /api/health -> HTTP 000 in 60.001294s
+06:34:58Z /api/health -> HTTP 000 in 60.001301s
+06:35:58Z /api/health -> HTTP 000 in 60.001397s
+recovery probe start 2026-11-12T06:39:08Z (wake request was sent 06:23:42Z)
+06:39:58Z /api/health -> 000 50.000667
+06:40:58Z /api/health -> 000 50.001510
+06:41:58Z /api/health -> 000 50.001368
+06:42:58Z /api/health -> 000 50.001660
+06:43:58Z /api/health -> 000 50.000949
+06:44:58Z /api/health -> 000 50.002509
+06:45:58Z /api/health -> 000 50.002838
+06:46:58Z /api/health -> 000 50.002839
+06:47:58Z /api/health -> 000 50.002036
+06:48:58Z /api/health -> 000 50.002832
+06:49:58Z /api/health -> 000 50.002586
+06:50:58Z /api/health -> 000 50.002256
+06:51:58Z /api/health -> 000 50.002799
+06:52:58Z /api/health -> 000 50.002233
+06:53:58Z /api/health -> 000 50.002470
+probe end 2026-11-12T06:54:08Z
+recheck 2026-11-12T10:48:41Z (owner reports the Render logs show the service live again)
+10:48:41Z /api/health -> HTTP 200 in 0.480619s
+10:48:41Z /api/health -> HTTP 200 in 0.628973s
+10:48:42Z /api/health -> HTTP 200 in 0.381762s
+{"status":"ok","model_loaded":true,"checkpoint_sha256":"d7133c7c681cf3e9632579833fe357636d84ff7a5678d94b2f24c38955124df7","n_samples":24}

@@ -70,7 +70,7 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] Resources within HF CPU basic: peak 400–434 MiB, 2 vCPU, startup about 8.5 s
 - [x] docker-compose.yml (local), docs/DOCKER.md, docs/DEPLOYMENT.md, Space card, deploy script (dry-run only)
 - [ ] ~~Public Docker Space deployment~~: superseded. HF Docker Spaces need a paid plan; see M7 (ZeroGPU Gradio Space)
-- [ ] Public URL verified (health SHA, functional checks, e2e)
+- [ ] ~~Public URL verified (Docker Space)~~: superseded; the Docker image is live on Render (M7)
 
 ## M7 — Zero-cost hosting (ZeroGPU Gradio Space)
 - [x] Feasibility: official free-tier terms; Docker/Gradio Spaces need PRO; ZeroGPU Gradio free for eligible accounts
@@ -79,8 +79,9 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] Gradio ↔ FastAPI predictions identical (SHA-256 of float64 arrays); checkpoint SHA unchanged
 - [x] Strict backend suites 3.11 and 3.12 (151 + 151), Space tests 31, 1,000-sample equivalence bit-identical (3 envs)
 - [x] Frontend typecheck, Vitest 52, standalone + static builds, Playwright: integrated 24 + Gradio 6, regression 26
-- [ ] **Public deployment**: two ZeroGPU attempts failed (build fixed; runtime requires `@spaces.GPU`); Render Free prepared, not created (`docs/HOSTING.md`)
-- [ ] Public URL verified
+- [x] **Public deployment**: Render Free, https://pdeaas.onrender.com (ZeroGPU attempts failed; see `docs/HOSTING.md`)
+- [x] Public URL verified 2026-11-12 06:02 and 10:48 UTC: health/SHA, model, samples, predictions (≤4.2e-7 vs local), Playwright 26/26
+- [ ] Cold start after idle: one observed wake-up did not complete within 30 min (cause in the owner's Render logs)
 
 ## Documentation & submission
 - [ ] README (quickstart, results, limitations)
