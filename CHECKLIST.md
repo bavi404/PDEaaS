@@ -79,7 +79,7 @@ Legend: `[x]` done and verified · `[ ]` open · `[!]` blocked (reason given)
 - [x] Gradio ↔ FastAPI predictions identical (SHA-256 of float64 arrays); checkpoint SHA unchanged
 - [x] Strict backend suites 3.11 and 3.12 (151 + 151), Space tests 31, 1,000-sample equivalence bit-identical (3 envs)
 - [x] Frontend typecheck, Vitest 52, standalone + static builds, Playwright: integrated 24 + Gradio 6, regression 26
-- [ ] **Public deployment** (awaiting the owner's separate approval and HF_TOKEN)
+- [ ] **Public deployment**: two ZeroGPU attempts failed (build fixed; runtime requires `@spaces.GPU`); Render Free prepared, not created (`docs/HOSTING.md`)
 - [ ] Public URL verified
 
 ## Documentation & submission

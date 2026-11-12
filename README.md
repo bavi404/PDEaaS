@@ -62,10 +62,14 @@ licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Status
 
-Milestones M1–M6 (data, model, evaluation, API, frontend, Docker) and the M7 ZeroGPU Space app are complete and tested
-locally. **Not deployed yet.** Hugging Face requires a paid plan to create Docker Spaces, so the zero-cost route is a
-ZeroGPU **Gradio** Space ([`docs/ZEROGPU.md`](docs/ZEROGPU.md)). It is implemented, its preflight passes, and it awaits
-the owner's deployment approval.
+Milestones M1–M6 (data, model, evaluation, API, frontend, Docker) and the M7 ZeroGPU Space app are complete and
+verified locally. **No public deployment is live.**
+- **Hugging Face:** Docker Spaces need a paid plan. Two controlled attempts on a free ZeroGPU Space failed. The second
+  built, but HF's runtime rejects apps without `@spaces.GPU` functions, and this app runs inference on CPU by design.
+- **Render Free:** the remaining zero-cost option, prepared but not created.
+
+**Hosting limitations** (cold starts, free-tier constraints, CPU inference) and the full record are in
+[`docs/HOSTING.md`](docs/HOSTING.md).
 
 | Document | Contents |
 |---|---|
@@ -76,6 +80,7 @@ the owner's deployment approval.
 | [`docs/RESULTS.md`](docs/RESULTS.md) | baseline test results (64² and 128²; official vs reference), latency, limitations |
 | [`docs/API.md`](docs/API.md) | API endpoints, validation, logging, model-identity checks, latency |
 | [`docs/FRONTEND.md`](docs/FRONTEND.md) | frontend architecture, pages, scientific presentation rules, tests, screenshots |
+| [`docs/HOSTING.md`](docs/HOSTING.md) | hosting status: deployment attempts, why no public URL yet, cold starts, free-tier and CPU-inference limits |
 | [`docs/ZEROGPU.md`](docs/ZEROGPU.md) | ZeroGPU Gradio Space: architecture, compatibility decisions, validation, hosting risks |
 | [`docs/FREE_HOSTING_FEASIBILITY.md`](docs/FREE_HOSTING_FEASIBILITY.md) | zero-cost hosting comparison (HF ZeroGPU vs Render Free), measured |
 | [`docs/DOCKER.md`](docs/DOCKER.md) | Docker image design, build/run, container test results and resource usage |
@@ -122,7 +127,7 @@ uv venv --python 3.12.12 .venv-zerogpu && uv pip install --python .venv-zerogpu/
 PORT=7860 .venv-zerogpu/bin/python deploy/zerogpu/app.py      # /  (web app)  /gradio  /api/docs
 ```
 
-## Deploy to Hugging Face Spaces (ZeroGPU Gradio Space; not yet done)
+## Deploy to Hugging Face Spaces (ZeroGPU Gradio Space; attempted twice, not live: see docs/HOSTING.md)
 
 Authentication uses the sandbox proxy's host-scoped secret for `huggingface.co`, so no token is read, stored or
 printed. The owner creates the empty Space on the website, and the script never creates one. It runs a read-only
